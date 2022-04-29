@@ -7,13 +7,15 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [Rizon](https://www.mintscan.io/rizon/validators/rizonvaloper14qd4n677jxsuh7fqg7z7kvj2dzjqdkv8pqv7tk)
 
 ## Guides for those who want to become a validator 
-- Gravity Bridge
+Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Security Validator](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
+- [Gravity Bridge](h)
 - Agoric
-- IRISnet
-- Rizon
-- Axelar
+- [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
+- [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
+- [Axelar](https://surftest.gitbook.io/axelar-wiki)
 
 ## Guides for Validator' Security Protection and other settings
+
 - [Sentry Nodes](https://surftest.gitbook.io/axelar-wiki/english/sentry-node)
 - Double singing protection. [Github link](https://github.com/iqlusioninc/tmkms)
 - [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password)
