@@ -5,6 +5,7 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [Agoric](https://main.explorer.agoric.net/validator/agoricvaloper1dg6cl026x7fwjagasv7jjlcjkhn60wujwew05a)
 - [IRISnet](https://irishub.iobscan.io/#/staking/iva19ul0uva3fgtm6cd6tceprre4ghsfh6h3u29lcg)
 - [Rizon](https://www.mintscan.io/rizon/validators/rizonvaloper14qd4n677jxsuh7fqg7z7kvj2dzjqdkv8pqv7tk)
+- [Desmos](https://www.mintscan.io/desmos/validators/desmosvaloper1aq5ffdgqswf2tdm537xnp8rzlajd0qmk4j33k9)
 
 ## Guides for those who want to become a validator 
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
@@ -13,6 +14,7 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
 - [Axelar](https://surftest.gitbook.io/axelar-wiki)
+- [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
 - NuCypher [testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
 
 ## Guides for Validator' Security Protection and other settings
