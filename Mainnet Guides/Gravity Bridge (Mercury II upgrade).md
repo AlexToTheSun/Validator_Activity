@@ -18,7 +18,7 @@ sudo systemctl stop orchestrator
 ```
 # Upgrading
 ```
-cd gravity-bin
+mkdir gravity-bin && cd gravity-bin
 ```
 Upgrading gravity chain binary
 ```
