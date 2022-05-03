@@ -119,10 +119,24 @@ If you want to know your node_id.
 ```
 curl localhost:26657/status | jq '.result.node_info.id'
 ```
-
-
-
-
+## Faucet
+Before upgrade to validator status you should to request a faucet grant.
+- Here is the guide https://github.com/ingenuity-build/testnets#faucet
+### Validator Tx
+If your node is fully synchronized, then run the tx to upgrade to validator status:
+```
+quicksilverd tx staking create-validator \
+  --from=$YOUR_TEST_WALLET \
+  --amount=1000000uqck \
+  --moniker=$NODE_MONIKER \
+  --chain-id=$CHAIN_ID \
+  --commission-rate=0.1 \
+  --commission-max-rate=0.5 \
+  --commission-max-change-rate=0.1 \
+  --min-self-delegation=1 \
+  --identity=""
+  --pubkey=$(quicksilverd tendermint show-validator)
+  ```
 
 
 
