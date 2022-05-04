@@ -25,9 +25,9 @@ go version
 ```
 Install Quicksilver
 ```
-git clone https://github.com/ingenuity-build/quicksilver.git --branch v0.1.3
+cd $HOME && git clone https://github.com/ingenuity-build/quicksilver.git --branch v0.1.10
 cd quicksilver
-git checkout v0.1.3
+git checkout v0.1.10
 make build
 /root/quicksilver/build/quicksilverd version
 cp $HOME/quicksilver/build/quicksilverd /usr/local/bin
@@ -49,7 +49,7 @@ echo 'export YOUR_TEST_WALLET='\"${YOUR_TEST_WALLET}\" >> $HOME/.bash_profile
 ```
 Add chainName. Enter by one command.
 ```
-CHAIN_ID=quicktest-2 ; \
+CHAIN_ID=quicktest-3 ; \
 echo $CHAIN_ID ; \
 echo 'export chainName='\"${CHAIN_ID}\" >> $HOME/.bash_profile
 ```
@@ -69,6 +69,10 @@ GENESIS_URL="https://raw.githubusercontent.com/ingenuity-build/testnets/main/rha
 NODE_HOME=$HOME/.quicksilverd ; \
 curl -sSL $GENESIS_URL > $NODE_HOME/config/genesis.json
 ```
+Set minimum gas price
+```
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0uqck\"/" $HOME/.quicksilverd/config/app.toml
+```
 Comment out the line `log_level=info`
 ```
 sed -i.bak 's/^log_level/# log_level/' $HOME/.quicksilverd/config/config.toml
@@ -80,6 +84,7 @@ You should reed about this flag here:
 - see the code https://docs.cosmos.network/v0.44/core/cli.html#root-command
 ```
 quicksilverd keys add $YOUR_TEST_WALLET --keyring-backend=test
+# add flag `--recover` if you already have mnemonic 
 ```
 ### Сreate a service file
 ```
@@ -103,7 +108,7 @@ Update variables
 ```
 source ~/.bash_profile
 ```
-Start the service to synchronize from first block
+## Start the service to synchronize from first block
 ```
 sudo systemctl enable quicksilverd
 sudo systemctl daemon-reload
@@ -119,6 +124,9 @@ If you want to know your node_id.
 ```
 curl localhost:26657/status | jq '.result.node_info.id'
 ```
+## Synchronize by State Sync
+If it takes a long time to sync from the first block, then use the quick State Sync synchronization.
+
 ## Faucet
 Before upgrade to validator status you should to request a faucet grant.
 - Here is the guide https://github.com/ingenuity-build/testnets#faucet
@@ -137,7 +145,10 @@ quicksilverd tx staking create-validator \
   --identity=""
   --pubkey=$(quicksilverd tendermint show-validator)
   ```
-
+To see how many tokens are in your wallet, enter:
+```
+quicksilverd q bank balances <quick1...your..wallet...>
+```
 
 
 
