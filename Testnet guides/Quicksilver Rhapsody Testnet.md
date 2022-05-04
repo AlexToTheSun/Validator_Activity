@@ -126,6 +126,11 @@ curl localhost:26657/status | jq '.result.node_info.id'
 ```
 ## Synchronize by State Sync
 If it takes a long time to sync from the first block, then use the quick State Sync synchronization.
+Actual network State Sync from community:
+- https://github.com/StakeTake/guidecosmos/blob/main/quicksilver/quicktest-3/README.md
+- https://github.com/Staketab/cosmos-tools/tree/main/state-sync
+- https://github.com/kj89/testnet_manuals/tree/main/quicksilver#to-synchronize-your-quicksilver-node-to-latest-block-you-have-to-use-state-sync-provided-below
+
 
 ## Faucet
 Before upgrade to validator status you should to request a faucet grant.
