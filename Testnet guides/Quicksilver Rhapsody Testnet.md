@@ -149,7 +149,10 @@ To see how many tokens are in your wallet, enter:
 ```
 quicksilverd q bank balances <quick1...your..wallet...>
 ```
-
+To send tokens type the command:
+```
+quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=quicktest-3
+```
 
 
 
