@@ -83,7 +83,7 @@ You should reed about this flag here:
 - Details about usage of `--keyring-backend` https://docs.cosmos.network/v0.44/run-node/keyring.html
 - see the code https://docs.cosmos.network/v0.44/core/cli.html#root-command
 ```
-quicksilverd keys add $YOUR_TEST_WALLET --keyring-backend=test
+quicksilverd keys add $YOUR_TEST_WALLET
 # add flag `--recover` if you already have mnemonic 
 ```
 ### Сreate a service file
@@ -134,17 +134,21 @@ Before upgrade to validator status you should to request a faucet grant.
 If your node is fully synchronized, then run the tx to upgrade to validator status:
 ```
 quicksilverd tx staking create-validator \
-  --from=$YOUR_TEST_WALLET \
-  --amount=1000000uqck \
-  --moniker=$NODE_MONIKER \
-  --chain-id=$CHAIN_ID \
-  --commission-rate=0.1 \
-  --commission-max-rate=0.5 \
-  --commission-max-change-rate=0.1 \
-  --min-self-delegation=1 \
-  --identity=""
-  --pubkey=$(quicksilverd tendermint show-validator)
-  ```
+ --amount=<amount>uqck \
+ --pubkey=$(quicksilverd tendermint show-validator) \  
+ --from=$YOUR_TEST_WALLET \
+ --moniker=$NODE_MONIKER \
+ --chain-id=$CHAIN_ID \
+ --details="" \
+ --website="" \
+ --identity="" \
+ --commission-rate=0.1 \
+ --commission-max-rate=0.5 \
+ --commission-max-change-rate=0.1 \
+ --min-self-delegation=1 \
+ --gas-prices=0.025uqck \
+ --gas-adjustment=1.4
+```
 To see how many tokens are in your wallet, enter:
 ```
 quicksilverd q bank balances <quick1...your..wallet...>
