@@ -61,7 +61,7 @@ quicksilverd init $NODE_MONIKER --chain-id $CHAIN_ID
 Include seeds in `config.toml`. By one command
 ```
 SEEDS="dd3460ec11f78b4a7c4336f22a356fe00805ab64@seed.quicktest-1.quicksilver.zone:26656" ; \
-sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $NODE_HOME/config/config.toml
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.quicksilverd/config/config.toml
 ```
 Download genesis. By one command
 ```
