@@ -1,4 +1,5 @@
 Officiall link is here https://github.com/ingenuity-build/testnets
+
 Explorer: https://testnet.explorer.testnet.run/Quicksilver
 
 # Instructions
@@ -173,9 +174,10 @@ quicksilverd tx staking delegate <quick1...your..wallet...> <amount>uqck \
 ```
 ### Governance
 https://testnet.explorer.testnet.run/Quicksilver/gov
+
 How to vote:
+
 ```
-quicksilverd tx gov vote 2 yes --from <quick1...your..wallet...>
 ```
 
 
