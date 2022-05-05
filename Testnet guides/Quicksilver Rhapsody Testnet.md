@@ -145,7 +145,7 @@ quicksilverd tx staking create-validator \
  --pubkey=$(quicksilverd tendermint show-validator) \  
  --from=$YOUR_TEST_WALLET \
  --moniker=$NODE_MONIKER \
- --chain-id=$CHAIN_ID \
+ --chain-id=$chainName \
  --details="" \
  --website="" \
  --identity="" \
@@ -162,7 +162,7 @@ quicksilverd q bank balances <quick1...your..wallet...>
 ```
 To send tokens type the command:
 ```
-quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=quicktest-3
+quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=$chainName
 ```
 To delegate more tokens
 ```
