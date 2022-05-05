@@ -1,4 +1,5 @@
 Officiall link is here https://github.com/ingenuity-build/testnets
+Explorer: https://testnet.explorer.testnet.run/Quicksilver
 
 # Instructions
 Update the packeges
@@ -162,8 +163,20 @@ To send tokens type the command:
 ```
 quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=quicktest-3
 ```
-
-
+To delegate more tokens
+```
+quicksilverd tx staking delegate <quick1...your..wallet...> <amount>uqck \
+--chain-id torii-1 \
+--from $Arch_wallet \
+--gas auto \
+--fees=200utorii
+```
+### Governance
+https://testnet.explorer.testnet.run/Quicksilver/gov
+How to vote:
+```
+quicksilverd tx gov vote 2 yes --from <quick1...your..wallet...>
+```
 
 
 
