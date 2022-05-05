@@ -133,7 +133,36 @@ Actual network State Sync from community:
 - https://github.com/Staketab/cosmos-tools/tree/main/state-sync
 - https://github.com/kj89/testnet_manuals/tree/main/quicksilver#to-synchronize-your-quicksilver-node-to-latest-block-you-have-to-use-state-sync-provided-below
 
+In this guide, I will use the service from [kj89](https://github.com/kj89)
 
+Stop the service
+```
+sudo systemctl stop quicksilverd
+```
+Resetting downloaded blockchain data
+```
+quicksilverd unsafe-reset-all
+```
+add State Sync data to `config.toml`
+```
+# variables
+INTERVAL=1500
+LATEST_HEIGHT=$(curl -s http://seed.quicktest-1.quicksilver.zone:26657/block | jq -r .result.block.header.height)
+BLOCK_HEIGHT=$(($(($LATEST_HEIGHT / $INTERVAL)) * $INTERVAL))
+TRUST_HASH=$(curl -s "http://seed.quicktest-1.quicksilver.zone:26657/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+SYNC_RPC="node02.quicktest-1.quicksilver.zone:26657,node03.quicktest-1.quicksilver.zone:26657,node04.quicktest-1.quicksilver.zone:26657"
+
+# Ever by one command
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SYNC_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.quicksilverd/config/config.toml
+```
+Start the service
+```
+sudo systemctl restart quicksilverd
+sudo systemctl status quicksilverd
+```
 ## Faucet
 Before upgrade to validator status you should to request a faucet grant.
 - Here is the guide https://github.com/ingenuity-build/testnets#faucet
