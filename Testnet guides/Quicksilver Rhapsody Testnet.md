@@ -171,7 +171,7 @@ If your node is fully synchronized, then run the tx to upgrade to validator stat
 ```
 quicksilverd tx staking create-validator \
  --amount=<amount>uqck \
- --pubkey=$(quicksilverd tendermint show-validator) \  
+ --pubkey=$(quicksilverd tendermint show-validator) \
  --from=$YOUR_TEST_WALLET \
  --moniker=$NODE_MONIKER \
  --chain-id=$chainName \
@@ -207,6 +207,7 @@ https://testnet.explorer.testnet.run/Quicksilver/gov
 How to vote:
 
 ```
+quicksilverd tx gov vote 2 yes --from=$(quicksilverd keys show $WALLET -a) --chain-id=$chainName
 ```
 
 
