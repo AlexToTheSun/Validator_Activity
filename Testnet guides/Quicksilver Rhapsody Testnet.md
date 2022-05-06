@@ -118,9 +118,13 @@ sudo systemctl restart quicksilverd
 sudo systemctl status quicksilverd
 ```
 ### Logs and status
+Logs
 ```
 journalctl -u quicksilverd -f --output cat
-ag0 status 2>&1 | jq .SyncInfo
+```
+Status of sinchronization
+```
+quicksilverd status 2>&1 | jq .SyncInfo
 ```
 If you want to know your node_id.
 ```
@@ -195,7 +199,7 @@ quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=$chainName
 ```
 Find out your wallet
 ```
-quicksilverd keys show $WALLET -a
+quicksilverd keys show $YOUR_TEST_WALLET -a
 ```
 Find out your validator
 ```
