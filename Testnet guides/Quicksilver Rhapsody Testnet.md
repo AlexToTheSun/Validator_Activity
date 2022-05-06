@@ -193,13 +193,21 @@ To send tokens type the command:
 ```
 quicksilverd tx bank send <sender> <receiver> <amount>uqck --chain-id=$chainName
 ```
+Find out your wallet
+```
+quicksilverd keys show $WALLET -a
+```
+Find out your validator
+```
+quicksilverd keys show $YOUR_TEST_WALLET --bech val -a
+```
 To delegate more tokens
 ```
-quicksilverd tx staking delegate <quick1...your..wallet...> <amount>uqck \
---chain-id torii-1 \
---from $Arch_wallet \
+quicksilverd tx staking delegate $(quicksilverd keys show $YOUR_TEST_WALLET --bech val -a) <amount>uqck \
+--chain-id=$chainName \
+--from=$YOUR_TEST_WALLET \
 --gas auto \
---fees=200utorii
+--fees=200uqck
 ```
 ### Governance
 https://testnet.explorer.testnet.run/Quicksilver/gov
