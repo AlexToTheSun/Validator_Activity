@@ -58,7 +58,7 @@ echo 'export chainName='\"${CHAIN_ID}\" >> $HOME/.bash_profile
 ### Init and make chandges configuration
 Init
 ```
-quicksilverd init $NODE_MONIKER --chain-id $CHAIN_ID
+quicksilverd init $NODE_MONIKER --chain-id $chainName
 ```
 Include seeds in `config.toml`. By one command
 ```
