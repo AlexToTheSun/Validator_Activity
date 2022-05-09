@@ -1,4 +1,5 @@
 ## Axelar Network State Sync
+### Chain: `axelar-testnet-casablanca-1`
 Add my public RPC node to `persistance_peer` in `config.toml`
 ```
 peers="cc138f96d4d38bb3ba06f0a0181af53d16edb6df@195.3.221.174:26656"; \
