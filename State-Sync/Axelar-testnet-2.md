@@ -1,7 +1,7 @@
-## For quick synchronization and saving space, use state sync snapshot
-Add my public RPC node to `persistance_peer` in config.toml
+## Axelar Network State Sync
+Add my public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="cc138f96d4d38bb3ba06f0a0181af53d16edb6df@195.3.221.174:26656"
+peers="cc138f96d4d38bb3ba06f0a0181af53d16edb6df@195.3.221.174:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.axelar/config/config.toml
 ```
 Add variables
@@ -19,7 +19,7 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.axelar/config/config.toml
 ```
-Restart the axelard.service
+Restart the `axelard.service`
 ```
 sudo systemctl restart axelard
 ```
