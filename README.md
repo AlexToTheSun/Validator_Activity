@@ -24,4 +24,7 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password)
 - [File2Ban](https://surftest.gitbook.io/axelar-wiki/russian/bezopasnost/file-2-ban)
 - [Disk usage optimisation](https://surftest.gitbook.io/axelar-wiki/english/disk-usage-optimisation)
-- [How to produce Cosmos SDK State Sync Snapshots](https://surftest.gitbook.io/axelar-wiki/english/cosmos-sdk-state-sync)
+- [How to produce Cosmos SDK State Sync Snapshots](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync)
+
+## Public RPC nodes with State Sync
+- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
