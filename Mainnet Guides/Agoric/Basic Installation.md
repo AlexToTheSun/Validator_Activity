@@ -1,15 +1,17 @@
 ## Summary
 In this tutorial, we will:
-- Make minimal server protection (change the password, change the SSH port, install File2ban).
+- Make minimal server protection ([change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-password), [change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-ssh-port), [install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-file2ban)).
 - [Install and Synchronize the node using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-the-validator-node).
-- 
 - [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#create-the-validator).
 - [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
 - [tmkms protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#tmkms) (Optional)
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings.
 ### Change the password
-`passwd`
+```
+passwd
+```
+This will protect against password leakage from the hosting or your mail. For example, when sending you an email message with a password.
 ### Change the SSH port
 The port number must not exceed `65535`
 
