@@ -1,3 +1,84 @@
+## Summary
+In this tutorial, we will:
+- Make minimal server protection (change the password, change the SSH port, install File2ban).
+- [Install and Synchronize the node using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-the-validator-node).
+- 
+- [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#create-the-validator).
+- [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
+- [tmkms protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#tmkms) (Optional)
+## Minimal server protection
+It will not protect against all threats. Requires more advanced security settings.
+### Change the password
+`passwd`
+### Change the SSH port
+The port number must not exceed `65535`
+
+Replace port 22 with a new one.
+You need to find the line `Port 22`, and if it is commented out, remove the `#` symbol, and also enter a random number instead of port `22`, for example `1234`.
+```
+sudo nano /etc/ssh/sshd_config
+```
+Add the new port to the allowed list for UFW
+```
+sudo ufw allow 1234/tcp
+sudo ufw deny 22
+```
+Sshd service restart
+```
+sudo systemctl restart sshd
+```
+Be sure to try opening an ssh connection in a new putty window without closing the first one. To check and, if necessary, correct the error.
+### Install File2ban
+```
+sudo apt install fail2ban
+```
+Let's start and make the daemon start automatically on every boot:
+```
+sudo systemctl start fail2ban
+sudo systemctl enable fail2ban
+```
+All ban parameters are set in the configuration file jail.conf , which is located at /etc/fail2ban/jail.conf
+
+By default, after installation, we have the following settings for banning via SSH:
+```
+[DEFAULT]
+ignorecommand =
+bantime = 10m
+findtime = 10m
+maxretry = 5
+```
+- **bantime** - [min] time for banning ip.
+- **findtime** - [min] time interval during which you can try to log in to the server "maxretry" times.
+- **maxretry** - [times] allowed number of login attempts, per "findtime" time interval.
+
+If you decide to change the settings, then open the editor:
+```
+sudo nano /etc/fail2ban/jail.conf
+```
+#### Setting up sshd_log for file2ban
+Checking if the file `sshd_log` exists `find / -name "sshd_log"`
+
+If not, then create the file by yourself `touch /var/log/sshd_log`
+
+Open file2ban to set the path to the logs `sudo nano /etc/fail2ban/jail.conf`
+```
+# Find block [sshd]
+# Delete a line:
+logpath = %(sshd_log)s
+
+# Insert a line to write the path
+logpath  = /var/log/sshd_log
+```
+After changing the parameters, restart the service:
+```
+sudo systemctl reload fail2ban
+sudo systemctl status fail2ban
+journalctl -b -u fail2ban
+```
+
+
+
+
 ## Install the validator node
 **Update & upgrade**
 ```
