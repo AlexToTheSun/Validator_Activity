@@ -2,7 +2,7 @@
 In this tutorial, we will:
 - Make minimal server protection ([change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-password), [change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-ssh-port), [install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-file2ban)).
 - [Install and Synchronize the node using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-the-validator-node).
-- - [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
+- [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
 - [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#create-the-validator).
 - [tmkms protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#tmkms) (Optional)
 ## Minimal server protection
