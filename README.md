@@ -17,10 +17,10 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
 - NuCypher [testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
 
-## Guides for Validator' Security Protection and other settings
+## Guides for advanced Validator' Security Protection and other settings
 
 - [Sentry Nodes](https://surftest.gitbook.io/axelar-wiki/english/sentry-node)
-- Double singing protection. [Github link](https://github.com/iqlusioninc/tmkms)
+- [Double singing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md)
 - [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password)
 - [File2Ban](https://surftest.gitbook.io/axelar-wiki/russian/bezopasnost/file-2-ban)
 - [Disk usage optimisation](https://surftest.gitbook.io/axelar-wiki/english/disk-usage-optimisation)
