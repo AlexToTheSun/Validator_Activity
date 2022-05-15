@@ -1,13 +1,13 @@
 ## Overview
 In this tutorial, we will:
-- Make minimal server protection 
-  - [change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-password)
-  - [change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-ssh-port)
-  - [install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-file2ban)
-- [Install and Synchronize the node using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-the-validator-node).
-- [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
-- [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#create-the-validator).
-- [tmkms protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#tmkms) (Optional)
+- [Make minimal server protection]() 
+  - [change the password]()
+  - [change the SSH port]()
+  - [install File2ban]()
+- [Install and Synchronize the node using opend RPC node with State Sync]().
+- [Make DDoS protection]() (Optional)
+- [Create the validator]().
+- [tmkms protection]() (Optional)
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings.
 ### Change the password
@@ -80,7 +80,7 @@ sudo systemctl reload fail2ban
 sudo systemctl status fail2ban
 journalctl -b -u fail2ban
 ```
-## Install the validator node
+## Install Agoric Node
 First we need to install the software, ran `init` and set up the configuration files to be able to start the sync.
 ### Install the software
 **Update & upgrade**
