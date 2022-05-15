@@ -286,6 +286,7 @@ If you want to secure a node with a validator, then before starting, click [[her
 If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
 ## Start synchronization
 ```
+ag0 unsafe-reset-all
 sudo systemctl enable agoricd
 sudo systemctl daemon-reload
 sudo systemctl restart agoricd
