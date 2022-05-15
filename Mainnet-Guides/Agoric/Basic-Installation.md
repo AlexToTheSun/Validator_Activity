@@ -2,7 +2,7 @@
 In this tutorial, we will:
 - [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#minimal-server-protection) 
   - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-password)
-  -  [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/edit/main/Mainnet-Guides/Agoric/Basic-Installation.md#firewall-configuration) (ufw)
+  -  [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#firewall-configuration) (ufw)
   - [Change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-ssh-port)
   - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-file2ban)
 - [Install Agoric Node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-agoric-node)
