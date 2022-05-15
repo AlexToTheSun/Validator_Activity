@@ -213,6 +213,18 @@ quicksilverd tx staking delegate $(quicksilverd keys show $YOUR_TEST_WALLET --be
 --gas auto \
 --fees=200uqck
 ```
+## Unjail
+Transaction to Unjail
+```
+quicksilverd tx slashing unjail \
+--chain-id $chainName \
+--from $YOUR_TEST_WALLET \
+--gas=auto \
+--gas-adjustment=1.4 \
+--gas-prices="0.025uqck"
+```
+But if you are in prison, then you should analyze the reasons. The server may not be able to handle the load.
+
 ### Governance
 https://testnet.explorer.testnet.run/Quicksilver/gov
 
