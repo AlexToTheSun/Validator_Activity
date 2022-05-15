@@ -10,7 +10,7 @@ This is an actual information about my validator. Projects. Guides. Tools.
 ## Guides for those who want to become a validator 
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
 - [Gravity Bridge](https://surftest.gitbook.io/gravity-bridge/)
-- [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet%20Guides/Agoric)
+- [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Agoric)
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
 - [Axelar](https://surftest.gitbook.io/axelar-wiki)
