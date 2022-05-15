@@ -1,18 +1,19 @@
 ## Overview
 In this tutorial, we will:
-- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic-Installation.md#minimal-server-protection) 
-  - [change the password]()
-  - [change the SSH port]()
-  - [install File2ban]()
-- [Install Agoric Node]().
-  - Install the software
-  - Disk usage optimization
-  - Sync using opend RPC node with State Sync
-  - Create service file for Agoric
-- [DDoS protection]() (Optional)
-- Start synchronization
-- [Create the validator]().
-- [tmkms protection]() (Optional)
+- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#minimal-server-protection) 
+  - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-password)
+  -  [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/edit/main/Mainnet-Guides/Agoric/Basic-Installation.md#firewall-configuration) (ufw)
+  - [Change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-ssh-port)
+  - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-file2ban)
+- [Install Agoric Node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-agoric-node)
+  - [Install the software](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-the-software)
+  - [Disk usage optimization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-configtoml-and-apptoml-for-disk-usage-optimization)
+  - [Sync using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-configtoml-to-sync-with-a-state-sync-snapshot)
+  - [Create service file for Agoric](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#create-service-file-for-agoric)
+- [DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#ddos-protection-sentry-node-architecture) (Sentry nodes)
+- [Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#start-synchronization)
+- [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#create-the-validator)
+- [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#tmkms) (tmkms)
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings.
 ### Change the password
@@ -20,6 +21,47 @@ It will not protect against all threats. Requires more advanced security setting
 passwd
 ```
 This will protect against password leakage from the hosting or your mail. For example, when sending you an email message with a password.
+### Firewall configuration
+Install ufw
+```
+sudo apt ufw install -y
+```
+Open the ports necessary for Agoric
+```
+# Allow ssh connection
+sudo ufw allow ssh
+
+# SSH port
+sudo ufw allow 22
+
+# # API server port
+sudo ufw allow 1317
+
+# Ports for p2p connection, RPC server, ABCI
+sudo ufw allow 26656:26658/udp
+
+# Prometheus port
+sudo ufw allow 26660
+
+# Port for pprof listen address
+sudo ufw allow 6060
+
+# Address defines the gRPC server address to bind to.
+sudo ufw allow 9090
+
+# Address defines the gRPC-web server address to bind to.
+sudo ufw allow 9091
+```
+Enable ufw
+```
+sudo ufw enable
+```
+Check
+```
+sudo ufw status
+sudo ufw status verbose
+ss -tulpn
+```
 ### Change the SSH port
 The port number must not exceed `65535`
 
@@ -238,9 +280,9 @@ EOF
 You could change `--log_level=info` flag after making sure everything works.
 
 The logging level (`trace`|`debug`|`info`|`warn`|`error`|`fatal`|`panic`)
-## DDoS protection (Sentry Node Architecture)
-!! Everything is ready to launch. But note that when you run the service file in this configuration, after synchronization, information about your node will be available on the Agoric public network. This exposes your validator to DDoS attacks.
-If you want to secure a node with a validator, then before starting, click [[here]](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Sentry%20Node%20architecture.md) and configure Agoric Sentry Node Architecture.
+## Sentry Node Architecture (Recommended)
+!! Everything is ready to launch. But we need **DDoS protection**. When you run the service file in this configuration, after synchronization, information about your node will be available on the Agoric public network. This exposes your validator to DDoS attacks.
+If you want to secure a node with a validator, then before starting, click [[here]](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md) and configure Agoric Sentry Node Architecture.
 If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
 ## Start synchronization
 ```
@@ -291,8 +333,8 @@ ag0 tx staking create-validator \
 - If you want to add identity then create an account here https://keybase.io/
 - Also you could add details and website flag.
 Greate. You could find your validator here https://main.explorer.agoric.net/validators
-## tmkms
+## tmkms (Recommended)
 It is **highly recommended** to protect your validator from double-signing case.
 [Official documentation](https://github.com/iqlusioninc/tmkms)
 This could prevent the Double-signing even in the event the validator process is compromised.
-Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/tmkms_Soft-sign_(needs_2_servers).md)] the guide of Installing tmkms on an additional server that will serve as protection.
+Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server))] the guide of Installing tmkms on an additional server that will serve as protection.
