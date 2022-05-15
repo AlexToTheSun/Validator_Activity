@@ -1,11 +1,16 @@
 ## Overview
 In this tutorial, we will:
-- [Make minimal server protection]() 
+- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic-Installation.md#minimal-server-protection) 
   - [change the password]()
   - [change the SSH port]()
   - [install File2ban]()
-- [Install and Synchronize the node using opend RPC node with State Sync]().
-- [Make DDoS protection]() (Optional)
+- [Install Agoric Node]().
+  - Install the software
+  - Disk usage optimization
+  - Sync using opend RPC node with State Sync
+  - Create service file for Agoric
+- [DDoS protection]() (Optional)
+- Start synchronization
 - [Create the validator]().
 - [tmkms protection]() (Optional)
 ## Minimal server protection
