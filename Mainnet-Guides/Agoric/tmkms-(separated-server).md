@@ -1,4 +1,5 @@
 ## Tendermint Key Management System (separated server)
+The official documentation is [[here](https://github.com/iqlusioninc/tmkms#tendermint-kms-)]
 In this article, we will configure `tmkms` on a separate server for the double-signing protection of the Agoriс' validator.
 
 [Software-Only](https://github.com/iqlusioninc/tmkms#software-only-not-recommended) signing is not recommended, but 
@@ -10,16 +11,16 @@ Advantage of this method instead of basic installation:
 ## Use Case
 If you already run a validator node. It's not too late to set up tmkms. Follow the instructions below.
 ## Overview
-- Setting up a Validator node
-  - Firewall configuration
-  - Edit config.toml
-- Setting up a tmkms server
-  - Install tmkms
-  - Firewall configuration
-  - Init tmkms
-  - Copy priv_validator_key.json from validator node
-  - Edit tmkms.toml
-- Restert both validator and tmkms
+- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#edit-configtoml)
+- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#setting-up-a-tmkms-server)
+  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#install-tmkms)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#firewall-configuration-1)
+  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#init-tmkms)
+  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#copy-priv_validator_keyjson-from-validator-node)
+  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#edit-tmkmstoml)
+- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#restert-both-validator-and-tmkms)
 
 ## Setting up a Validator node
 We already [[run](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md)] a validator node.
