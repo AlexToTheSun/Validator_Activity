@@ -3,19 +3,20 @@
 
 One Sentry node will not be enough, because if it goes offline during a DDoS attack, then the validator node will also be offline, because validator synchronizes only from the Sentry node.
 ## Overview
-- Setting up Sentry nodes
-  - Install
-  - Edit config.toml
-  - Restart
-- Setting up a validator node
-  - Firewall configuration
-  - Edit config.toml
-  - Restart
+- [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#install-agoric)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#edit-configtoml)
+  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#restart)
+- [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#edit-configtoml-1)
+  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md#restart-1)
 
 ## Setting up Sentry nodes
 It is worth installing at least 3 sentry nodes in the mainnet (preferably 4-5)
 ### Install Agoric
-Go to the [[guide](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md)] and set up Agoric RPC node.
+Go to the [[guide](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md)] and set up Agoric RPC node. Complete all steps up to and including [[Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#start-synchronization)].  
+Now it remains to configure Sentry Nodes to work in a private network also.
 ### Edit config.toml
 Open the config file by nano editor:
 ```
