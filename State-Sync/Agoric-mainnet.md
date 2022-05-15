@@ -1,6 +1,6 @@
 ## Agoric Network State Sync
 ### Chain: `agoric-3`
-Add my public RPC node to `persistance_peer` in `config.toml`
+Add this public RPC node to `persistance_peer` in `config.toml`
 ```
 peers="9373c1dbf0a040d2c76b120f8472871b92852f62@154.12.241.178:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.agoric/config/config.toml
@@ -13,7 +13,7 @@ BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 ```
-Now enter all the datat to `confil.toml`
+Now enter all the datat to `config.toml`
 ```
 sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
