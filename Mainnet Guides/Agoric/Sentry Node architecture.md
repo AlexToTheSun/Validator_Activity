@@ -1,1 +1,0 @@
-Sentry Node architecture
