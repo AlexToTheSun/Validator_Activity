@@ -1,6 +1,9 @@
-## Summary
+## Overview
 In this tutorial, we will:
-- Make minimal server protection ([change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-password), [change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-ssh-port), [install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-file2ban)).
+- Make minimal server protection 
+  - [change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-password)
+  - [change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#change-the-ssh-port)
+  - [install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-file2ban)
 - [Install and Synchronize the node using opend RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#install-the-validator-node).
 - [Make DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#ddos-protection-sentry-node-architecture) (Optional)
 - [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Basic%20Installation.md#create-the-validator).
@@ -77,11 +80,9 @@ sudo systemctl reload fail2ban
 sudo systemctl status fail2ban
 journalctl -b -u fail2ban
 ```
-
-
-
-
 ## Install the validator node
+First we need to install the software, ran `init` and set up the configuration files to be able to start the sync.
+### Install the software
 **Update & upgrade**
 ```
 sudo apt update && sudo apt upgrade -y
@@ -142,10 +143,12 @@ echo 'export chainName='\"${chainName}\" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 echo $AGORIC_NODENAME $AGORIC_WALLET $chainName
 ```
-**Make init of Agoric**
+**Make init of Agoric with `--recover` flag**
 ```
-ag0 init --chain-id $chainName $AGORIC_NODENAME
+ag0 init --chain-id $chainName $AGORIC_NODENAME --recover
 ```
+! Use `--recover` to provide seed phrase to recover existing key instead of creating. 
+If you do an `init` without this flag and lose the priv_validator_key.json file, you will never get access to the validator.
 **Download `genesis.json`**
 ```
 curl https://main.agoric.net/genesis.json > $HOME/.agoric/config/genesis.json
@@ -180,7 +183,7 @@ sed -i '/\[telemetry\]/{:a;n;/enabled/s/false/true/;Ta};/\[api\]/{:a;n;/enable/s
 sed -i "s/prometheus-retention-time = 0/prometheus-retention-time = 60/g" $HOME/.agoric/config/app.toml
 sed -i "s/prometheus = false/prometheus = true/g" $HOME/.agoric/config/config.toml
 ```
-**Change `config.toml` and `app.toml` for disk usage optimization**
+## Change `config.toml` and `app.toml` for disk usage optimization
 ```
 sed -i.bak -e "s/^indexer *=.*/indexer = \""null"\"/" $HOME/.agoric/config/config.toml
 sudo rm ~/.agoric/data/tx_index.db/*
@@ -191,7 +194,7 @@ sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \""10"\"/" $HOME/.ago
 ```
 More about that you could find [here](https://surftest.gitbook.io/axelar-wiki/english/disk-usage-optimisation)
 
-**Change `config.toml` to sync with a State sync snapshot**
+## Change `config.toml` to sync with a State sync snapshot
 Insert data into variables
 ```
 SNAP_RPC="http://154.12.241.178:26657" ; \
@@ -209,7 +212,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.agoric/config
 ```
 For faster loading, enter the RPC node data in the config file, in the `persistent_peers` section:
 `9373c1dbf0a040d2c76b120f8472871b92852f62@154.12.241.178:26656`
-**Create service file** for Agoric
+## Create service file for Agoric
 ```
 sudo tee <<EOF >/dev/null /etc/systemd/system/agoricd.service
 [Unit]
@@ -227,6 +230,9 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
+You could change `--log_level=info` flag after making sure everything works.
+
+The logging level (`trace`|`debug`|`info`|`warn`|`error`|`fatal`|`panic`)
 ## DDoS protection (Sentry Node Architecture)
 !! Everything is ready to launch. But note that when you run the service file in this configuration, after synchronization, information about your node will be available on the Agoric public network. This exposes your validator to DDoS attacks.
 If you want to secure a node with a validator, then before starting, click [[here]](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet%20Guides/Agoric/Sentry%20Node%20architecture.md) and configure Agoric Sentry Node Architecture.
