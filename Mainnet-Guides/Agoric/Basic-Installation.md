@@ -190,12 +190,20 @@ echo 'export chainName='\"${chainName}\" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 echo $AGORIC_NODENAME $AGORIC_WALLET $chainName
 ```
+### Create a wallet
+If you want to recover it then add `--recover` flag. Or just create a new key:
+```
+ag0 keys add $AGORIC_WALLET
+```
+- Write down the mnemonic phrase in a safe place
+- Set a keyring password. It is a local defense. The password applies to all wallets on the server.
 **Make init of Agoric with `--recover` flag**
 ```
 ag0 init --chain-id $chainName $AGORIC_NODENAME --recover
 ```
-! Use `--recover` to provide seed phrase to recover existing key instead of creating. 
+!!! Use `--recover` to provide seed phrase of your wallet you created on the previous step to recover existing priv_validator_key instead of creating. 
 If you do an `init` without this flag and lose the priv_validator_key.json file, you will never get access to the validator.
+
 **Download `genesis.json`**
 ```
 curl https://main.agoric.net/genesis.json > $HOME/.agoric/config/genesis.json
@@ -301,14 +309,8 @@ ag0 status 2>&1 | jq .SyncInfo
 curl localhost:26657/status | jq
 ```
 ## Create the validator
-First of all create a wallet. If you want to recover it then add `--recover` flag
-```
-ag0 keys add $AGORIC_WALLET
-```
-- Write down the mnemonic phrase in a safe place
-- Set a keying password. It is a local defense. The password applies to all wallets on the server.
 **Top up your wallet balance**
-Transfer to the wallet balance some $BLD, on the basis of this wallet you will soon create your validator.
+Transfer to the wallet you have [created before](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#create-a-wallet) some $BLD. On the basis of this wallet you will soon create your validator.
 ### Tx of creating the validator
 If your node is fully synchronized, then run the tx to upgrade to validator status:
 ```
