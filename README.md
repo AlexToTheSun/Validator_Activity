@@ -29,3 +29,4 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 ## Public RPC nodes with State Sync
 - [Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Agoric-mainnet.md)
+- [Quicksilver (Rhapsody Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Rhapsody-Testnet).md)
