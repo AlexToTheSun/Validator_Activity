@@ -3,7 +3,7 @@
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
 peers="cb5afee35649209bf584bda8c8f3f75b208af797@154.12.230.132:26656"; \
-sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.quicksilverd/config/config.toml
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
 ```
 Add variables
 ```
