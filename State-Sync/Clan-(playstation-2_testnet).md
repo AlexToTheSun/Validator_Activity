@@ -2,8 +2,9 @@
 ### Chain: `playstation-2`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="bc92bce07866ba26561d3cdfeb09254710fe6d33@195.3.221.174:26651"; \
-sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.quicksilverd/config/config.toml
+export PEERS_clan="$(curl -s "https://raw.githubusercontent.com/ClanNetwork/testnets/main/playstation-2/persistent-peers.txt")"
+peers="$PEERS_clan,bc92bce07866ba26561d3cdfeb09254710fe6d33@195.3.221.174:26651"; \
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.clan/config/config.toml
 ```
 Add variables
 ```
@@ -18,7 +19,7 @@ Now enter all the datat to `config.toml`
 sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.cland/config/config.toml
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.clan/config/config.toml
 ```
 Restart the `cland.service` with `unsafe-reset-all` by one command:
 ```
