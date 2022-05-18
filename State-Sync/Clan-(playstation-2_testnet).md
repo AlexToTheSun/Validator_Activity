@@ -2,7 +2,7 @@
 ### Chain: `playstation-2`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-export PEERS_clan="$(curl -s "https://raw.githubusercontent.com/ClanNetwork/testnets/main/playstation-2/persistent-peers.txt")"
+export PEERS_clan="$(curl -s "https://raw.githubusercontent.com/ClanNetwork/testnets/main/playstation-2/persistent-peers.txt")"; \
 peers="$PEERS_clan,bc92bce07866ba26561d3cdfeb09254710fe6d33@195.3.221.174:26651"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.clan/config/config.toml
 ```
