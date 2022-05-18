@@ -20,8 +20,10 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.quicksilverd/config/config.toml
 ```
-Restart the `quicksilverd.service`
+Restart the `quicksilverd.service` with `unsafe-reset-all` by one command:
 ```
+sudo systemctl stop quicksilverd && \
+quicksilverd unsafe-reset-all && \
 sudo systemctl restart quicksilverd
 ```
 Logs and status
