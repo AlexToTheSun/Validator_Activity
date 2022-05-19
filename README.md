@@ -19,8 +19,8 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 
 ## Guides for advanced Validator' Security Protection and other settings
 
-- [Sentry Nodes](https://surftest.gitbook.io/axelar-wiki/english/sentry-node)
-- [Double singing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md)
+- [Sentry Nodes (DDoS protection)](https://surftest.gitbook.io/axelar-wiki/english/sentry-node)
+- [tmkms (Double singing protection)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md)
 - [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password)
 - [File2Ban](https://surftest.gitbook.io/axelar-wiki/russian/bezopasnost/file-2-ban)
 - [Disk usage optimisation](https://surftest.gitbook.io/axelar-wiki/english/disk-usage-optimisation)
@@ -30,3 +30,4 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Agoric-mainnet.md)
 - [Quicksilver (Rhapsody Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Rhapsody-Testnet).md)
+- [Clan Network (playstation-2 testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Clan-(playstation-2_testnet).md)
