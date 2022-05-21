@@ -1,9 +1,9 @@
 # Turetskiy Validator Identity
 This is an actual information about my validator. Projects. Guides. Tools.
 ## Main-nets that I validate
-- [Gravity Bridge](https://gravity-bridge.ezstaking.io/validators/gravityvaloper1rqhsh8smda90d3n7txty38n44z5qfqpenp3q2v)
+- [Gravity](https://www.mintscan.io/gravity-bridge/validators/gravityvaloper1rqhsh8smda90d3n7txty38n44z5qfqpenp3q2v) [Bridge](https://gravity-bridge.ezstaking.io/validators/gravityvaloper1rqhsh8smda90d3n7txty38n44z5qfqpenp3q2v)
 - [Agoric](https://main.explorer.agoric.net/validator/agoricvaloper1dg6cl026x7fwjagasv7jjlcjkhn60wujwew05a)
-- [IRISnet](https://irishub.iobscan.io/#/staking/iva19ul0uva3fgtm6cd6tceprre4ghsfh6h3u29lcg)
+- [IRISnet](https://www.mintscan.io/iris/validators/iva19ul0uva3fgtm6cd6tceprre4ghsfh6h3u29lcg)
 - [Rizon](https://www.mintscan.io/rizon/validators/rizonvaloper14qd4n677jxsuh7fqg7z7kvj2dzjqdkv8pqv7tk)
 - [Desmos](https://www.mintscan.io/desmos/validators/desmosvaloper1cpr9l93e4s67svqg0crj0v35t3yl2a9zlst74m)
 
