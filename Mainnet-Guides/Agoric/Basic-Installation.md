@@ -162,7 +162,8 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt install nodejs=16.* -y  yarn build-essential jq -y --fix-missing
 ```
-**Install the latest version of Agoric** to sync with State Sync. In this case, you need to skip the first versions of the assembly.
+#### Install the latest version of Agoric
+It is necessary to sync with State Sync. In this case, you need to skip the first versions of the assembly.
 All releases can be viewed here: [Releases](https://github.com/Agoric/ag0/releases)
 ```
 rm -rf /root/ag0
