@@ -1,4 +1,7 @@
-Official instructions for devnet: https://github.com/Agoric/agoric-sdk/wiki/Validator-Guide-for-Devnet
+**Links**
+- Official instructions for devnet: https://github.com/Agoric/agoric-sdk/wiki/Validator-Guide-for-Devnet
+- Explorer: https://devnet.explorer.agoric.net/
+- Actual branch could be found here: https://github.com/Agoric/agoric-sdk/wiki/Validator-Guide-for-Devnet#network-status
 ### Installing
 **Update & upgrade**
 ```
@@ -39,7 +42,8 @@ sudo apt install nodejs=14.* yarn build-essential jq -y
 ```
 ### Install Agoric SDK
 ```
-cd /usr/src/ # temp fix
+cd /usr/src/ 
+#  It will fix a path issue
 rm -r agoric-sdk
 git clone https://github.com/Agoric/agoric-sdk -b agoricdev-11
 cd agoric-sdk
@@ -139,21 +143,24 @@ Request tokens in the [Agoric Discord server #faucet](https://discord.gg/9nKvca)
 !faucet delegate agoric1...
 ```
 #### Check your balance
+```
 agd query bank balances `agd keys show -a $AGORIC_WALLET`
+```
 ### Create-validator transaction
 ```
 agd tx staking create-validator \
   --amount=50000000ubld \
   --broadcast-mode=block \
-  --pubkey='{"@type":"/cosmos.crypto...' \
+  --pubkey=$(agd tendermint show-validator) \
   --moniker=<your-node-name> \
+  --from=<your-key-name> \
   --website=<your-node-website> \
   --details=<your-node-details> \
+  --identity=<your-node-identity> \
   --commission-rate="0.10" \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1" \
-  --from=<your-key-name> \
   --chain-id=$chainName \
   --gas=auto \
   --gas-adjustment=1.4
