@@ -7,6 +7,12 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [Rizon](https://www.mintscan.io/rizon/validators/rizonvaloper14qd4n677jxsuh7fqg7z7kvj2dzjqdkv8pqv7tk)
 - [Desmos](https://www.mintscan.io/desmos/validators/desmosvaloper1cpr9l93e4s67svqg0crj0v35t3yl2a9zlst74m)
 
+## Testnets
+- [Axelar](https://testnet.explorer.testnet.run/axelar-testnet-2/staking/axelarvaloper1eu28tqtanwe0fsl9nrfazr4re3rfewah889qg6)
+- [StafiHub](https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking/stafivaloper1zlw3kurp6h6vj87qf5cjxmkgupp82gpvmqn05j)
+- [Quicksilver](https://testnet.explorer.testnet.run/Quicksilver/staking/quickvaloper1qr688u3h9v6xenm7uwn8sp79yh7tgu76cqn2tv)
+- [Clan Network](https://testnet.explorer.testnet.run/Clan%20Network/staking/clanvaloper182f9evzshwvf2h6pmcut4qdt26nm5l9jf6w8n3)
+
 ## Guides for those who want to become a validator 
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
 - [Gravity Bridge](https://surftest.gitbook.io/gravity-bridge/)
