@@ -4,6 +4,7 @@ In this tutorial, we will:
   - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-password)
   -  [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#firewall-configuration) (ufw)
   - [Change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-ssh-port)
+  - [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#ssh-key-login)
   - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-file2ban)
   - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#2fa-for-ssh)
 - [Install Agoric Node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#install-agoric-node)
@@ -81,6 +82,8 @@ Sshd service restart
 sudo systemctl restart sshd
 ```
 Be sure to try opening an ssh connection in a new putty window without closing the first one. To check and, if necessary, correct the error.
+### SSH key login
+It is also highly recommended to set up an [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password). instead of a password. This is a more reliable method of protection than a password. 
 ### Install File2ban
 ```
 sudo apt install fail2ban
