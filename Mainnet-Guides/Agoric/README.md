@@ -13,12 +13,12 @@ This repository contains not only a simple installation option, but also advance
 Schematically, the server settings will look like this:
 <img width="5397" alt="Group 96" src="https://user-images.githubusercontent.com/30211801/170465651-294bdc0e-2565-4e21-8d8f-21d7d41977ed.png">
 
-#### 2) After that we [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md). The architecture will look like this
-The architecture will look like this:
+#### 2) After that we [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Sentry-Node-Architecture.md).
+It will protect from DDoS attacks. The architecture will look like this:
 <img width="5397" alt="Group 95" src="https://user-images.githubusercontent.com/30211801/170466250-eceffbbb-fc61-40fb-bb29-cf436057b29c.png">
 
 #### 3) And finally [Setting up tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md)
-And finally, we protect our validator from double signing the block using tmkms:
+With this, we protect our validator from double signing the block using tmkms:
 <img width="5397" alt="Group 94" src="https://user-images.githubusercontent.com/30211801/170466454-29747fd8-27d2-4fbf-baba-e6f05dae9ed0.png">
 
 ### Official Agoric links
