@@ -91,9 +91,26 @@ Description of parameters:
 ### Restart
 Once you have your sentry nodes synced and ready to work on a private network, it’s time to connect a validator node to them and start syncing.  
 
-**State sync synchronization clarification**  
-Since I configured the RPC node to produce snapshots every 1000 blocks, and only 2 snapshots are stored on the server => if you have configured Sentry Nodes for more than 2 hours, then you should re-enter the snapshot data in the config.toml of the validator node. [[Click here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-configtoml-to-sync-with-a-state-sync-snapshot)] 
+## Start synchronization  
+Once you have your sentry nodes synced and ready to work on both private and public networks, it’s time to connect a validator node to them and start syncing.  
 
-**Start the service of Validator Node**  
+Since the validator node will now connect exclusively to your Sentry Nodes, which you have specified in config.toml, you have 3 options to synchronize the node:
+1) **Synchronize from the first block**. To do this, enter the following commands:  
+
+Since we previously configured the config.toml of the validator node to synchronize using State Sync, we need to disable this feature. Otherwise, the node will try to download Snapshot from the public node - this will not work. Enter:
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\false|" ~/.gravity/config/config.toml
+```
+Start sync:
+```
+ag0 unsafe-reset-all
+sudo systemctl enable agoricd
+sudo systemctl daemon-reload
+sudo systemctl restart agoricd
+```
+2) **Use full date snapshot**. Download and unzip data folder.
+3) [**Run your own RPC with State Sync**](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync#how-to-run-your-own-rpc-with-state-sync), on one of your Sentry Nodes. then connect Validator node to it by changing the config. 
+
+### Start the service of Validator Node
 To do this, go back to the Basic-Installation guide and continue from the moment [[Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#start-synchronization)]
 
