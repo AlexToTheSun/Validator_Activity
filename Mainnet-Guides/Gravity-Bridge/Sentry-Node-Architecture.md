@@ -48,7 +48,7 @@ gravity status 2>&1 | jq .SyncInfo
 ```
 Once you have your sentry nodes synced and ready to work on a private network, it’s time to connect a validator node to them and start syncing.
 ## Setting up a validator node
-We have already installed all the necessary software, and configured `config.toml` to work on a public network (we stopped at the step [Sentry Node Architecture](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#sentry-node-architecture-recommended)). It's time to connect the validator node to the private network and run.
+We have already installed all the necessary software, and configured `config.toml` to work on a public network (we stopped at the step [Sentry Node Architecture](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#sentry-node-architecture-recommended)). It's time to connect the validator node to the private network and run.
 ### Firewall configuration
 The only thing is that now port 26656 is open to everyone. And you can close it and allow connection only to the IP of Sentry Nods. It is could be done like this:
 ```
