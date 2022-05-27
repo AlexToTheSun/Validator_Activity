@@ -1,5 +1,5 @@
 ## Minimal server protection
-It will not protect against all threats. Requires more advanced security settings such as DDoS and double singing protection.
+It will not protect against all threats. Requires more advanced security settings such as DDoS and double signing protection.
 
 ## Overview
 In this tutorial, we will:
