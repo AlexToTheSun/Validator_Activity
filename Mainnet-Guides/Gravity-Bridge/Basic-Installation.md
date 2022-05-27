@@ -1,12 +1,6 @@
 ## Installation Overview
 In this tutorial, we will:
 - [Make minimal server protection]() 
-  - [Change the password]()
-  -  [Firewall configuration]() (ufw)
-  - [Change the SSH port]()
-  - [SSH key login]()
-  - [Install File2ban]()
-  - [2FA for SSH]()
 - [Install Gravity Bridge Node]()
   - [Install the software]()
   - [Disk usage optimization]()
@@ -17,187 +11,13 @@ In this tutorial, we will:
 - [Create the validator]()
 - [Double-signing protection]() (tmkms)
 ## Minimal server protection
-It will not protect against all threats. Requires more advanced security settings.
-### Change the password
-```
-passwd
-```
-This will protect against password leakage from the hosting or your mail. For example, when sending you an email message with a password.
-### Firewall configuration
-Install ufw
-```
-sudo apt ufw install -y
-```
-Open the ports necessary for Agoric
-```
-# Allow ssh connection
-sudo ufw allow ssh
-# SSH port
-sudo ufw allow 22
-# # API server port
-sudo ufw allow 1317
-# Ports for p2p connection, RPC server, ABCI
-sudo ufw allow 26656:26658/udp
-# Prometheus port
-sudo ufw allow 26660
-# Port for pprof listen address
-sudo ufw allow 6060
-# Address defines the gRPC server address to bind to.
-sudo ufw allow 9090
-# Address defines the gRPC-web server address to bind to.
-sudo ufw allow 9091
-```
-Enable ufw
-```
-sudo ufw enable
-```
-Check
-```
-sudo ufw status
-sudo ufw status verbose
-ss -tulpn
-```
-### Change the SSH port
-The port number must not exceed `65535`
-
-Replace port 22 with a new one.
-You need to find the line `Port 22`, and if it is commented out, remove the `#` symbol, and also enter a random number instead of port `22`, for example `1234`.
-```
-sudo nano /etc/ssh/sshd_config
-```
-Add the new port to the allowed list for UFW
-```
-sudo ufw allow 1234/tcp
-sudo ufw deny 22
-```
-Sshd service restart
-```
-sudo systemctl restart sshd
-```
-Be sure to try opening an ssh connection in a new putty window without closing the first one. To check and, if necessary, correct the error.
-### SSH key login
-It is also highly recommended to set up an [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password). instead of a password. This is a more reliable method of protection than a password. 
-### Install File2ban
-```
-sudo apt install fail2ban
-```
-Let's start and make the daemon start automatically on every boot:
-```
-sudo systemctl start fail2ban
-sudo systemctl enable fail2ban
-```
-All ban parameters are set in the configuration file jail.conf , which is located at /etc/fail2ban/jail.conf
-
-By default, after installation, we have the following settings for banning via SSH:
-```
-[DEFAULT]
-ignorecommand =
-bantime = 10m
-findtime = 10m
-maxretry = 5
-```
-- **bantime** - [min] time for banning ip.
-- **findtime** - [min] time interval during which you can try to log in to the server "maxretry" times.
-- **maxretry** - [times] allowed number of login attempts, per "findtime" time interval.
-
-If you decide to change the settings, then open the editor:
-```
-sudo nano /etc/fail2ban/jail.conf
-```
-#### Setting up sshd_log for file2ban
-Checking if the file `sshd_log` exists `find / -name "sshd_log"`
-
-If not, then create the file by yourself `touch /var/log/sshd_log`
-
-Open file2ban to set the path to the logs `sudo nano /etc/fail2ban/jail.conf`
-```
-# Find block [sshd]
-# Delete a line:
-logpath = %(sshd_log)s
-# Insert a line to write the path
-logpath  = /var/log/sshd_log
-```
-After changing the parameters, restart the service:
-```
-sudo systemctl reload fail2ban
-sudo systemctl status fail2ban
-journalctl -b -u fail2ban
-```
-### 2FA for SSH
-You can also set up additional protection. 2FA are time based passwords. This method is not common, but is [considered](https://www.linode.com/docs/guides/use-one-time-passwords-for-two-factor-authentication-with-ssh-on-ubuntu-16-04-and-debian-8) reliable protection.
-#### Time zone setting
-The default time zone is set to UTC. This can be changed by setting the timezone you live in to use programs that are tied to your local time, and to display server logs in a time that you can understand. To do this, we will execute:
-1. Select from the list and copy the time zone we need. Opening the list:
-```
-timedatectl list-timezones
-```
-2. Now use keyboard arrows `Page Up`, and `Page Down` to view the list. Copy the desired time zone, then to exit the list press `q` (or `ctrl+c`) to get out of the list.  
-3. Set the time zone (for example, I took 'Etc/GMT+4'):
-```
-timedatectl set-timezone 'Etc/GMT+4'
-```
-#### Install Google Authenticator
-Enter the command to install Google Authenticator:
-```
-sudo apt-get install libpam-google-authenticator
-```
-This program generates keys on the server, and after scanning the qr code, the password for entering on the phone will be displayed.
-
-#### Key generation.
-❗️ Before generating a key, install the [Google Authenticator](https://en.wikipedia.org/wiki/Google_Authenticator) or [Authy](https://www.authy.com/) application on your phone.  
-And also check that the phone's time zone matches the one set on the server.   
-1. Enter the key generation command:
-```
-google-authenticator
-```
-A question will appear. You must select a time-based key by entering `y`.
-![image](https://user-images.githubusercontent.com/30211801/169817242-ab99844a-b11f-4931-a819-008fd71bc4c0.png)
-2. After that, we get a **QR code**, **secret key** and **emergency scratch codes**. You need to scan the **QR code** using the Google 2FA application, or enter the secret key into the application manually. **Emergency scratch codes** (5 pieces) just save or write down on paper. They are needed in case we lost the phone (they are disposable!).
-![image](https://user-images.githubusercontent.com/30211801/169817408-508b1074-40be-450c-867a-241cccce991d.png)
-
-Now we answer the questions:
-1) `Do you want me to update your "/home/exampleuser/.google_authenticator" file (y/n)`  
-**Answer** `y`
-2) `Do you want to disallow multiple uses of the same authentication token? This restricts you to one login about every 30s, but it increases your chances to notice or even prevent man-in-the-middle attacks (y/n)`  
-**Answer** `y`
-3) `By default, tokens are good for 30 seconds and in order to compensate for possible time-skew between the client and the server, we allow an extra token before and after the current time. If you experience problems with poor time synchronization, you can increase the window from its default size of 1:30min to about 4min. Do you want to do so (y/n)`  
-**Answer** `n`
-4) `If the computer that you are logging into isn't hardened against brute-force login attempts, you can enable rate-limiting for the authentication module. By default, this limits attackers to no more than 3 login attempts every 30s. Do you want to enable rate-limiting (y/n)`  
-**Answer** `y`
-#### Configuration setup
-For google-authenticator to work correctly, we need the [PAM](http://www.linux-pam.org/) ([Pluggable Authentication Modules for Linux](http://www.linux-pam.org/whatispam.html)).
-
-❗️At this step, it's important to open two putty sessions, as we'll soon need to login to the server again to check 2FA. And if we cannot log in to the server via 2FA, then we can solve the problem in the second opened session . Also, the problem can be solved through the console of the provider's personal account.
-
-#### Editing the file /etc/pam.d/sshd
-Open the file `/etc/pam.d/sshd` :  
-```
-sudo nano /etc/pam.d/sshd
-```
-Insert lines at the end of the file:
-```
-auth    required      pam_unix.so     no_warn try_first_pass
-auth    required      pam_google_authenticator.so
-```
-Where the first line tells PAM to ask for a password first! The second line sets the requirement for additional verification - google_authenticator.
-#### Editing the file /etc/ssh/sshd_config
-In this file, we also need to write an additional verification requirement.  
-Find the line `ChallengeResponseAuthentication no`. You need to set its value to `yes`:
-```
-ChallengeResponseAuthentication yes
-```
-Replace `example-user` with the user you want. Let's say `root`. And paste the changed lines at the end of the file:
-```
-Match User example-user
-    AuthenticationMethods keyboard-interactive
-```
-If you need to enable 2FA for other users - insert the block above for each user (changing the `example-user` variable for each block).
-
-Restart the sshd service and you're done:
-```
-sudo systemctl restart sshd
-```
-Now When logging into the server, you will first need to enter a password, and then a two-factor authentication code. 🎉
+It will not protect against all threats. Requires more advanced security settings such as DDoS and double signing protection.
+- [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#change-the-password)
+- [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#firewall-configuration) (ufw)
+- [Change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#change-the-ssh-port)
+- [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#ssh-key-login)
+- [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#install-file2ban)
+- [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#2fa-for-ssh)
 
 # Setting up the validator node
 **Update & upgrade**
@@ -208,8 +28,27 @@ sudo apt update && sudo apt upgrade -y
 ```
 sudo apt-get install nano mc git gcc g++ make curl yarn jq clang pkg-config libssl-dev build-essential ncdu -y
 ```
-#### Download the latest version of Gravity chain and the Gravity tools
-**Download Gravity chain**
+## Download and install geth
+You only need to do this if you are running Geth locally
+```
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.15-8be800ff.tar.gz
+wget https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/geth-light-config.toml -O /etc/geth-light-config.toml
+wget https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/geth-full-config.toml -O /etc/geth-full-config.toml
+tar -xvf geth-linux-amd64-1.10.15-8be800ff.tar.gz
+cd geth-linux-amd64-1.10.15-8be800ff
+mv geth /usr/sbin/
+geth version
+```
+![image](https://user-images.githubusercontent.com/30211801/170711065-cc3d630e-b1ce-46a2-8eec-dccd4922cb7d.png)
+
+
+Or use the flags below in the /etc/systemd/system/orchestrator.service
+```
+--ethereum-rpc http://chainripper-2.althea.net:8545
+# or
+--ethereum-rpc https://eth.althea.net/
+```
+## Download the latest version of Gravity chain
 To sync by State Sync you need to skip the first versions of the assembly and download the latest version.
 ```
 mkdir gravity-bin
@@ -224,7 +63,7 @@ cp /root/gravity-bin/gravity /usr/bin/
 gravity version
 gravity unsafe-reset-all
 ```
-**Download Gravity tools (GBT)**
+## Download the latest version of Gravity chain and the Gravity tools (GBT)
 ```
 cd gravity-bin
 wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.5.2/gbt
@@ -235,7 +74,7 @@ gbt --version
 
 gbt --help
 ```
-**Let's add variables.**
+### Let's add variables.
 - `<YOUR_MONIKER>` - Your node name
 - `<YOUR_WALLET>` - Your wallet name
 ```
@@ -256,14 +95,7 @@ The output of this command will generate `priv_validator_key.json`, which genera
 cd $HOME
 gravity init $Grav_moniker --chain-id $chainName
 ```
-## Add your validator key
-We need to import the validator key. This is the key containing Graviton tokens
-```
-# you will be prompted for your key phrase
 
-gravity keys add $Grav_wallet
-gravity keys show $Grav_wallet --bech val
-```
 ## Configure your config fles
 #### Download the genesis file
 ```
@@ -366,6 +198,169 @@ journalctl -u gravityd -f
 curl localhost:26657/status | jq '.result.sync_info'
 echo 'Node status:'$(sudo service gravityd status | grep active)
 ```
+## Add your validator key, orchestrator key and ethereum key
+There will be [four](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#generate-your-delegate-keys) keys involved in this process:  
+- Validator Funds key: `gravity1...` - contains your funds.  
+- Validator Operator Key: `gravityvaloper1...` - actually signs your validators blocks.  
+- Gravity Orchestrator Cosmos Key: `gravity1...` - will be used on the Cosmos side of Gravity bridge to submit Oracle transactions and Ethereum signatures. 
+- Gravity Orchestrator Ethereum Key: `0x...` - represents your validators voting power on Ethereum in the `Gravity.sol` contract.  
+
+#### Add Validator key
+```
+# you will be prompted for your key phrase
+
+gravity keys add $Grav_wallet
+gravity keys show $Grav_wallet --bech val
+```
+#### Add orchestrator key
+```
+#Let's add name variable for orchestrator key 
+Gr_Orch_Cosm_Key=<Your_Orch_key_name>
+echo $Gr_Orch_Cosm_Key
+echo 'export Gr_Orch_Cosm_Key='\"${Gr_Orch_Cosm_Key}\" >> $HOME/.bash_profile
+. $HOME/.bash_profile
+```
+Now create the orchestrator key 
+```
+gravity keys add $Gr_Orch_Cosm_Key
+```
+#### Add gravity eth_keys
+```
+gravity eth_keys add
+```
+#### Make init of GBT
+Yes, this step is different from **Make init of Gravity chain**. And it needs to be done so that the validator does not go to jail.
+```
+gbt init
+```
+#### Set keys in our Orchestrator
+Once we have registered our keys we will also set them in our Orchestrator right away, this reduces the risk of confusion as the chain starts and you need these keys to submit Gravity bridge signatures via your orchestrator.
+```
+gbt keys set-ethereum-key --key Gravity Orchestrator Ethereum Key
+gbt keys set-orchestrator-key --phrase "Gravity Orchestrator Cosmos Key"
+```
+Here is an important clarification.
+For commands above, we use this:
+- Gravity Orchestrator Ethereum Key - is private from your gravity eth_keys
+- Gravity Orchestrator Cosmos Key is a mnemonic phrase that was created for the command `gravity keys add $Gr_Orch_Cosm_Key`
+More detailed - [discord link](https://discord.com/channels/881943007115497553/926163896388182026/939844952484110376)
+
+## Download Gravity Bridge, Orchestrator and geth services
+```
+cd /etc/systemd/system
+wget https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/gravity-node.service
+wget https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/orchestrator.service
+wget https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/geth.service
+```
+Restart the gravity node with the service file suggested by the team:
+```
+sudo systemctl daemon-reload
+sudo systemctl enable gravity-node
+sudo systemctl stop gravityd
+sudo systemctl restart gravity-node
+
+# Logs
+journalctl -u gravity-node -f --output cat
+```
+Now run orchestrator and geth services
+```
+sudo systemctl enable orchestrator
+sudo systemctl enable geth
+sudo service orchestrator restart
+sudo service geth restart
+
+journalctl -u orchestrator -f --output cat
+journalctl -u geth -f --output cat
+journalctl -u gravity-node -f --output cat
+```
+## Observe Sync Status and Time Remaining
+```
+# Ethereum
+curl -H "Content-Type:application/json" -X POST -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://127.0.0.1:8545
+
+# Gravity Node
+curl localhost:26657/status | jq '.result.sync_info'
+# or
+gravity status 2>&1| jq .SyncInfo.catching_up
+```
+Values of 'false' means that it is now synced, 'true' means that sync is still in process.
+
+## Top up wallets balance.
+You need to replenish 3 wallets:
+**Validator Funds Address** - here are the coins that will be delegated to the validator.
+**Gravity Orchestrator Cosmos Address** - here are the gravity coins for the commission. 10 pcs is enough.
+**Gravity Orchestrator Ethereum Address** - eth here for commission. Just a little.
+## Send your validator setup transaction
+```
+gravity tx staking create-validator \
+ --amount=<the amount of graviton you wish to stake>ugraviton \
+ --pubkey=$(gravity tendermint show-validator) \
+ --moniker=$Grav_moniker \
+ --from=$Grav_wallet \
+ --chain-id=gravity-bridge-3 \
+ --details="" \
+ --website="" \
+ --identity="" \
+ --commission-rate="0.10" \
+ --commission-max-rate="0.20" \
+ --commission-max-change-rate="0.01" \
+ --gas=auto \
+ --fees=125000ugraviton \
+ --min-self-delegation="1" \
+ --gas-adjustment=1.4
+```
+Check that the validator creation transaction was successful:
+```
+gravity query staking validator $(gravity keys show $Grav_wallet --bech val --address)
+```
+Validator launched! Excellent. **But if within a couple of hours you do not Register your delegate keys for the orchestrator, then the validator will go to jail**.
+## Fees for orchestrator
+> The necessary commission for the orchestrator changes depending on the `minimum-gas-prices` that we set for gravity in the `~/.gravity/config/app.toml` file (this is described in the "Setting the minimum commission" section). So, if we set `minimum-gas-prices = "0.0001ugraviton"` there, then in the orchestrator.service service file we need to set a commission in the amount of `43ugraviton`, but you can take it with a margin, for example `50`. If you set more, the orchestrator will tell you how much he wants in logs, together with errors.
+Go to the service file by nano editor and correct the commission value:
+```
+nano /etc/systemd/system/orchestrator.service
+```
+And in the line `ExecStart=` change the commission
+```
+ExecStart=/usr/bin/gbt orchestrator --fees "50ugraviton"
+```
+Restart the orchestrator
+```
+sudo systemctl daemon-reload
+sudo systemctl restart orchestrator
+journalctl -u orchestrator -f
+```
+All. The preparation is ready.
+## Register your delegate keys
+```
+gbt keys register-orchestrator-address --validator-phrase "the phrase you saved earlier" --ethereum-key "the key you saved earlier" --fees=125000ugraviton
+```
+Where:
+- `the phrase you saved earlier` - mnemonic phrase of the VALIDATOR wallet!!
+- `the key you saved earlier` - privaye key from eth wallet!!
+If everything is done correctly, then the logs will be without errors.
+
+## Common error in orchestrator logs
+```
+journalctl -u orchestrator -f
+```
+output:
+```
+Apr 27 10:20:21 n13b679 gbt[27297]: [2022-04-27T10:20:21Z ERROR orchestrator::main_loop] Failed to get events for block range, Check your Eth node and Cosmos gRPC CosmosGrpcError(TransactionFailed { tx: TxResponse { height: 0, txhash: "1B7D71797DD4E3E196479E8E72015484E74AB9E7D93A7C430EAEAF92DF7FDB6D", codespace: "", code: 0, data: "", raw_log: "[]", logs: [], info: "", gas_wanted: 0, gas_used: 0, tx: None, timestamp: "", events: [] }, time: 60s, sdk_error: None })
+Apr 27 10:24:43 n13b679 gbt[27297]: [2022-04-27T10:24:43Z INFO  orchestrator::ethereum_event_watcher] Oracle observed deposit with sender 0x301f58c9aabC577573911789B1dFb48bE20e1Ad6, destination Some(gravity159q9qwltzn26cz8wh0fulrpmfq06z74xwxykx8), amount 156250000000000000000, and event nonce 1731
+Apr 27 10:25:43 n13b679 gbt[27297]: [2022-04-27T10:25:43Z ERROR orchestrator::main_loop] Failed to get events for block range, Check your Eth node and Cosmos gRPC CosmosGrpcError(TransactionFailed { tx: TxResponse { height: 0, txhash: "ADCFD9CA75DD028A892EF81D5799E65D31F78EC8EEEEC1C85A599ED9ACE4A633", codespace: "", code: 0, data: "", raw_log: "[]", logs: [], info: "", gas_wanted: 0, gas_used: 0, tx: None, timestamp: "", events: [] }, time: 60s, sdk_error: None })
+Apr 27 10:41:32 n13b679 gbt[27297]: [2022-04-27T10:41:32Z INFO  orchestrator::ethereum_event_watcher] Oracle observed deposit with sender 0xc35A062446aC8773f6F66C9ffeA23FA37A070Eb6, destination Some(gravity16jpptxf42hapaaugw36q3j49ackrvsvfs2jzvs), amount 509586000, and event nonce 1732
+```
+Team response:
+> "This looks ok it failed but then succeded on the next try." Here is the discord message: [[Question](https://discord.com/channels/881943007115497553/926163896388182026/958423796950401084)] answer [[Answer](https://discord.com/channels/881943007115497553/926163896388182026/958437633397231726)]
+
+## tmkms (Recommended)
+It is **highly recommended** to protect your validator from double-signing case. [Official documentation](https://github.com/iqlusioninc/tmkms) This could prevent the Double-signing even in the event the validator process is compromised. Click [here] the guide of Installing tmkms on an additional server that will serve as protection.
+
+
+
+
+
 
 
 
