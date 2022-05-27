@@ -1,6 +1,7 @@
 ## Installation Overview
 In this tutorial, we will:
 - [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#minimal-server-protection) 
+  - [Ports]()
 - [Download and install geth](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-and-install-geth)
 - [Download the latest version of Gravity chain](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain)
 - [Download Gravity tools (GBT)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain-and-the-gravity-tools-gbt)
@@ -37,6 +38,12 @@ It will not protect against all threats. Requires more advanced security setting
 - [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#ssh-key-login)
 - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#install-file2ban)
 - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#2fa-for-ssh)
+### Ports
+You need ports:
+- For gravity: 1317, `26656`, `26657`, `26658`, `26660`, `6060`, `9090`, `9091`
+- For ssh port you could choose yours
+- For geth: `30303`, `8545`
+- For gbt metrics: `6631`
 
 # Setting up the validator node
 **Update & upgrade**
