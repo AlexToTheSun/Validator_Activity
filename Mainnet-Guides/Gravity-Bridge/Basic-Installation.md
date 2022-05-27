@@ -1,15 +1,34 @@
 ## Installation Overview
 In this tutorial, we will:
-- [Make minimal server protection]() 
-- [Install Gravity Bridge Node]()
-  - [Install the software]()
-  - [Disk usage optimization]()
-  - [Sync using opend RPC node with State Sync]()
-  - [Create service file for Gravity Bridge]()
-- [DDoS protection]() (Sentry nodes)
-- [Start synchronization]()
-- [Create the validator]()
-- [Double-signing protection]() (tmkms)
+- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#minimal-server-protection) 
+- [Download and install geth](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-and-install-geth)
+- [Download the latest version of Gravity chain](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain)
+- [Download Gravity tools (GBT)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain-and-the-gravity-tools-gbt)
+- [Let's add variables](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#lets-add-variables)
+- [Gravity init](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#make-init-of-gravity-chain)
+- [Configure your config fles](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#configure-your-config-fles)
+  - [Download the genesis file](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-genesis-file)
+  - [Add seed nodes into config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#add-seed-nodes-into-configtoml)
+  - [Setting the minimum-gas-prices](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#setting-the-minimum-gas-prices-in-gravityconfigapptoml-and---fees-in-orchestratorservice)
+  - [Disk usage optimisation](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#disk-usage-optimisation)
+  - [Configure your node for state sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#configure-your-node-for-state-sync)
+- [Create service file for Gravity chain](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#create-service-file-for-gravity-chain)
+- [DDoS protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#sentry-node-architecture-recommended) (Sentry nodes)
+- [Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#start-synchronization)
+- Create keys
+  - [validator key](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#add-validator-key)
+  - [orchestrator key](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#add-orchestrator-key)
+  - [ethereum key](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#add-gravity-eth_keys)
+- [GBT init](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#make-init-of-gbt)
+- [Set keys in our Orchestrator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#set-keys-in-our-orchestrator)
+- [Download service files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-gravity-bridge-orchestrator-and-geth-services)
+- [Observe Sync Status](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#observe-sync-status)
+- [Top up wallets balance](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#top-up-wallets-balance)
+- [Validator setup transaction](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#send-your-validator-setup-transaction)
+- [Fees for orchestrator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#fees-for-orchestrator)
+- [Register your delegate keys](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#register-your-delegate-keys)
+- [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#tmkms-recommended) (tmkms)
+- 
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings such as DDoS and double signing protection.
 - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#change-the-password)
@@ -205,14 +224,14 @@ There will be [four](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/do
 - Gravity Orchestrator Cosmos Key: `gravity1...` - will be used on the Cosmos side of Gravity bridge to submit Oracle transactions and Ethereum signatures. 
 - Gravity Orchestrator Ethereum Key: `0x...` - represents your validators voting power on Ethereum in the `Gravity.sol` contract.  
 
-#### Add Validator key
+### Add Validator key
 ```
 # you will be prompted for your key phrase
 
 gravity keys add $Grav_wallet
 gravity keys show $Grav_wallet --bech val
 ```
-#### Add orchestrator key
+### Add orchestrator key
 ```
 #Let's add name variable for orchestrator key 
 Gr_Orch_Cosm_Key=<Your_Orch_key_name>
@@ -224,16 +243,16 @@ Now create the orchestrator key
 ```
 gravity keys add $Gr_Orch_Cosm_Key
 ```
-#### Add gravity eth_keys
+### Add gravity eth_keys
 ```
 gravity eth_keys add
 ```
-#### Make init of GBT
+## Make init of GBT
 Yes, this step is different from **Make init of Gravity chain**. And it needs to be done so that the validator does not go to jail.
 ```
 gbt init
 ```
-#### Set keys in our Orchestrator
+## Set keys in our Orchestrator
 Once we have registered our keys we will also set them in our Orchestrator right away, this reduces the risk of confusion as the chain starts and you need these keys to submit Gravity bridge signatures via your orchestrator.
 ```
 gbt keys set-ethereum-key --key Gravity Orchestrator Ethereum Key
@@ -273,7 +292,7 @@ journalctl -u orchestrator -f --output cat
 journalctl -u geth -f --output cat
 journalctl -u gravity-node -f --output cat
 ```
-## Observe Sync Status and Time Remaining
+## Observe Sync Status
 ```
 # Ethereum
 curl -H "Content-Type:application/json" -X POST -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://127.0.0.1:8545
