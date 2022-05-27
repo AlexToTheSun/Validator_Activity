@@ -80,27 +80,25 @@ Description of parameters:
 - `persistent_peers = "<nodeid_sentry>@<ip_sentry>:26656,...."` - a list of addresses of your Sentry Nodes, so that you can connect to them.
 - `private_peer_ids = ""` - We do not enter anything, since the gossip protocol is disabled, and the node will not issue any peers to the general network. Moreover, Sentry Node works not only in a private but also in a public network.
 - `addr_book_strict = false` -  parameter allowing the validator to work in a private network. It will also be able to work in the public.
-### Restart
-Once you have your sentry nodes synced and ready to work on a private network, it’s time to connect a validator node to them and start syncing.  
 
-**State sync synchronization clarification**  
-Edit the `config.toml` file in accordance with the information from the section "2. Enable State Sync" from the site https://ping.pub/gravity-bridge/statesync
+## Start synchronization  
+Once you have your sentry nodes synced and ready to work on both private and public networks, it’s time to connect a validator node to them and start syncing.  
 
-We enter the command for editing and prescribe as it is said on the site above:
-```
-nano $HOME/.gravity/config/config.toml
-# Then, follow the guide from the site https://ping.pub/gravity-bridge/statesync
-```
-This information is constantly changing as the characteristics of the network snapshot are updated.
-Example of input information:
-```
-[statesync]
-enable = true
-rpc_servers = "https://gravitychain.io:26657,http://gravity-bridge-1-08.nodes.amhost.net:26657"
-trust_height = 1658000
-trust_hash = "55C1612DEC5D63D7451EB6743810E9B003A22568440C4D84ABA0FDC13288126C"
-trust_period = "168h"
-```
+Since the validator node will now connect exclusively to your Sentry Nodes, which you have specified in config.toml, you have 3 options to synchronize the node:
+1) **Synchronize from the first block**. To do this, enter the following commands:  
 
-**Start the service of Validator Node**  
+Since we previously configured the config.toml of the validator node to synchronize using State Sync, we need to disable this feature. Otherwise, the node will try to download Snapshot from the public node - this will not work. Enter:
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\false|" ~/.gravity/config/config.toml
+```
+Start sync:
+```
+gravity unsafe-reset-all
+sudo systemctl enable gravityd
+sudo systemctl daemon-reload
+sudo systemctl restart gravityd
+```
+2) **Use full date snapshot**. Download and unzip data folder.
+3) [**Run your own RPC with State Sync**](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync#how-to-run-your-own-rpc-with-state-sync), on one of your Sentry Nodes. then connect Validator node to it by changing the config. 
+### Start the service of Validator Node
 To do this, go back to the Basic-Installation guide and continue from the moment [[Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#start-synchronization)]
