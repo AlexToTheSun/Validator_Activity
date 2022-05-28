@@ -169,4 +169,70 @@ Status
 ```
 agd status | jq .ValidatorInfo
 ```
+# Upgrade to agoricdev-13
+Stop service file
+```
+sudo systemctl stop agd
+```
+Reset all chain data from agoricdev-11 chain
+```
+agd unsafe-reset-all
+```
+Update Agoric-SDK
+```
+rm -rf /usr/src/agoric-sdk
+cd /usr/src/
+git clone https://github.com/Agoric/agoric-sdk -b agoricdev-13
+cd agoric-sdk
+yarn install
+yarn build
+(cd packages/cosmic-swingset && make)
+agd version --long
+cp /root/go/bin/agd /usr/bin
+```
+Download chain.json and update chainName to agoricdev-13
+```
+curl https://devnet.agoric.net/network-config > chain.json
+chainName=`jq -r .chainName < chain.json`
+echo $chainName
+echo 'export chainName='\"${chainName}\" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+```
+Download genesis file
+```
+curl https://devnet.rpc.agoric.net/genesis | jq .result.genesis > $HOME/.agoric/config/genesis.json 
+```
+Update seeds into a config.toml
+```
+seeds=$(jq '.seeds | join(",")' < chain.json)
+echo $seeds
+sed -i.bak 's/^log_level/# log_level/' $HOME/.agoric/config/config.toml
+sed -i.bak -e "s/^seeds *=.*/seeds = $seeds/; s/^persistent_peers *=.*/persistent_peers = ""/" $HOME/.agoric/config/config.toml
+```
+Restart
+```
+sudo systemctl restart agd
+journalctl -u agd -f --output cat
+```
+Get some tokens
+Faucet is [here](https://discord.com/channels/585576150827532298/767231925646524446)
 
+Wait for sync and then create the validator
+```
+agd tx staking create-validator \
+  --amount=50000000ubld \
+  --broadcast-mode=block \
+  --pubkey=$(agd tendermint show-validator) \
+  --moniker=<your-node-name> \
+  --from=<your-key-name> \
+  --website=<your-node-website> \
+  --details=<your-node-details> \
+  --identity=<your-node-identity> \
+  --commission-rate="0.10" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation="1" \
+  --chain-id=$chainName \
+  --gas=auto \
+  --gas-adjustment=1.4
+```
