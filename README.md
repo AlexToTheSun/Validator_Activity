@@ -12,10 +12,11 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [StafiHub](https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking/stafivaloper1zlw3kurp6h6vj87qf5cjxmkgupp82gpvmqn05j)
 - [Quicksilver](https://testnet.explorer.testnet.run/Quicksilver/staking/quickvaloper1qr688u3h9v6xenm7uwn8sp79yh7tgu76cqn2tv)
 - [Clan Network](https://testnet.explorer.testnet.run/Clan%20Network/staking/clanvaloper182f9evzshwvf2h6pmcut4qdt26nm5l9jf6w8n3)
+- [Agoric Devnet](https://devnet.explorer.agoric.net/agoric/staking/agoricvaloper1v06akzfvj4l5mnzpfua9w66c9z77qtrxkt23vt)
 
 ## Guides for those who want to become a validator 
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
-- [Gravity Bridge](https://surftest.gitbook.io/gravity-bridge/)
+- [Gravity Bridge](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Gravity-Bridge)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Agoric)
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
