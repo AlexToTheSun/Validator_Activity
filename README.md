@@ -10,7 +10,7 @@ This is an actual information about my validator. Projects. Guides. Tools.
 ## Testnets
 - [Axelar](https://testnet.explorer.testnet.run/axelar-testnet-2/staking/axelarvaloper1eu28tqtanwe0fsl9nrfazr4re3rfewah889qg6)
 - [StafiHub](https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking/stafivaloper1zlw3kurp6h6vj87qf5cjxmkgupp82gpvmqn05j)
-- [Quicksilver](https://testnet.explorer.testnet.run/Quicksilver/staking/quickvaloper1qr688u3h9v6xenm7uwn8sp79yh7tgu76cqn2tv)
+- [Quicksilver](https://quicksilver.explorers.guru/validator/quickvaloper1qr688u3h9v6xenm7uwn8sp79yh7tgu76cqn2tv)
 - [Clan Network](https://testnet.explorer.testnet.run/Clan%20Network/staking/clanvaloper182f9evzshwvf2h6pmcut4qdt26nm5l9jf6w8n3)
 - [Agoric Devnet](https://devnet.explorer.agoric.net/agoric/staking/agoricvaloper1v06akzfvj4l5mnzpfua9w66c9z77qtrxkt23vt)
 
