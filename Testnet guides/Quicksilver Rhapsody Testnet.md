@@ -1,6 +1,8 @@
 Officiall link is here https://github.com/ingenuity-build/testnets
 
-Explorer: https://testnet.explorer.testnet.run/Quicksilver
+Explorer: 
+  - https://testnet.explorer.testnet.run/Quicksilver
+  - https://quicksilver.explorers.guru/
 
 # Instructions
 Update the packeges
