@@ -15,7 +15,7 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [Agoric Devnet](https://devnet.explorer.agoric.net/agoric/staking/agoricvaloper1v06akzfvj4l5mnzpfua9w66c9z77qtrxkt23vt)
 
 ## Guides for those who want to become a validator 
-Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Turetskiy_Validator_Identity/blob/main/Turetskiy_Validator.md#guides-for-validator-security-protection-and-other-settings) section.
+Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Validator_Activity#guides-for-advanced-validator-security-protection-and-other-settings) section.
 - [Gravity Bridge](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Gravity-Bridge)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Agoric)
 - [Agoric Devnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Agoric-Devnet.md)
