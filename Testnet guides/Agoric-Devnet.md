@@ -1,6 +1,8 @@
 **Links**
 - Official instructions for devnet: https://github.com/Agoric/agoric-sdk/wiki/Validator-Guide-for-Devnet
-- Explorer: https://devnet.explorer.agoric.net/
+- Explorer: 
+  - https://devnet.explorer.agoric.net/
+  - https://devnet.agoric.explorers.guru/
 - Actual branch could be found here: https://github.com/Agoric/agoric-sdk/wiki/Validator-Guide-for-Devnet#network-status
 ### Installing
 **Update & upgrade**
