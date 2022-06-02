@@ -66,8 +66,58 @@ Sshd service restart
 sudo systemctl restart sshd
 ```
 Be sure to try opening an ssh connection in a new putty window without closing the first one. To check and, if necessary, correct the error.
+
 ### SSH key login
-It is also highly recommended to set up an [SSH key login](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password). instead of a password. This is a more reliable method of protection than a password. 
+It is also highly recommended to set up an SSH key login instead of a password. This is a more reliable method of protection than a password.
+
+Now we will enable ssh key login, and disable password login. 
+
+This guide is for those who have **Linux/macOS** installed on their local computer. If you have a different system, such as **windows**, use [[this instruction](https://surftest.gitbook.io/axelar-wiki/english/security-setup/ssh-key-login-+-disable-password)].
+
+#### Generate ssh keys
+Unix has a built-in key generator. Launch the terminal on PC and enter:
+```
+ssh-keygen
+```
+> It will be possible **to set a password for SSH keys**. This will additionally protect you from possible key theft. The main thing is to write down the password in a safe place. If you do not want to set a password, press **Enter**.
+Done, the keys are created and stored in the folder `~/.ssh/`
+- `~/.ssh/id_rsa` - private key. We should leave it on PC.
+- `~/.ssh/id_rsa.pub` - public key. Must be on the server.
+#### Uploading the public key to the server
+On Unix systems for this you could open a terminal on PC and enter the command:
+```
+ssh-copy-id root@ххх.ххх.ххх.ххх
+```
+where:
+- `root` - the user we want to access the server using ssh keys.
+- `ххх.ххх.ххх.ххх` - server ip address.
+Ready. You can proceed to the next step - Checking the login using the SSH key.
+#### Checking for login with SSH keys.
+We will not only check, but also save the session for further convenient work.
+1) On the session tab, insert the IP and port:  
+![image](https://user-images.githubusercontent.com/30211801/171718181-c0403171-4d8a-49ff-8b3b-0dc0248e0541.png)
+2) Go to the **Connection --> SSH --> Auth** section and write the path to the private key that we created and placed in the folder we need:  
+![image](https://user-images.githubusercontent.com/30211801/171718460-c1d49e4f-9ab4-47af-b387-25e99fb742a3.png)
+
+3) Go back to the **Session** section --> Come up with a name for the session --> **Save** the session --> And go into it.  
+![image](https://user-images.githubusercontent.com/30211801/171718829-4e014418-f01f-43c4-8497-14a5f06858a3.png)
+
+If everything worked out successfully, the last step left for us is to disable password entry.
+#### Disabling password login.
+Make sure that the key is securely stored and you will not lose it, because you will no longer log in with the password (only through the console in the provider's personal account, or through VNS).
+
+Log in to the server, then open the configuration file for editing `/etc/ssh/sshd_config`:
+```
+sudo nano /etc/ssh/sshd_config
+```
+Find the line there `PasswordAuthenticatin yes`. You need to set its value to `No`:
+```
+PasswordAuthentication no
+```
+![image](https://user-images.githubusercontent.com/30211801/171719306-ce05e885-920a-4148-9489-0ea3725cce6c.png)
+Let's restart the service:
+Everything is ready!🎉
+
 ### Install File2ban
 ```
 sudo apt install fail2ban
