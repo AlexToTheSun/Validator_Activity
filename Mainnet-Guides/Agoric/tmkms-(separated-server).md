@@ -10,6 +10,8 @@ Advantage of this method instead of basic installation:
 2) having the validator keys in separated server.  
 ## Use Case
 If you already run a validator node. It's not too late to set up tmkms. Follow the instructions below.
+## Analogue
+To prevent double-signing protection, as an analogue, you can use [[horcrux](https://github.com/strangelove-ventures/horcrux)]. 
 ## Overview
 - [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#setting-up-a-validator-node)
   - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server).md#firewall-configuration)
