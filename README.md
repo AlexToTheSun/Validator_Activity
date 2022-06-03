@@ -23,6 +23,7 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
 - [Axelar](https://surftest.gitbook.io/axelar-wiki)
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
+- [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Quicksilver%20Rhapsody%20Testnet.md)
 - [NuCypher testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
 
 ## Guides for advanced Validator' Security Protection and other settings
