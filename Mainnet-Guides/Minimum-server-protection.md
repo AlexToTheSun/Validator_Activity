@@ -80,9 +80,10 @@ Unix has a built-in key generator. Launch the terminal on PC and enter:
 ssh-keygen
 ```
 > It will be possible **to set a password for SSH keys**. This will additionally protect you from possible key theft. The main thing is to write down the password in a safe place. If you do not want to set a password, press **Enter**.
-Done, the keys are created and stored in the folder `~/.ssh/`
+Done, the keys are created and stored in the folder `~/.ssh/` (for example `/home/user/.ssh/`)
 - `~/.ssh/id_rsa` - private key. We should leave it on PC.
 - `~/.ssh/id_rsa.pub` - public key. Must be on the server.
+
 #### Uploading the public key to the server
 On Unix systems for this you could open a terminal on PC and enter the command:
 ```
@@ -91,6 +92,15 @@ ssh-copy-id root@ххх.ххх.ххх.ххх
 where:
 - `root` - the user we want to access the server using ssh keys.
 - `ххх.ххх.ххх.ххх` - server ip address.
+
+**If you would like to specify** the **path** to the public key, and the server has a non-standard (22) port, use the `-i`, `-p` flags:
+```
+ssh-copy-id -i /home/user/.ssh/id_rsa_test.pub -p 22 root@ххх.ххх.ххх.ххх
+```
+Flags:
+- `-i /home/user/.ssh/id_rsa_test.pub` - specify the path to your public key.
+- `-p 22`  - specify your ssh port.
+
 Ready. You can proceed to the next step - Checking the login using the SSH key.
 #### Checking for login with SSH keys.
 We will not only check, but also save the session for further convenient work.
