@@ -106,6 +106,15 @@ ssh-copy-id root@ххх.ххх.ххх.ххх
 where:
 - `root` - the user we want to access the server using ssh keys.
 - `ххх.ххх.ххх.ххх` - server ip address.
+
+**If you would like to specify** the **path** to the public key, and the server has a non-standard (22) port, use the `-i`, `-p` flags:
+```
+ssh-copy-id -i /home/user/.ssh/id_rsa_test.pub -p 22 root@ххх.ххх.ххх.ххх
+```
+Flags:
+- `-i /home/user/.ssh/id_rsa_test.pub` - specify the path to your public key.
+- `-p 22`  - specify your ssh port.
+
 Ready. You can proceed to the next step - Checking the login using the SSH key.
 #### Checking for login with SSH keys.
 We will not only check, but also save the session for further convenient work.
