@@ -124,8 +124,11 @@ Find the line there `PasswordAuthenticatin yes`. You need to set its value to `N
 ```
 PasswordAuthentication no
 ```
-![image](https://user-images.githubusercontent.com/30211801/171719306-ce05e885-920a-4148-9489-0ea3725cce6c.png)
+![image](https://user-images.githubusercontent.com/30211801/171719306-ce05e885-920a-4148-9489-0ea3725cce6c.png)  
 Let's restart the service:
+```
+sudo systemctl restart sshd
+```
 Everything is ready!🎉
 
 ### Install File2ban
