@@ -24,7 +24,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.clan/config/c
 Restart the `cland.service` with `unsafe-reset-all` by one command:
 ```
 sudo systemctl stop cland && \
-cland unsafe-reset-all && \
+cland tendermint unsafe-reset-all && \
 sudo systemctl restart cland
 ```
 Logs and status
