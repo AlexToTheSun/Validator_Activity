@@ -1,3 +1,4 @@
+### `Updates: the chain under maintenance`
 ## Quicksilver Network State Sync
 ### Chain: `quicktest-3`
 Add this public RPC node to `persistance_peer` in `config.toml`
