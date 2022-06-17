@@ -1,6 +1,15 @@
 ## Updating process for Quicksilver Rhapsody Testnet
 ### Chain: `rhapsody-5`
-### Stop the service
+This instruction is for updating the node, which we installed according to the instructions  https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Quicksilver%20Rhapsody%20Testnet.md
+
+Officiall link is here https://github.com/ingenuity-build/testnets
+
+Explorer:
+
+https://testnet.explorer.testnet.run/Quicksilver
+https://quicksilver.explorers.guru/
+
+## Stop the service
 ```
 sudo systemctl stop quicksilverd
 ```
@@ -17,7 +26,7 @@ rm -rf /root/.quicksilverd/data/*
 mv /root/.quicksilverd/priv_validator_state.json /root/.quicksilverd/data/priv_validator_state.json
 quicksilverd unsafe-reset-all
 ```
-### Upgrading
+## Upgrading
 #### Update quicksilverd
 ```
 rm -rf $HOME/quicksilver
@@ -46,7 +55,7 @@ sed -i -e "/seeds =/ s/= .*/= \"$seeds\"/"  $HOME/.quicksilverd/config/config.to
 sed -i -e "/seeds =/ s/= .*/= \"$peers\"/"  $HOME/.quicksilverd/config/config.toml
 
 ```
-### Start syncing
+## Start syncing
 Disable synchronization by State Sync
 ```
 sed -i.bak -e "s/^enable *=.*/enable = "false"/" $HOME/.quicksilverd/config/config.toml
@@ -57,7 +66,7 @@ quicksilverd tendermint unsafe-reset-all
 sudo systemctl restart quicksilverd
 ```
 Excellent. All is ready. It remains to check
-#### Check your node logs:
+## Check your node logs:
 ```
 journalctl -u quicksilverd -f --output cat
 ```
@@ -71,4 +80,30 @@ curl http://localhost:26657/status | jq .result.sync_info.catching_up
 ```
 curl localhost:26657/status | jq '.result.node_info.id'
 ```
-
+## Create the validator in the new chain
+Get tokens in the Discord faucet:
+```
+$request <your_wallet> rhapsody
+```
+Check your balance in the Discord faucet:
+```
+$balance <your_wallet> rhapsody
+```
+#### Create validator:
+```
+quicksilverd tx staking create-validator \
+--amount=4800000uqck \
+--pubkey=$(quicksilverd tendermint show-validator) \
+--from=$YOUR_TEST_WALLET \
+--moniker=$NODE_MONIKER \
+--chain-id=$chainName \
+--details="" \
+--website="" \
+--identity="" \
+--min-self-delegation=1 \
+--commission-rate=0.1 \
+--commission-max-rate=0.5 \
+--commission-max-change-rate=0.1 \
+--gas-prices=0.025uqck \
+--gas-adjustment=1.4
+```
