@@ -1,6 +1,6 @@
 ## Updating process for Quicksilver Rhapsody Testnet
 ### Chain: `rhapsody-5`
-This instruction is for updating the node, which we installed according to the instructions  https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Quicksilver%20Rhapsody%20Testnet.md
+This instruction is for updating the node, which we installed according to the instructions https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Quicksilver/Quicksilver-Rhapsody-Testnet.md
 
 Officiall link is here https://github.com/ingenuity-build/testnets
 
