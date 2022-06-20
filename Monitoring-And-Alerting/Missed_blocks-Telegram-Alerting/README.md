@@ -81,11 +81,16 @@ sudo systemctl start missed-blocks-checker
 sudo systemctl status missed-blocks-checker
 journalctl -u missed-blocks-checker -f --output cat
 ```
-
-
-
-
-
+## Configure the Alerting by `config.toml`
+First, let's set `Your_User_ID` and `Telegram_Bot_Token` variables. You will need this to set up config so that you receive Alerts from the telegram bot, which we will create shortly.
+#### `Your_User_ID`
+Go to the @getmyid_bot or [@userinfobot](https://t.me/userinfobot) and find out `<your user ID>`. Then add it as variable.
+```
+Your_User_ID=<your user ID>
+echo $Your_User_ID
+```
+#### `Telegram_Bot_Token`
+ Go to [@botfather](https://telegram.me/botfather) and generate new token (here is the [instructions](https://core.telegram.org/bots#6-botfather)).
 
 
 
