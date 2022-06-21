@@ -84,13 +84,77 @@ journalctl -u missed-blocks-checker -f --output cat
 ## Configure the Alerting by `config.toml`
 First, let's set `Your_User_ID` and `Telegram_Bot_Token` variables. You will need this to set up config so that you receive Alerts from the telegram bot, which we will create shortly.
 #### `Your_User_ID`
-Go to the @getmyid_bot or [@userinfobot](https://t.me/userinfobot) and find out `<your user ID>`. Then add it as variable.
+1) To send messages to a user. Go to the @getmyid_bot or [@userinfobot](https://t.me/userinfobot) and find out `<your user ID>`. Then add it as variable.
 ```
 Your_User_ID=<your user ID>
 echo $Your_User_ID
 ```
+Or:
+2) To send  messages to a channel. Write something to a channel, then forward it to @getmyid_bot and copy the `Forwarded from chat number`. After creatig the bot, add this bot as an channel' admin.
+```
+Your_User_ID=<your Channel ID>
+echo $Your_User_ID
+```
 #### `Telegram_Bot_Token`
- Go to [@botfather](https://telegram.me/botfather) and generate new token (here is the [instructions](https://core.telegram.org/bots#6-botfather)).
+ Go to [@botfather](https://telegram.me/botfather) and generate new token (here is the [instructions](https://core.telegram.org/bots#6-botfather)). Or just do the following:
+1. Send `/newbot` to [@BotFather](https://telegram.me/botfather)
+2. Choose and send a name for your new bot.
+3. Choose and send a username for your new bot. It must end in `bot`.
+4. Done. Now you have the **bot** and **token** to access the HTTP API.
+```
+Telegram_Bot_Token=<Your_Telegram_Bot_Token>
+echo $Telegram_Bot_Token
+```
+#### `bech-prefixes`
+Add all Bech prefixes for network where you have the validator.
+```
+bech-prefix=<your cosmos_project' bech-prefix>
+bech-validator-prefix=<bech-validator-prefix>
+bech-validator-pubkey-prefix=<bech-validator-pubkey-prefix>
+bech-consensus-node-prefix=<bech-consensus-node-prefix>
+bech-consensus-node-pubkey-prefix=<bech-consensus-node-pubkey-prefix>
+
+echo $bech-prefix
+echo $bech-validator-prefix
+echo $bech-validator-pubkey-prefix
+echo $bech-consensus-node-prefix
+echo $bech-consensus-node-pubkey-prefix
+```
+There is an Example:
+```
+bech-prefix=cosmos
+bech-validator-prefix=cosmosvaloper
+bech-validator-pubkey-prefix=cosmosvaloperpub
+bech-consensus-node-prefix=cosmosvalcons
+bech-consensus-node-pubkey-prefix=cosmosvalconspub
+```
+#### Add `include-validators`
+Add `include-validators`, if you want to monitor some validators. Or add `exclude-validators` if you want to monitor all validators except a few. 
+
+Fill in only one parameter. Cannot be used together.
+ For Example we will use `include-validators` for selecting 3 validators:
+```
+include-validators=<cosmosvaloper1,cosmosvaloper2,cosmosvaloper3>
+echo $include-validators
+```
+#### Add grpc-address and rpc-address
+- gRPC - is needed to get signing info and validators info from
+- RPC node - is needed to get block info from.
+```
+grpc-address=<specify_grpc-address>
+rpc-address=<specify_grpc-address>
+
+echo $grpc-address
+echo $rpc-address
+```
+
+
+
+
+
+
+
+
 
 
 
