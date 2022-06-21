@@ -137,7 +137,7 @@ Fill in only one parameter. Cannot be used together.
 include-validators=<cosmosvaloper1,cosmosvaloper2,cosmosvaloper3>
 echo $include-validators
 ```
-#### Add grpc-address and rpc-address
+#### Add `grpc-address` and `rpc-address`
 - gRPC - is needed to get signing info and validators info from
 - RPC node - is needed to get block info from.
 ```
@@ -147,16 +147,73 @@ rpc-address=<specify_grpc-address>
 echo $grpc-address
 echo $rpc-address
 ```
+If you set an alert on a server with a project node, then you can write grpc-`address=localhost:9090` and `rpc-address=http://localhost:26657`. But I suggest installing missed-blocks-checker on a separate server. And you can connect not to your own nodes, but to any public peer.
 
+The only things you need to know is
+- IP address
+- RPC port. By default it is `26657`
+- If it is a public rpc. It should have this sitting in its config: 
+```
+[rpc]
 
+# TCP or UNIX socket address for the RPC server to listen on
+laddr = "tcp://0.0.0.0:26657"
+```
+- gRPC port. By default it is `9090`
+- If it is a public grpc:
+```
+[grpc]
 
+# Enable defines if the gRPC server should be enabled.
+enable = true
 
+# Address defines the gRPC server address to bind to.
+address = "0.0.0.0:9090"
+```
+#### `Log level`
+```
+level=info
+echo $level
+```
+Options: `info` | `debug` | `trace`
+#### `Chain-info`
+**Add `prefix`:**
+```
+mintscan-prefix=<prefix>
+echo $mintscan-prefix
+```
+Example `mintscan-prefix = "cosmos"`
 
+**Add `validator-page-pattern`**
+```
+validator-page-pattern=https://explorebitsong.com/validators/%s
+echo $validator-page-pattern
+```
+Example `mintscan-prefix=https://kujira.explorers.guru/validator/kujiravaloper1546l88y0g9ch5v25dg4lmfewgelsd3v966qj3y`
+#### `config-path`
+Path to a file storing all information about people's links to validators.
+```
+config-path=/home/user/config/missed-blocks-checker-telegram-labels.toml
+echo $config-path
+```
 
-
-
-
-
+#### Now let's enter all the data in config.toml of missed-blocks-checker:
+```
+sed -i -E "s|^(chat[[:space:]]+=[[:space:]]+).*$|\1\"$Your_User_ID\"| ; \
+s|^(token [[:space:]]+=[[:space:]]+).*$|\1\"$Telegram_Bot_Token\"| ; \
+s|^(bech-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-prefix| ; \
+s|^(bech-validator-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-validator-prefix| ; \
+s|^(bech-validator-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-validator-pubkey-prefix| ; \
+s|^(bech-consensus-node-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-consensus-node-prefix| ; \
+s|^(bech-consensus-node-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-consensus-node-pubkey-prefix| ; \
+s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1$include-validators| ; \
+s|^(grpc-address[[:space:]]+=[[:space:]]+).*$|\1$grpc-address| ; \
+s|^(rpc-address[[:space:]]+=[[:space:]]+).*$|\1$rpc-address| ; \
+s|^(level[[:space:]]+=[[:space:]]+).*$|\1$level| ; \
+s|^(mintscan-prefix[[:space:]]+=[[:space:]]+).*$|\1$mintscan-prefix| ; \
+s|^(validator-page-pattern[[:space:]]+=[[:space:]]+).*$|\1$validator-page-pattern| ; \
+s|^(config-path[[:space:]]+=[[:space:]]+).*$|\1\"$config-path\"|" ~/config/missed-blocks-checker-telegram-labels.toml
+```
 
 
 
