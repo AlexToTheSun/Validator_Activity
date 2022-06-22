@@ -223,6 +223,10 @@ s|^(mintscan-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$mintscan_prefix\"| ; \
 s|^(validator-page-pattern[[:space:]]+=[[:space:]]+).*$|\1\"$validator_page_pattern\"| ; \
 s|^(config-path[[:space:]]+=[[:space:]]+).*$|\1\"$config_path\"|" /root/missed-blocks-checker/config.<Cosmos_project>.toml
 ```
+And lets comment `exclude-validators`
+```
+sed -i.bak 's/^exclude-validators/# exclude-validators/' /root/missed-blocks-checker/config.<Cosmos_project>.toml
+```
 #### It remains to modify manually a few terms:
 ```
 nano /root/missed-blocks-checker/config.<Cosmos_project>.toml
