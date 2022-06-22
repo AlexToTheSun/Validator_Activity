@@ -36,7 +36,7 @@ go version
 ```
 Setup [Server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md)
 ## Installing
-clone the repo and build it. This will generate a ./main binary file in the repository folder:
+clone the repo and build it. This will generate a `./main` binary file in the repository folder:
 ```
 git clone https://github.com/solarlabsteam/missed-blocks-checker
 cd missed-blocks-checker
@@ -44,15 +44,18 @@ go build
 ```
 For running in the background we have to copy the file to the system apps folder:
 ```
-sudo cp ./missed-blocks-checker /usr/local/bin
+sudo cp /root/go/bin/main /usr/local/bin/missed-blocks-checker
 ```
-
+Copy config.example.toml and name it so that you understand for which project you will configure it. There is an example for Axelar: sudo `cp /root/missed-blocks-checker/config.example.toml /root/missed-blocks-checker/config.axelar.toml`. Now rename `config.<Cosmos_project>.toml` for your needs:
+```
+cp /root/missed-blocks-checker/config.example.toml /root/missed-blocks-checker/config.<Cosmos_project>.toml
+```
 ## Setup service file
 Create a systemd service for missed-blocks-checker:
 ```
 sudo tee <<EOF >/dev/null /etc/systemd/system/missed-blocks-checker.service
 [Unit]
-Description=Missed Blocks Checker
+Description=<Cosmos_Project> Missed Blocks Checker
 After=network-online.target
 
 [Service]
@@ -71,7 +74,8 @@ WantedBy=multi-user.target
 EOF
 ```
 Where:
-- `<config path>` - the path to the config file we need
+- `<Cosmos_Project>` - the name of the cosmos project for which you want to customize the Missed Blocks Checker. For example `/root/missed-blocks-checker/config.<Cosmos_project>.toml`
+- `<config path>` - the path to the config file we need for the cosmos project.
 
 Add this service to the autostart and run it and check the logs:
 ```
@@ -101,6 +105,7 @@ echo $Your_User_ID
 2. Choose and send a name for your new bot.
 3. Choose and send a username for your new bot. It must end in `bot`.
 4. Done. Now you have the **bot** and **token** to access the HTTP API.
+5. Send message to new bot as it is not allowd to send you message first.
 ```
 Telegram_Bot_Token=<Your_Telegram_Bot_Token>
 echo $Telegram_Bot_Token
@@ -108,17 +113,17 @@ echo $Telegram_Bot_Token
 #### `bech-prefixes`
 Add all Bech prefixes for network where you have the validator.
 ```
-bech-prefix=<your cosmos_project' bech-prefix>
-bech-validator-prefix=<bech-validator-prefix>
-bech-validator-pubkey-prefix=<bech-validator-pubkey-prefix>
-bech-consensus-node-prefix=<bech-consensus-node-prefix>
-bech-consensus-node-pubkey-prefix=<bech-consensus-node-pubkey-prefix>
+bech_prefix=<your cosmos_project' bech-prefix>
+bech_validator_prefix=<bech-validator-prefix>
+bech_validator_pubkey_prefix=<bech-validator-pubkey-prefix>
+bech_consensus_node_prefix=<bech-consensus-node-prefix>
+bech_consensus_node_pubkey_prefix=<bech-consensus-node-pubkey-prefix>
 
-echo $bech-prefix
-echo $bech-validator-prefix
-echo $bech-validator-pubkey-prefix
-echo $bech-consensus-node-prefix
-echo $bech-consensus-node-pubkey-prefix
+echo $bech_prefix
+echo $bech_validator_prefix
+echo $bech_validator_pubkey_prefix
+echo $bech_consensus_node_prefix
+echo $bech_consensus_node_pubkey_prefix
 ```
 There is an Example:
 ```
@@ -128,26 +133,29 @@ bech-validator-pubkey-prefix=cosmosvaloperpub
 bech-consensus-node-prefix=cosmosvalcons
 bech-consensus-node-pubkey-prefix=cosmosvalconspub
 ```
-#### Add `include-validators`
+#### Add `include-validators` and `exclude-validators`
 Add `include-validators`, if you want to monitor some validators. Or add `exclude-validators` if you want to monitor all validators except a few. 
 
 Fill in only one parameter. Cannot be used together.
  For Example we will use `include-validators` for selecting 3 validators:
 ```
-include-validators=<cosmosvaloper1,cosmosvaloper2,cosmosvaloper3>
-echo $include-validators
+include_validators=<cosmosvaloper1,cosmosvaloper2,cosmosvaloper3>
+exclude_validators=
+echo $include_validators
+echo $exclude_validators
 ```
-#### Add `grpc-address` and `rpc-address`
+In case using `include-validators`, we deliberately leave `exclude_validators=` empty, because if it is not empty, then we will have an error.
+ #### Add `grpc-address` and `rpc-address`
 - gRPC - is needed to get signing info and validators info from
 - RPC node - is needed to get block info from.
 ```
-grpc-address=<specify_grpc-address>
-rpc-address=<specify_grpc-address>
+grpc_address=<specify_grpc-address>
+rpc_address=<specify_rpc-address>
 
-echo $grpc-address
-echo $rpc-address
+echo $grpc_address
+echo $rpc_address
 ```
-If you set an alert on a server with a project node, then you can write grpc-`address=localhost:9090` and `rpc-address=http://localhost:26657`. But I suggest installing missed-blocks-checker on a separate server. And you can connect not to your own nodes, but to any public peer.
+If you set an alert on a server with a project node, then you can write `grpc-address=localhost:9090` and `rpc-address=http://localhost:26657`. But I suggest installing missed-blocks-checker on a separate server. And you can connect not to your own nodes, but to any public peer.
 
 The only things you need to know is
 - IP address
@@ -179,42 +187,69 @@ Options: `info` | `debug` | `trace`
 #### `Chain-info`
 **Add `prefix`:**
 ```
-mintscan-prefix=<prefix>
-echo $mintscan-prefix
+mintscan_prefix=<prefix>
+echo $mintscan_prefix
 ```
 Example `mintscan-prefix = "cosmos"`
 
 **Add `validator-page-pattern`**
 ```
-validator-page-pattern=https://explorebitsong.com/validators/%s
-echo $validator-page-pattern
+validator_page_pattern=https://explorebitsong.com/validators/%s
+echo $validator_page_pattern
 ```
 Example `mintscan-prefix=https://kujira.explorers.guru/validator/kujiravaloper1546l88y0g9ch5v25dg4lmfewgelsd3v966qj3y`
 #### `config-path`
 Path to a file storing all information about people's links to validators.
 ```
-config-path=/home/user/config/missed-blocks-checker-telegram-labels.toml
-echo $config-path
+config_path=/home/user/config/missed-blocks-checker-telegram-labels.toml
+echo $config_path
 ```
 
 #### Now let's enter all the data in config.toml of missed-blocks-checker:
 ```
 sed -i -E "s|^(chat[[:space:]]+=[[:space:]]+).*$|\1\"$Your_User_ID\"| ; \
-s|^(token [[:space:]]+=[[:space:]]+).*$|\1\"$Telegram_Bot_Token\"| ; \
-s|^(bech-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-prefix| ; \
-s|^(bech-validator-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-validator-prefix| ; \
-s|^(bech-validator-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-validator-pubkey-prefix| ; \
-s|^(bech-consensus-node-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-consensus-node-prefix| ; \
-s|^(bech-consensus-node-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1$bech-consensus-node-pubkey-prefix| ; \
-s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1$include-validators| ; \
-s|^(grpc-address[[:space:]]+=[[:space:]]+).*$|\1$grpc-address| ; \
-s|^(rpc-address[[:space:]]+=[[:space:]]+).*$|\1$rpc-address| ; \
-s|^(level[[:space:]]+=[[:space:]]+).*$|\1$level| ; \
-s|^(mintscan-prefix[[:space:]]+=[[:space:]]+).*$|\1$mintscan-prefix| ; \
-s|^(validator-page-pattern[[:space:]]+=[[:space:]]+).*$|\1$validator-page-pattern| ; \
-s|^(config-path[[:space:]]+=[[:space:]]+).*$|\1\"$config-path\"|" ~/config/missed-blocks-checker-telegram-labels.toml
+s|^(token[[:space:]]+=[[:space:]]+).*$|\1\"$Telegram_Bot_Token\"| ; \
+s|^(bech-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_prefix\"| ; \
+s|^(bech-validator-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_prefix\"| ; \
+s|^(bech-validator-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_pubkey_prefix\"| ; \
+s|^(bech-consensus-node-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_prefix\"| ; \
+s|^(bech-consensus-node-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_pubkey_prefix\"| ; \
+s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1$include_validators| ; \
+s|^(exclude-validators[[:space:]]+=[[:space:]]+).*$|\1$exclude_validators| ; \
+s|^(grpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$grpc_address\"| ; \
+s|^(rpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$rpc_address\"| ; \
+s|^(level[[:space:]]+=[[:space:]]+).*$|\1\"$level\"| ; \
+s|^(mintscan-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$mintscan_prefix\"| ; \
+s|^(validator-page-pattern[[:space:]]+=[[:space:]]+).*$|\1\"$validator_page_pattern\"| ; \
+s|^(config-path[[:space:]]+=[[:space:]]+).*$|\1\"$config_path\"|" /root/missed-blocks-checker/config.<Cosmos_project>.toml
 ```
-
-
+#### It remains to modify manually a few terms:
+```
+nano /root/missed-blocks-checker/config.<Cosmos_project>.toml
+```
+- paste the address of the validator in this type (with `[]`):
+```
+include-validators = ["<your_validator>"] 
+```
+- Telegram chat should be without `""`:
+```
+# A Telegram chat to send messages to.
+chat = 234234234
+```
+- Remove info for slak so it looks like this:
+```
+[slack]
+# A Slack bot token.
+token = ""
+# A Slack channel or username to send messages to.
+chat = ""
+```
+After that let's restart service
+```
+sudo systemctl restart missed-blocks-checker
+sudo systemctl status missed-blocks-checker
+journalctl -u missed-blocks-checker -f --output cat
+```
+Done!
 
 
