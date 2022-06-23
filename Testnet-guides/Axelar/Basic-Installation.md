@@ -189,7 +189,7 @@ sudo systemctl enable vald
 sudo systemctl daemon-reload
 ```
 ## Sentry Node Architecture (Recommended) or State Sync from public network (not recommended)
-!! Everything is ready to launch. But we need **DDoS protection**. When you run the service file in this configuration, after synchronization, information about your node will be available on the Gravity Bridge public network. This exposes your validator to DDoS attacks. If you want to secure a node with a validator, then before starting, click [here] and configure Axelar Sentry Node Architecture. If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
+!! Everything is ready to launch. But we need **DDoS protection**. When you run the service file in this configuration, after synchronization, information about your node will be available on the Gravity Bridge public network. This exposes your validator to DDoS attacks. If you want to secure a node with a validator, then before starting, click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md)] and configure Axelar Sentry Node Architecture. If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
 - [Sentry Node Architecture]()
 - [State Sync from public network](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
 Now follow the instructions below.
