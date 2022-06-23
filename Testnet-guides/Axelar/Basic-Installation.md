@@ -92,7 +92,7 @@ wget -q https://raw.githubusercontent.com/axelarnetwork/axelarate-community/main
 wget -q https://raw.githubusercontent.com/axelarnetwork/axelarate-community/main/configuration/app.toml -O $HOME/.axelar/config/app.toml
 wget -q https://raw.githubusercontent.com/axelarnetwork/axelarate-community/main/resources/testnet-2/genesis.json -O $HOME/.axelar/config/genesis.json
 ```
-Set seeds (if you dont want to use Sentry Nodes):
+Set [seeds](https://raw.githubusercontent.com/axelarnetwork/axelarate-community/main/resources/testnet-2/seeds.toml) (if you dont want to use Sentry Nodes):
 ```
 SEEDS="95c90e528c54e2ebaa0427e034c8facc75e6da3f@aa96e735f68464b09955026986b15632-1865235038.us-east-2.elb.amazonaws.com:26656"
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" $HOME/.axelar/config/config.toml
