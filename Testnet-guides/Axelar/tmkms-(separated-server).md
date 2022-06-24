@@ -1,6 +1,6 @@
 ## Tendermint Key Management System (separated server)
 The official documentation is [[here](https://github.com/iqlusioninc/tmkms#tendermint-kms-)]
-In this article, we will configure `tmkms` on a separate server for the double-signing protection of the Gravity' validator.
+In this article, we will configure `tmkms` on a separate server for the double-signing protection of the Axelar' validator.
 
 [Software-Only](https://github.com/iqlusioninc/tmkms#software-only-not-recommended) signing is not recommended, but 
 if you set this on a separate server, then this will take precedence over the absence of tmkms.  
@@ -13,16 +13,16 @@ If you already run a validator node. It's not too late to set up tmkms. Follow t
 ## Analogue
 To prevent double-signing protection, as an analogue, you can use [[horcrux](https://github.com/strangelove-ventures/horcrux)]. 
 ## Overview
-- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#setting-up-a-validator-node)
-  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#firewall-configuration)
-  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#edit-configtoml)
-- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#setting-up-a-tmkms-server)
-  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#install-tmkms)
-  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#firewall-configuration-1)
-  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#init-tmkms)
-  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#copy-priv_validator_keyjson-from-validator-node)
-  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#edit-tmkmstoml)
-- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/tmkms-(separated-server).md#restert-both-validator-and-tmkms)
+- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#edit-configtoml)
+- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#setting-up-a-tmkms-server)
+  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#install-tmkms)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#firewall-configuration-1)
+  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#init-tmkms)
+  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#copy-priv_validator_keyjson-from-validator-node)
+  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#edit-tmkmstoml)
+- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md#restert-both-validator-and-tmkms)
 
 ## Setting up a Validator node
 We already [[run](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md)] a validator node.
@@ -47,7 +47,7 @@ Or you can enter this value: `priv_validator_laddr = "tcp://<nodeid_VAL>@<ip_VAL
 **DON'T RESTERT validator' service file!!!** Until you have configured the tmkms server.
 
 ## Setting up a tmkms server
-This server does not require the Gravity blockchain. **tmkms** only.  
+This server does not require the Axelar blockchain. **tmkms** only.  
 The official documentation is [[here](https://github.com/iqlusioninc/tmkms#tendermint-kms-)]
 ### Install tmkms
 Update & upgrade
@@ -168,16 +168,16 @@ LimitNOFILE=1024
 WantedBy=multi-user.target
 EOF
 ```
-Start tmkmsgravity
+Start tmkmsaxelar
 ```
 sudo systemctl enable tmkmsaxelar
 sudo systemctl daemon-reload
 sudo systemctl restart tmkmsaxelar
 journalctl -u tmkmsaxelar -f
 ```
-### Restart gravity service on the server of the validator
+### Restart Axelar service on the server of the validator
 ```
-sudo systemctl restart gravity-node
+sudo systemctl restart axelard
 journalctl -u axelard -f --output cat
 ```
 ### Restart tmkms service
