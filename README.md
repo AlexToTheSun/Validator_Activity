@@ -18,12 +18,12 @@ This is an actual information about my validator. Projects. Guides. Tools.
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Validator_Activity#guides-for-advanced-validator-security-protection-and-other-settings) section.
 - [Gravity Bridge](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Gravity-Bridge)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Agoric)
-- [Agoric Devnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Agoric-Devnet.md)
+- [Agoric Devnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Agoric-Devnet.md)
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
-- [Axelar](https://surftest.gitbook.io/axelar-wiki)
+- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Axelar)and on [gitbook](https://surftest.gitbook.io/axelar-wiki)
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
-- [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet%20guides/Quicksilver%20Rhapsody%20Testnet.md)
+- [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Quicksilver)
 - [NuCypher testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
 
 ## Guides for advanced Validator' Security Protection and other settings
