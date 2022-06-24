@@ -3,14 +3,15 @@ Here is the most popular version of Sentry Node Architecture.
 One Sentry node will not be enough, because if it goes offline during a DDoS attack, then the validator node will also be offline, because validator synchronizes only from the Sentry node.
 
 ## Overview
-- [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
-  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#install-agoric)
-  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#edit-configtoml)
-  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#restart)
-- [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#setting-up-a-validator-node)
-  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#firewall-configuration)
-  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#edit-configtoml-1)
-  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#restart-1)
+- [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#install-axelar-chain)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#edit-configtoml)
+  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#restart)
+- [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#edit-configtoml-1)
+  - [Start validator synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#start-validator-synchronization)
+  - [Go back to the Basic-Installation.md](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md#start-the-service-of-validator-node)
 
 ## Setting up Sentry nodes
 It is worth installing at least 3 sentry nodes in the mainnet (preferably 4-5)
@@ -149,7 +150,7 @@ Description of parameters:
 - `private_peer_ids = ""` - We do not enter anything, since the gossip protocol is disabled, and the node will not issue any peers to the general network. Moreover, Sentry Node works not only in a private but also in a public network.
 - `addr_book_strict = false` -  parameter allowing the validator to work in a private network. It will also be able to work in the public.
 
-## Start synchronization  
+## Start validator synchronization  
 Once you have your sentry nodes synced and ready to work on both private and public networks, it’s time to connect a validator node to them and start syncing.  
 
 Since the validator node will now connect exclusively to your Sentry Nodes, which you have specified in config.toml, you have 3 options to synchronize the node:
