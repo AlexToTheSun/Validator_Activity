@@ -1,7 +1,7 @@
 ## Installation Overview
 In this tutorial, we will:
 - [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#minimal-server-protection) 
-  - [Ports]()
+  - [Ports](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#ports)
 - [Download and install geth](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-and-install-geth)
 - [Download the latest version of Gravity chain](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain)
 - [Download Gravity tools (GBT)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Basic-Installation.md#download-the-latest-version-of-gravity-chain-and-the-gravity-tools-gbt)
@@ -40,7 +40,7 @@ It will not protect against all threats. Requires more advanced security setting
 - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#2fa-for-ssh)
 ### Ports
 You need ports:
-- For gravity: 1317, `26656`, `26657`, `26658`, `26660`, `6060`, `9090`, `9091`
+- For gravity: `1317`, `26656`, `26657`, `26658`, `26660`, `6060`, `9090`, `9091`
 - For ssh port you could choose yours
 - For geth: `30303`, `8545`
 - For gbt metrics: `6631`
@@ -383,7 +383,8 @@ Team response:
 ## tmkms (Recommended)
 It is **highly recommended** to protect your validator from double-signing case. [Official documentation](https://github.com/iqlusioninc/tmkms) This could prevent the Double-signing even in the event the validator process is compromised. Click [here] the guide of Installing tmkms on an additional server that will serve as protection.
 
-
+## Set Up Relaying for Gravity Bridge
+See an official link [here](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/relaying.md).
 
 
 
