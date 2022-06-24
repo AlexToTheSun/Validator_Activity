@@ -21,7 +21,7 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Agoric Devnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Agoric-Devnet.md)
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
-- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Axelar)and on [gitbook](https://surftest.gitbook.io/axelar-wiki)
+- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Axelar) and on [gitbook](https://surftest.gitbook.io/axelar-wiki)
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
 - [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Quicksilver)
 - [NuCypher testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
