@@ -5,7 +5,7 @@ One Sentry node will not be enough, because if it goes offline during a DDoS att
 
 ## Overview
 - [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
-  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#install-agoric)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#install-gravity-chain)
   - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#edit-configtoml)
   - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#restart)
 - [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Sentry-Node-Architecture.md#setting-up-a-validator-node)
