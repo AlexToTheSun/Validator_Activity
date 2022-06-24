@@ -1,6 +1,31 @@
+# Links and Summary about Axelar testnet-2
+Chain_id:
+- `axelar-testnet-casablanca-1`  
+
+Official Instructions:
+-  [Docs.axelar.dev](https://docs.axelar.dev/validator/setup/overview)
+
+Explorers:
+- [Axelarscan](https://testnet-2.axelarscan.io/validators)
+- [Ping.pub explorer](https://testnet.explorer.testnet.run/axelar-testnet-2/staking)
+
 # Installation Overview
 In this tutorial, we will:
-- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Axelar/Basic-Installation.md#minimal-server-protection) 
+- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#minimal-server-protection) 
+- [Setting up the validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#setting-up-the-validator-node)
+  - [Update & upgrade](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#update--upgrade)
+  - [Install the required packages](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#install-the-required-packages)
+  - [Download binary files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#download-binary-files)
+  - [Add Validator, Broadcaster and tofnd keys](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#add-validator-broadcaster-and-tofnd-keys)
+  - [Let's add variables](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#lets-add-variables)
+  - [Make init of Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#make-init-of-axelar)
+  - [Configure your config files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#configure-your-config-files)
+  - [Create service files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#create-service-files)
+  - [Choose Sentry Node Architecture or State Sync Snapshot for synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#sentry-node-architecture-recommended-or-state-sync-from-public-network-not-recommended)
+  - [Start service files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#start-service-files)
+  - [Register broadcaster proxy](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#register-broadcaster-proxy)
+  - [Create validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#create-validator)
+
 
 
 
@@ -190,9 +215,12 @@ sudo systemctl daemon-reload
 ```
 ## Sentry Node Architecture (Recommended) or State Sync from public network (not recommended)
 !! Everything is ready to launch. But we need **DDoS protection**. When you run the service file in this configuration, after synchronization, information about your node will be available on the Gravity Bridge public network. This exposes your validator to DDoS attacks. If you want to secure a node with a validator, then before starting, click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md)] and configure Axelar Sentry Node Architecture. If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
-- [Sentry Node Architecture]()
-- [State Sync from public network](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
-Now follow the instructions below.
+
+Choose an option and follow the instructions in choosen link:
+- [Sentry Node Architecture](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Sentry-Node-Architecture.md)
+- [Sync your validatir by State Sync from public network](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
+
+After that follow the instructions below.
 ## Start service files
 ```
 sudo systemctl restart axelard
@@ -213,12 +241,20 @@ journalctl -u axelard.service -f --output cat
 curl localhost:26657/status | jq '.result.sync_info'
 ```
 ## Register broadcaster proxy
-Fund your `validator` and `broadcaster` accounts before proceeding.
+Your `validator` and `broadcaster` accounts should be funded. Get tokens from the casablanca faucet - https://faucet-casablanca.testnet.axelar.dev/ before proceeding.
 ```
 axelard tx snapshot register-proxy $BROADCASTER_ADDRESS --from validator --chain-id $CHAIN_ID
 ```
 ## Create validator
 For identity code you should create an account [here](https://keybase.io/)
+
+Set your values:
+- amount 
+- commission-rate
+- commission-max-rate
+- commission-max-change-rate
+- identity
+- details
 ```
 axelard tx staking create-validator \
  --amount=<your_amount>uaxl \
@@ -235,5 +271,56 @@ axelard tx staking create-validator \
  --gas-prices 1.5uaxl \
  --gas-adjustment 1.4 \
  --chain-id $CHAIN_ID
+```
+## TMKMS (Recommended)
+It is **highly recommended** to protect your validator from double-signing case. Official documentation about [tmkms](https://github.com/iqlusioninc/tmkms). This could prevent the Double-signing even in the event the validator process is compromised. Click [here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/tmkms-(separated-server).md) for the guide of Installing tmkms on an additional server that will serve as protection.
+
+## Register EVM Chains
+Testnet-2 currently supports two EVM networks:
+- [Ethereum](https://github.com/axelarnetwork/axelar-docs/blob/main/pages/validator/external-chains/ethereum.md) (ropsten testnet)
+- [Avalanch](https://github.com/axelarnetwork/axelar-docs/blob/main/pages/validator/external-chains/avalanche.md) (fuji testnet)
+
+If you have installed and synced your Ethereum and Avalanch RPC noden, then just follow the instructions below:
+
+Open the config.toml
+```
+nano ~/.axelar/config/config.toml
+```
+Set your rpc_addreses for Ethereum and Avalanche. Also set `start-with-bridge = true`:
+```
+[[axelar_bridge_evm]]
+name = "Ethereum"
+rpc_addr = "http://IP:PORT"
+start-with-bridge = true
+
+[[axelar_bridge_evm]]
+name = "Avalanche"
+rpc_addr = "http://IP:PORT/ext/bc/C/rpc"
+start-with-bridge = true
+```
+Where:
+- **About Avalanch endpoint URL** - Axelar Network will be connecting to the C-Chain, which is the EVM compatible blockchain, so your rpc_addr should be exposed in this format: `http://IP:PORT/ext/bc/C/rpc`
+- **About Ethereum endpoint URL** - In order for Axelar Network to connect to your Ethereum node, your rpc_addr should be exposed in this format: `http://IP:PORT`
+
+Then restart all the services:
+```
+sudo systemctl restart axelard
+sudo systemctl restart tofnd
+sudo systemctl restart vald
+```
+Register
+```
+axelard tx nexus register-chain-maintainer avalanche ethereum \
+--from broadcaster \
+--gas auto \
+--gas-prices 1.5uaxl \
+--gas-adjustment 1.4 \
+--chain-id $CHAIN_ID
+```
+Now let's check
+```
+axelard keys show validator --bech val -a
+axelard q nexus chain-maintainers avalanche
+axelard q nexus chain-maintainers ethereum
 ```
 
