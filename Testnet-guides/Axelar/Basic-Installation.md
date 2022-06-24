@@ -25,6 +25,8 @@ In this tutorial, we will:
   - [Start service files](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#start-service-files)
   - [Register broadcaster proxy](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#register-broadcaster-proxy)
   - [Create validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#create-validator)
+  - [TMKMS (Recommended)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#tmkms-recommended)
+  - [Register EVM Chains](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Axelar/Basic-Installation.md#register-evm-chains)
 
 
 
