@@ -1,9 +1,8 @@
-### `Updates: the chain under maintenance`
 ## Quicksilver Network State Sync
-### Chain: `quicktest-3`
+### Chain: `killerqueen-1`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="cb5afee35649209bf584bda8c8f3f75b208af797@154.12.230.132:26656"; \
+peers="819463a364f7ff39d8ca8070976457c67811c500@154.12.230.132:26656"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
 ```
 Add variables
@@ -24,7 +23,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.quicksilverd/
 Restart the `quicksilverd.service` with `unsafe-reset-all` by one command:
 ```
 sudo systemctl stop quicksilverd && \
-quicksilverd unsafe-reset-all && \
+quicksilverd tendermint unsafe-reset-all --home $HOME/.quicksilverd && \
 sudo systemctl restart quicksilverd
 ```
 Logs and status
