@@ -1,4 +1,5 @@
 ## Quicksilver Network State Sync
+### Link to the testnet materials is [here](https://github.com/ingenuity-build/testnets/tree/main/killerqueen)
 ### Chain: `killerqueen-1`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
