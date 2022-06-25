@@ -121,6 +121,11 @@ Atoms can be claimed from the `#atom-tap` channel. The tap gives 25 Atoms.
 $request cosmos1........ killerqueen
 ```
 ### Create the validator
+Your node sould be synced. Make shure:
+```
+icad status 2>&1 | jq .SyncInfo
+```
+If node is synced - create a validator
 ```
 icad tx staking create-validator \
   --amount 24000000uatom \
