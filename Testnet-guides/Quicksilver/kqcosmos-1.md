@@ -150,3 +150,19 @@ Find out information about your validator
 ```
 icad query staking validator $(icad keys show $icad_WALLET --bech val -a)
 ```
+## More about wallets delegations and rewards
+To see how many tokens are in your wallet:
+```
+icad q bank balances $(icad keys show $icad_WALLET -a)
+```
+Withdraw all rewards
+```
+icad tx distribution withdraw-all-rewards --node "tcp://127.0.0.1:26657" --from=$icad_WALLET --chain-id=$icad_chain --gas=auto
+```
+Self delegation
+```
+icad tx staking delegate --node "tcp://127.0.0.1:26657" $(icad keys show $icad_WALLET --bech val -a) <amount_to_delegate>uatom \
+--chain-id=$icad_chain \
+--from=$icad_WALLET \
+--gas=auto
+```
