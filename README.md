@@ -39,9 +39,10 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
   - [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#ssh-key-login)
   - [File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#install-file2ban)
   - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#2fa-for-ssh)
+- [Missed-blocks-checker (Telegram-Alerting)](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Monitoring-And-Alerting/Missed_blocks-Telegram-Alerting)
 
 ## Public RPC nodes with State Sync
 - [Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Agoric-mainnet.md)
-- [Quicksilver (Rhapsody Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Rhapsody-Testnet).md)
+- [Quicksilver (killerqueen-1 Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Killerqueen-Testnet).md)
 - [Clan Network (playstation-2 testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Clan-(playstation-2_testnet).md)
