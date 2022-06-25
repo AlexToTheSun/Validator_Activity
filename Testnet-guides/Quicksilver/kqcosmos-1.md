@@ -1,5 +1,6 @@
 ## Chain: `kqcosmos-1`
-
+- Off link is [here](https://github.com/ingenuity-build/testnets/tree/main/killerqueen/kqcosmos-1)
+- [Explorer](https://testnet.explorer.testnet.run/kqcosmos-1)
 # Instructions
 #### Update the packeges
 ```
@@ -58,7 +59,7 @@ GENESIS_URL="https://raw.githubusercontent.com/ingenuity-build/testnets/main/kil
 ICA_HOME=$HOME/.ica ; \
 curl -sSL $GENESIS_URL > $ICA_HOME/config/genesis.json
 ```
-Recover wallet created for killerquin-1
+Recover wallet created for killerquin-1. Type your saved seed phease.
 ```
 icad keys add $icad_WALLET --recover
 ```
@@ -113,6 +114,27 @@ icad status 2>&1 | jq .SyncInfo
 If you want to know your node_id.
 ```
 curl localhost:26657/status | jq '.result.node_info.id'
+```
+#### Get tokens
+Atoms can be claimed from the `#atom-tap` channel. The tap gives 25 Atoms.
+```
+$request cosmos1........ killerqueen
+```
+### Create the validator
+```
+icad tx staking create-validator \
+  --amount 24000000uatom \
+  --from $icad_WALLET \
+  --commission-max-change-rate "0.01" \
+  --commission-max-rate "0.2" \
+  --commission-rate "0.059" \
+  --min-self-delegation "1" \
+  --pubkey  $(icad tendermint show-validator) \
+  --details="" \
+  --website="" \
+  --identity="" \
+  --moniker $icad_MONIKER \
+  --chain-id $icad_chain
 ```
 
 
