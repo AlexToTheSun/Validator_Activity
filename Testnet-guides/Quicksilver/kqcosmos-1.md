@@ -134,7 +134,7 @@ icad tx staking create-validator \
   --commission-max-rate "0.2" \
   --commission-rate "0.059" \
   --min-self-delegation "1" \
-  --pubkey  $(icad tendermint show-validator) \
+  --pubkey $(icad tendermint show-validator) \
   --details="" \
   --website="" \
   --identity="" \
