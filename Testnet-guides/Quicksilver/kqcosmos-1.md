@@ -137,4 +137,16 @@ icad tx staking create-validator \
   --chain-id $icad_chain
 ```
 
-
+# Commands
+Find out your wallet
+```
+icad keys show $icad_WALLET -a
+```
+Find out your validator
+```
+icad keys show $icad_WALLET --bech val -a
+```
+Find out information about your validator
+```
+icad query staking validator $(icad keys show $icad_WALLET --bech val -a)
+```
