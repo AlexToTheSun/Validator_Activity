@@ -3,14 +3,14 @@
 ### Chain: `killerqueen-1`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="819463a364f7ff39d8ca8070976457c67811c500@154.12.230.132:26656"; \
+peers="0ee5ac9c210af39ace15b9d5e3227acd0551e73e@146.19.24.184:26636"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
 ```
 Add variables
 ```
-SNAP_RPC="http://154.12.230.132:26657"; \
+SNAP_RPC="http://146.19.24.184:26637"; \
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 5000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 ```
