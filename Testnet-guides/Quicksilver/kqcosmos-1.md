@@ -171,3 +171,35 @@ icad tx staking delegate --node "tcp://127.0.0.1:26657" $(icad keys show $icad_W
 --from=$icad_WALLET \
 --gas=auto
 ```
+## How to `quicksilver` and `ica` tx ibc-transfer transfer
+Here you can find the task [Crazy Little Thing Called Love](https://github.com/ingenuity-build/testnets/blob/main/killerqueen/VALIDATOR_TASKS.md)
+As there are already relayers between these two channels then you should not have to start your relayer. Just make transections.
+### quicksilver -> ica tx ibc-transfer
+This `tx` we should do on the server with quicksilverd installed.
+
+You can find out info how to transfer `quicksilverd tx ibc-transfer transfer --help`
+```
+quicksilverd tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flags]
+```
+**Now make you transfer**
+```
+quicksilverd tx ibc-transfer transfer transfer channel-0 <YOUR_COSMOS_ADDRESS> 10uqck --from=$quick_WALLET --chain-id=killerqueen-1 -y
+```
+Afther succesful transaction we could see on our quicksilver wallet 2 tokens:
+![image](https://user-images.githubusercontent.com/30211801/175817233-2dcf3896-164c-4f45-8d92-a571aea0d1fe.png)
+
+### ica -> quicksilver tx ibc-transfer
+This `tx` we should do on the server with icad installed.
+
+You can find out info how to transfer `icad tx ibc-transfer transfer --help`
+```
+icad tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flags]
+```
+**Now make you transfer**
+```
+icad tx ibc-transfer transfer transfer channel-0 <YOUR_QUICKSILVER_ADDRESS> 10uatom --from=$icad_WALLET --chain-id=kqcosmos-1 -y
+```
+Afther succesful transaction we could see on our quicksilver wallet 2 tokens:
+![image](https://user-images.githubusercontent.com/30211801/175816634-63feeab7-787c-4bd6-a575-9668f2efeff4.png)
+
+
