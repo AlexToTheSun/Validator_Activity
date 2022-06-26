@@ -183,7 +183,7 @@ quicksilverd tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amoun
 ```
 **Now make you transfer**
 ```
-quicksilverd tx ibc-transfer transfer transfer channel-0 <YOUR_COSMOS_ADDRESS> 10uqck --from=$quick_WALLET --chain-id=killerqueen-1 -y
+quicksilverd tx ibc-transfer transfer transfer channel-0 <YOUR_COSMOS_ADDRESS> 10uqck --node "tcp://127.0.0.1:26657" --from=$quick_WALLET --chain-id=killerqueen-1 -y
 ```
 Afther succesful transaction we could see on our quicksilver wallet 2 tokens:
 ![image](https://user-images.githubusercontent.com/30211801/175817233-2dcf3896-164c-4f45-8d92-a571aea0d1fe.png)
@@ -197,7 +197,7 @@ icad tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flag
 ```
 **Now make you transfer**
 ```
-icad tx ibc-transfer transfer transfer channel-0 <YOUR_QUICKSILVER_ADDRESS> 10uatom --from=$icad_WALLET --chain-id=kqcosmos-1 -y
+icad tx ibc-transfer transfer transfer channel-0 <YOUR_QUICKSILVER_ADDRESS> 10uatom --node "tcp://127.0.0.1:26657" --from=$icad_WALLET --chain-id=kqcosmos-1 -y
 ```
 Afther succesful transaction we could see on our quicksilver wallet 2 tokens:
 ![image](https://user-images.githubusercontent.com/30211801/175816634-63feeab7-787c-4bd6-a575-9668f2efeff4.png)
