@@ -22,9 +22,13 @@ Add user for cosmos-exporter
 ```
 sudo useradd -rs /bin/false cosmos_exporter
 ```
-Add variables `bond_denom` and `bench_prefix` for Axelar
+Add variables `denom` and `bench_prefix` for Axelar
 ```
-
+denom=AXL uaxl
+bench_prefix=axelar
+echo 'export denom='\"${denom}\" >> $HOME/.bash_profile
+echo 'export bench_prefix='\"${bench_prefix}\" >> $HOME/.bash_profile
+source $HOME/.bash_profile
 ```
 
 Create `cosmos-exporter` service file
@@ -40,7 +44,7 @@ Group=cosmos_exporter
 TimeoutStartSec=0
 CPUWeight=95
 IOWeight=95
-ExecStart=cosmos-exporter --denom $BOND_DENOM --denom-coefficient 1000000 --bech-prefix $BENCH_PREFIX
+ExecStart=cosmos-exporter --denom $denom --denom-coefficient 1000000 --bech-prefix $bench_prefix
 Restart=always
 RestartSec=2
 LimitNOFILE=800000
@@ -50,6 +54,7 @@ KillSignal=SIGTERM
 WantedBy=multi-user.target
 EOF
 ```
+Default `cosmos-exporter` port is `9300`.
 #### Node-exporter
 Now we will install cosmos-exporter
 ```
@@ -79,6 +84,7 @@ ExecStart=/usr/local/bin/node_exporter
 WantedBy=multi-user.target
 EOF
 ```
+Default `cosmos-exporter` port is `9100`.
 #### Start `cosmos-exporter` and `node_exporter` services
 ```
 sudo systemctl daemon-reload
@@ -86,6 +92,29 @@ sudo systemctl enable cosmos-exporter
 sudo systemctl enable node_exporter
 sudo systemctl start cosmos-exporter
 sudo systemctl start node_exporter
+```
+## Installing monitoring on the separate server
+install packeges
+```
+sudo apt install jq -y
+sudo apt install python3-pip -y
+sudo pip install yq
+```
+Installing Docker
+```
+sudo apt-get install ca-certificates curl gnupg lsb-release wget -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+```
+Installing Docker Compose
+```
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+sudo chown $USER /var/run/docker.sock
+docker compose version
 ```
 
 
