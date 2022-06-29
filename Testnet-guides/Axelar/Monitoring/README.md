@@ -90,35 +90,14 @@ sudo systemctl start cosmos-exporter
 sudo systemctl start node_exporter
 ```
 ## Installing monitoring on the separate server
-install packeges
+Install packeges
 ```
-sudo apt install jq -y
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt install jq nano mc curl gcc g++ git -y
 sudo apt install python3-pip -y
 sudo pip install yq
 ```
-#### Install Grafana
-- Usefull links [here](https://grafana.com/docs/grafana/latest/setup-grafana/)
-- More info about [installation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/) 
-- [Releases](https://grafana.com/docs/grafana/latest/release-notes/)
-Run the commands to install Grafana
-```
-sudo apt-get install -y apt-transport-https
-sudo apt-get install -y software-properties-common wget
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
-
-sudo apt-get update
-sudo apt-get install grafana
-
-sudo systemctl daemon-reload && \
-sudo systemctl enable grafana-server && \
-sudo systemctl restart grafana-server
-
-sudo journalctl -u grafana-server -f
-```
-The port of Grafana is `3000`
-#### Installing Prometheus
+### Installing Prometheus
 ```
 wget https://github.com/prometheus/prometheus/releases/download/v2.28.1/prometheus-2.28.1.linux-amd64.tar.gz && \
 tar xvf prometheus-2.28.1.linux-amd64.tar.gz && \
@@ -126,6 +105,12 @@ rm prometheus-2.28.1.linux-amd64.tar.gz && \
 mv prometheus-2.28.1.linux-amd64 prometheus
 
 chmod +x $HOME/prometheus/prometheus
+```
+
+Download prepared prometheus' config file:
+```
+PROMETHEUS_YML_URL="https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Axelar/Monitoring/prometheus.yml" ; \
+curl -sSL $PROMETHEUS_YML_URL > $HOME/prometheus/prometheus.yml
 ```
 Now we could setting up promethes config.  
 Download script for adding your nodes easely
@@ -136,12 +121,12 @@ wget -q -O add_node.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_
 Run command to add your nodes to promehteus:
 ```
 VALIDATOR_IP=<YOUR_VALIDATOR_IP>
-WALLET_ADDRESS=<YOUR_WALLET_ADDRESS>
 VALOPER_ADDRESS=<YOUR_VALOPER_ADDRESS>
+WALLET_ADDRESS=<YOUR_WALLET_ADDRESS>
 PROJECT_NAME=<YOUR_PROJECT_NAME>
-$HOME/prometheus/add_node.sh $VALIDATOR_IP $WALLET_ADDRESS $VALOPER_ADDRESS $PROJECT_NAME
+$HOME/prometheus/add_node.sh $VALIDATOR_IP $VALOPER_ADDRESS $WALLET_ADDRESS $PROJECT_NAME
 ```
-For adding more nodes just run command above with again.
+For adding more nodes just run command above again with another information.
 
 Create prometheus service file
 ```
@@ -168,6 +153,30 @@ sudo systemctl restart prometheusd
 
 sudo journalctl -u prometheusd -f
 ```
+
+### Install Grafana
+- Usefull links [here](https://grafana.com/docs/grafana/latest/setup-grafana/)
+- More info about [installation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/) 
+- [Releases](https://grafana.com/docs/grafana/latest/release-notes/)
+Run the commands to install Grafana
+```
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y software-properties-common wget
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+sudo apt-get update
+sudo apt-get install grafana
+
+sudo systemctl daemon-reload && \
+sudo systemctl enable grafana-server && \
+sudo systemctl restart grafana-server
+
+sudo journalctl -u grafana-server -f
+```
+The port of Grafana is `3000`
+
 Now go to `http://<server_IP>:3000/` and inport the dashboard that you choose.
 
 
