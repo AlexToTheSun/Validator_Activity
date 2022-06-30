@@ -204,4 +204,11 @@ icad tx ibc-transfer transfer transfer channel-0 <YOUR_QUICKSILVER_WALLET_ADDRES
 Afther succesful transaction we could see on our quicksilver wallet 2 tokens:
 ![image](https://user-images.githubusercontent.com/30211801/175816634-63feeab7-787c-4bd6-a575-9668f2efeff4.png)
 
+## Unjail
+```
+icad tx slashing unjail \
+--chain-id $icad_chain \
+--from $icad_WALLET
+```
+
 
