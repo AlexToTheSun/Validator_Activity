@@ -2,15 +2,14 @@
 ![image](https://user-images.githubusercontent.com/30211801/175352556-6ba67294-65f7-4aec-adf7-aaefa34c8d22.png)
 Here is the most popular version of Sentry Node Architecture.
 ## Steps
-- [Setting up Sentry nodes]()
-  - [Install]()
-  - [Edit config.toml]()
-  - [Restart]()
-- [Setting up a validator node]()
-  - [Firewall configuration]()
-  - [Edit config.toml]()
-  - [Start validator synchronization]()
-  - [Go back to the Basic-Installation.md]()
+- [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#install-idep-network)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#edit-configtoml-for-a-sentry-node)
+  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#restart)
+- [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#edit-configtoml)
+  - [Start validator synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md#start-validator-synchronization)
 
 ## Setting up Sentry nodes
 It is worth installing at least 3 sentry nodes in the mainnet (preferably 4-5)
