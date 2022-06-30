@@ -13,16 +13,16 @@ If you already run a validator node. It's not too late to set up tmkms. Follow t
 ## Analogue
 To prevent double-signing protection, as an analogue, you can use [[horcrux](https://github.com/strangelove-ventures/horcrux)]. 
 ## Overview
-- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#setting-up-a-validator-node)
-  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#firewall-configuration)
-  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#edit-configtoml)
-- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#setting-up-a-tmkms-server)
-  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#install-tmkms)
-  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#firewall-configuration-1)
-  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#init-tmkms)
-  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#copy-priv_validator_keyjson-from-validator-node)
-  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#edit-tmkmstoml)
-- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IPED/tmkms.md#restert-both-validator-and-tmkms)
+- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#edit-configtoml)
+- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#setting-up-a-tmkms-server)
+  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#install-tmkms)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#firewall-configuration-1)
+  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#init-tmkms)
+  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#copy-priv_validator_keyjson-from-validator-node)
+  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#edit-tmkmstoml)
+- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/tmkms.md#restert-both-validator-and-tmkms)
 
 ## Setting up a Validator node
 We already [[official instruction](https://github.com/AlexToTheSun/Antora#original-launch-docs)] a validator node.
