@@ -9,8 +9,16 @@ But for this type of monitoring, there are a lot of dashboards have been created
 To keep your collector server safe, please, protect it with the [Minimum-server-protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md) instructions.
 
 # Installation
-## Installing exporters on validator and sentry nodes' servers
-#### Cosmos-exporter
+The whole monitoring installation process consists of several stages.
+1) **Installation on servers with nodes.**  
+Installation of exporters for each type of data that will be exported via a separate port to the collector server. We will install two:
+- Cosmos-exporter
+- Node-exporter
+2) **Installation on the collector-renderer server.**
+- Prometheus
+- Grafana
+# Installing exporters on validator and sentry nodes' servers
+### Cosmos-exporter
 First of all install cosmos-exporter created by [solarlabsteam](https://github.com/solarlabsteam/cosmos-exporter/releases):
 ```
 wget https://github.com/solarlabsteam/cosmos-exporter/releases/download/v0.2.2/cosmos-exporter_0.2.2_Linux_x86_64.tar.gz
@@ -53,7 +61,7 @@ WantedBy=multi-user.target
 EOF
 ```
 Default `cosmos-exporter` port is `9300`.
-#### Node-exporter
+### Node-exporter
 Now we will install cosmos-exporter
 ```
 wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
