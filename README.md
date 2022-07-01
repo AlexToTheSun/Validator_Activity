@@ -19,12 +19,14 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Gravity Bridge](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Gravity-Bridge)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Agoric)
 - [Agoric Devnet](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Agoric-Devnet.md)
+- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Axelar) and on [gitbook](https://surftest.gitbook.io/axelar-wiki)
+- [IDEP](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/IDEP)
 - [IRISnet](https://surftest.gitbook.io/iris-mainnet/)
 - [Rizon](https://surftest.gitbook.io/rizon-mainnet/)
-- [Axelar](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Axelar) and on [gitbook](https://surftest.gitbook.io/axelar-wiki)
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
 - [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Quicksilver)
 - [NuCypher testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
+
 
 ## Guides for advanced Validator' Security Protection and other settings
 
@@ -45,4 +47,6 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Axelar](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Axelar-testnet-2.md)
 - [Agoric](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Agoric-mainnet.md)
 - [Quicksilver (killerqueen-1 Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Killerqueen-Testnet).md)
+- [Quicksilver (kqcosmos-1 Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(kqcosmos-1).md)
 - [Clan Network (playstation-2 testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Clan-(playstation-2_testnet).md)
+- [IDEP](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/IDEP.md)
