@@ -3,6 +3,7 @@ Useful links:
 - [Official instruction](https://github.com/ingenuity-build/testnets/tree/main/killerqueen/kqcosmos-1)
 - [Explorer](https://testnet.explorer.testnet.run/kqcosmos-1)
 - [Tasks](https://github.com/ingenuity-build/testnets/blob/main/killerqueen/VALIDATOR_TASKS.md)
+- [State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(kqcosmos-1).md)
 # Instructions
 #### Update the packeges
 ```
