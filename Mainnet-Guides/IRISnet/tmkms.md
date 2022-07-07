@@ -13,16 +13,16 @@ If you already [run](https://surftest.gitbook.io/iris-mainnet/installation-guide
 ## Analogue
 To prevent double-signing protection, as an analogue, you can use [[horcrux](https://github.com/strangelove-ventures/horcrux)]. 
 ## Overview
-- [Setting up a Validator node]()
-  - [Firewall configuration]()
-  - [Edit config.toml]()
-- [Setting up a tmkms server]()
-  - [Install tmkms]()
-  - [Firewall configuration]()
-  - [Init tmkms]()
-  - [Copy priv_validator_key.json from validator node]()
-  - [Edit tmkms.toml]()
-- [Restert both validator and tmkms]()
+- [Setting up a Validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#setting-up-a-validator-node)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#firewall-configuration)
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#edit-configtoml)
+- [Setting up a tmkms server](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#setting-up-a-tmkms-server)
+  - [Install tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#install-tmkms)
+  - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#firewall-configuration-1)
+  - [Init tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#init-tmkms)
+  - [Copy priv_validator_key.json from validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#copy-priv_validator_keyjson-from-validator-node)
+  - [Edit tmkms.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#edit-tmkmstoml)
+- [Restert both validator and tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/tmkms.md#restert-both-validator-and-tmkms)
 
 ## Setting up a Validator node
 We already [[run](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md)] a validator node.
