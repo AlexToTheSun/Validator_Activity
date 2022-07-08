@@ -22,6 +22,8 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.ion/config/co
 ```
 Restart the `iond.service`
 ```
+sudo systemctl stop iond && \
+iond tendermint unsafe-reset-all --home $HOME/.ion && \
 sudo systemctl restart iond
 ```
 Logs and status
