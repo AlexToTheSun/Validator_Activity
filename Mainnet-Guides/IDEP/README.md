@@ -15,10 +15,6 @@ There we will protect server by:
 - SSH key login
 - Install File2ban
 - 2FA for SSH
-## State sync for your Sentry Nodes
-[[Here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/IDEP.md)] is the Link to guide for sync your Sentry Nodes by RPC Node with State Sync.
-
-Not recomended for node with validators. Because it should be protected by Sentry Nodes.
 
 ## DDoS attacks protection
 All validator nodes should be protected from DDoS attacks by Sentry Nodes. [[Guide](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IDEP/Sentry-Node-Architecture.md)]
