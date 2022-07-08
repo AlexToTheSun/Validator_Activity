@@ -2,7 +2,7 @@
 ### Chain: `Antora`
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="ef365d33791193aa5fbb5c7137ea51667e875789@146.19.24.139:26656"; \
+peers="ef365d33791193aa5fbb5c7137ea51667e875789@x.x.x.x:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.ion/config/config.toml
 ```
 Add variables
