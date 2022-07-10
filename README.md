@@ -49,4 +49,3 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Quicksilver (killerqueen-1 Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(Killerqueen-Testnet).md)
 - [Quicksilver (kqcosmos-1 Testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(kqcosmos-1).md)
 - [Clan Network (playstation-2 testnet)](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Clan-(playstation-2_testnet).md)
-- [IDEP](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/IDEP.md)
