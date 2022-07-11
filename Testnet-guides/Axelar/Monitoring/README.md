@@ -161,6 +161,9 @@ sudo systemctl restart prometheusd
 
 sudo journalctl -u prometheusd -f
 ```
+The port of prometheus is `9090`
+
+Now go to `http://<server_IP>:9090/` to check that prometheus is working. It should take 5 minutes after installation.
 
 ### Install Grafana
 - Usefull links [here](https://grafana.com/docs/grafana/latest/setup-grafana/)
