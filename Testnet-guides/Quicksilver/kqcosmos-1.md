@@ -163,9 +163,18 @@ To see how many tokens are in your wallet:
 ```
 icad q bank balances $(icad keys show $icad_WALLET -a)
 ```
-Withdraw all rewards
+Withdraw all delegation rewards
 ```
 icad tx distribution withdraw-all-rewards --node "tcp://127.0.0.1:26657" --from=$icad_WALLET --chain-id=$icad_chain --gas=auto
+```
+How to withdraw validator commission
+```
+icad tx distribution withdraw-rewards $(icad keys show $icad_WALLET --bech val -a) \
+--chain-id $icad_chain \
+--from $icad_WALLET \
+--commission \
+--fees 1000uatom \
+--yes
 ```
 Self delegation
 ```
@@ -211,5 +220,28 @@ icad tx slashing unjail \
 --chain-id $icad_chain \
 --from $icad_WALLET
 ```
-
+## Resync
+If you need to synchronize the node again, then you can use three methods.
+### 1. Synchronize from the first block
+Stop blockchain so that it does not load new information
+```
+sudo systemctl stop icad
+```
+Disable synchronization using State Sync (this feature will prohibit synchronization from scratch, so we should disable it)
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" ~/.ica/config/config.toml
+```
+We reset the downloaded information and the state priv_validator_state.json from the data folder
+```
+icad tendermint unsafe-reset-all --home $HOME/.ica
+```
+Restart
+```
+sudo systemctl restart icad
+```
+### 2. Synchronize from State Sync
+Use this [[guide](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/quicksilver-(kqcosmos-1).md)]
+You can read more about this feature [here](https://medium.com/tendermint/tendermint-core-state-sync-for-developers-70a96ba3ee35).
+### 3. Synchronize by downloading snapshot.
+Reed how to run your own snapshot server [here](https://github.com/c29r3/cosmos-snapshots#run-your-own-backup-server-with-snapshots).
 
