@@ -1,5 +1,10 @@
 Here is the instruction to run a validator from scratch. But if you've already installed SEI and created gentx on your server then you should then you should continue from the **Configure your node** step.
 ## Chain: `atlantic-1`
+Useful links:
+- [Github](https://github.com/sei-protocol)
+- [Explorer](https://sei.explorers.guru/)
+- [Tasks](https://3pgv.notion.site/Sei-Network-Incentivized-Testnet-Seinami-1f3de71c76c24d4f862af936f0a5fe04)
+- [Docs](https://docs.seinetwork.io/nodes-and-validators/joining-testnets)
 # Instructions
 #### Minimal serer protection
 [[Link to instruction](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md)] There we will protect server by:
@@ -60,11 +65,15 @@ Init SEI
 ```
 seid init $sei_MONIKER --chain-id $sei_CHAIN
 ```
-Create wallet
+#### Create wallet
 ```
 seid keys add $sei_WALLET
 ```
-Download `genesis.json` and `addrbook.json`
+Or if you copied your keys files from backup and past to `$HOME/.sei`, you should turn keyhash into an executable file:
+```
+chmod +x $HOME/.sei/keyhash
+```
+#### Download `genesis.json` and `addrbook.json`
 ```
 wget -qO $HOME/.sei/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-incentivized-testnet/genesis.json"
 wget -qO $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-incentivized-testnet/addrbook.json"
