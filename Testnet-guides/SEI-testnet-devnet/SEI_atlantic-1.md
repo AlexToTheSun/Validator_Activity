@@ -50,7 +50,7 @@ source $HOME/.bash_profile
 ### Configure your node
 Init SEI
 ```
-seid init $NODENAME --chain-id $sei_CHAIN
+seid init $sei_MONIKER --chain-id $sei_CHAIN
 ```
 Create wallet
 ```
@@ -100,7 +100,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which seid) start --home $HOME/.sei
+ExecStart=$(which seid) start
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
@@ -156,6 +156,10 @@ seid tx slashing unjail \
   --from=$sei_WALLET \
   --chain-id=$sei_CHAIN \
   --gas=auto
+```
+Reset the downloaded information from the data folder
+```
+icad tendermint unsafe-reset-all --home $HOME/.ica
 ```
 Find out your wallet
 ```
