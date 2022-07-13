@@ -24,6 +24,7 @@ sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \""10"\"/" $HOME/.axe
 sed -i.bak -e "s/^snapshot-interval *=.*/snapshot-interval = \""1000"\"/" $HOME/.axelar/config/app.toml
 sed -i.bak -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = \""2"\"/" $HOME/.axelar/config/app.toml
 ```
+The value of `snapshot-interval`/`pruning-keep-every`could be for example 5000, for more economical space usage..
 #### Setting `config.toml`
 ```
 sed -i.bak -e "s/^laddr *=.*/laddr = \""tcp://0.0.0.0:26657"\"/" $HOME/.axelar/config/config.toml
@@ -34,5 +35,43 @@ sed -i.bak -e "s/^pex *=.*/pex = \"true\"/" $HOME/.axelar/config/config.toml
 sudo systemctl restart axelard
 ```
 Done! Wait when your server produces snapshots and everyone can use it.🎉
+
+## How to use
+You shoud know 4 things:
+- `Your_server_IP` - ip of your server with State Sync
+- `Your_rpc_port` (default is `26657`)
+- `Your_p2p_port` (default is `26656`)
+- `Your_node_id`: to find out node_id of the RPC server type the command `curl localhost:26657/status | jq '.result.node_info.id'`
+- `Your_interval` - it is value of `snapshot-interval`/`pruning-keep-every`
+
+#### Now just insert the values:
+Adding public RPC node to `persistance_peer` in `config.toml`.  
+Here you need `<Your_node_id>`, `<Your_server_IP>`, `<Your_p2p_port>`.
+```
+peers="<Your_node_id>@<Your_server_IP>:<Your_p2p_port>"; \
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.axelar/config/config.toml
+```
+Adding variables.  
+Here you need `<Your_server_IP>`, `<Your_rpc_port>`, `<Your_interval>`.
+```
+SNAP_RPC="http://<Your_server_IP>:<Your_rpc_port>"; \
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - <Your_interval>)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
+echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
+```
+Entering all the datat to `config.toml`
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.axelar/config/config.toml
+```
+Deleting all downloaded date by `unsafe-reset-all` and resterting `axelard.service`
+```
+sudo systemctl stop axelard && \
+icad tendermint unsafe-reset-all --home $HOME/.axelar && \
+sudo systemctl restart axelard
+```
 
 In more detail, the process can be found by the link https://surftest.gitbook.io/axelar-wiki/english/cosmos-sdk-state-sync
