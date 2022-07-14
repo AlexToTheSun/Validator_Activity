@@ -6,22 +6,22 @@ Useful links:
 
 ## Overview
 In this tutorial, we will:
-- [Make minimal server protection]()
-  - [Change the password]()
-  -  [Firewall configuration]() (ufw)
-  - [Change the SSH port]()
-  - [SSH key login]()
-  - [Install File2ban]()
-  - [2FA for SSH]()
-- [Install Agoric Node]()
-  - [Install the software]()
-  - [Disk usage optimization]()
-  - [Sync using opend RPC node with State Sync]()
-  - [Create service file for Agoric]()
-- [DDoS protection]() (Sentry nodes)
-- [Start synchronization]()
-- [Create the validator]()
-- [Double-signing protection]()
+- [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#minimal-server-protection)
+  - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#change-the-password)
+  -  [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#firewall-configuration) (ufw)
+  - [Change the SSH port](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#change-the-ssh-port)
+  - [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#ssh-key-login)
+  - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#install-file2ban)
+  - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#2fa-for-ssh)
+- [Install StafiHub Node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#install-stafihub)
+  - [Install the software](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#install-the-software)
+  - [Disk usage optimization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#disk-usage-optimization)
+  - [Create service file for StafiHub](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#create-service-file-for-stafihub)
+- [Connect to Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#sentry-node-architecture-recommended) (DDoS protection)
+  - [Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#start-synchronization)
+- [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#create-the-validator)
+  - [Commands](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#commands)
+- [tmkms](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Basic-Installation.md#tmkms-recommended) (Double-signing protection)
 
 # Minimal server protection
 Let's start with the security settings.
@@ -420,7 +420,7 @@ To find out your node_id:
 ```
 curl localhost:26657/status | jq '.result.node_info.id'
 ```
-### Create the validator
+## Create the validator
 First of all top up your wallet balance
 #### Faucet
 Request tokens from [discord](https://discord.gg/4UFqJhZ4) in the `#stafi-hub-faucetw` channel by the command `!faucet send <YOUR_WALLET_ADDRESS>`
