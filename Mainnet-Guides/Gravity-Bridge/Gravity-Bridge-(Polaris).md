@@ -64,3 +64,4 @@ service orchestrator restart
 journalctl -u gravity-node.service -f --output cat
 journalctl -u orchestrator -f
 ```
+ 
