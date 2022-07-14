@@ -2,7 +2,8 @@
 Useful links:
 - [Github](https://github.com/stafihub/)
 - [Explorer](https://testnet-explorer.stafihub.io/stafi-hub-testnet)
-- [Official documentation](https://github.com/stafihub/stafihub/tree/public-testnet-v3)
+- [GitHub](https://github.com/stafihub/stafihub/tree/public-testnet-v3)
+- [Docs](https://docs.stafihub.io/welcome-to-stafihub/user/join-public-testnet)
 
 ## Overview
 In this tutorial, we will:
@@ -520,7 +521,7 @@ stafihubd tx staking delegate --node "tcp://127.0.0.1:26657" $(stafihubd keys sh
 It is **highly recommended** to protect your validator from double-signing case.
 [Official documentation](https://github.com/iqlusioninc/tmkms)
 This could prevent the Double-signing even in the event the validator process is compromised.
-Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/tmkms.md)
+Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/tmkms.md)]
 
 
 
