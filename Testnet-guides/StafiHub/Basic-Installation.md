@@ -387,7 +387,7 @@ The logging level (`trace`|`debug`|`info`|`warn`|`error`|`fatal`|`panic`)
 
 ### Sentry Node Architecture (Recommended)
 !! Everything is ready to launch. But we need **DDoS protection**. When you run the service file in this configuration, after synchronization, information about your node will be available on the StafiHub public network. This exposes your validator to DDoS attacks.
-If you want to secure a node with a validator, then before starting, click [[here]]() and configure StafiHub Sentry Node Architecture.
+If you want to secure a node with a validator, then before starting, click [[here]](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/Sentry-Node-Architecture.md) and configure StafiHub Sentry Node Architecture.
 If you **decide not to protect** the server from DDoS attacks (**which is a security issue for the protocol**) then follow the instructions below.
 
 ### Start Synchronization
@@ -468,6 +468,8 @@ stafihubd tx slashing unjail \
   --broadcast-mode=block \
   --from=$stafihub_WALLET \
   --chain-id=$stafihub_CHAIN \
+  --gas-prices=0.025ufis \
+  --gas-adjustment=1.4 \
   --gas=auto
 ```
 Reset the downloaded information from the data folder
@@ -493,7 +495,7 @@ stafihubd q bank balances $(stafihubd keys show $stafihub_WALLET -a)
 ```
 Withdraw all delegation rewards
 ```
-stafihubd tx distribution withdraw-all-rewards --node "tcp://127.0.0.1:26657" --from=$stafihub_WALLET --chain-id=$stafihub_CHAIN --gas=auto
+stafihubd tx distribution withdraw-all-rewards --node "tcp://127.0.0.1:26657" --from=$stafihub_WALLET --chain-id=$stafihub_CHAIN --gas-prices=0.025ufis --gas-adjustment=1.4 --gas=auto
 ```
 How to withdraw validator commission
 ```
@@ -501,21 +503,24 @@ stafihubd tx distribution withdraw-rewards $(stafihubd keys show $stafihub_WALLE
 --chain-id $stafihub_CHAIN \
 --from $stafihub_WALLET \
 --commission \
---fees 1000ufis \
---yes
+--gas-prices=0.025ufis \
+--gas-adjustment=1.4 \
+--gas=auto
 ```
 Self delegation
 ```
 stafihubd tx staking delegate --node "tcp://127.0.0.1:26657" $(stafihubd keys show $stafihub_WALLET --bech val -a) <amount_to_delegate>ufis \
 --chain-id=$stafihub_CHAIN \
 --from=$stafihub_WALLET \
+--gas-prices=0.025ufis \
+--gas-adjustment=1.4 \
 --gas=auto
 ```
 ## tmkms (Recommended)
 It is **highly recommended** to protect your validator from double-signing case.
 [Official documentation](https://github.com/iqlusioninc/tmkms)
 This could prevent the Double-signing even in the event the validator process is compromised.
-Click [[here]()
+Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/StafiHub/tmkms.md)
 
 
 
