@@ -41,7 +41,7 @@ rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
 ```
 Upgrading gravity chain binary
 ```
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.5.2/gravity-linux-amd64
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.6.5/gravity-linux-amd64
 mv gravity-linux-amd64 gravity
 chmod +x gravity
 cp /root/gravity-bin/gravity /usr/bin/
@@ -49,7 +49,7 @@ gravity version
 ```
 Upgrading GBT
 ```
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.5.2/gbt
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.6.5/gbt
 chmod +x *
 sudo mv * /usr/bin/
 gbt --version
