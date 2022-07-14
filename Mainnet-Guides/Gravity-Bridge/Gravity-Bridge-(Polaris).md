@@ -25,6 +25,10 @@ cp -r ~/.gravity gravity-bridge-polaris-backup/
 ```
 cp ~/.gravity/data/priv_validator_state.json validator-state-backup.json
 ```
+# Check
+```
+gravity status 2>&1| jq .SyncInfo
+```
 
 # Stop
 ```
@@ -33,7 +37,6 @@ sudo systemctl stop orchestrator
 ```
 # Upgrading
 ```
-gravity status 2>&1| jq .SyncInfo
 rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
 ```
 Upgrading gravity chain binary
