@@ -26,6 +26,8 @@ Please note that most of the guides (anywhere) contain minimal guides and do not
 - [Desmos](https://surftest.gitbook.io/desmos-mainnet/installing)
 - [Quicksilver testnet](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/Quicksilver)
 - [NuCypher testnet](https://medium.com/coinmonks/launch-nucypher-nodes-from-a-to-z-test-network-7bbedd5e4f03)
+- [IRIS Network](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/IRISnet)
+- [StafiHub](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Testnet-guides/StafiHub)
 
 
 ## Guides for advanced Validator' Security Protection and other settings
