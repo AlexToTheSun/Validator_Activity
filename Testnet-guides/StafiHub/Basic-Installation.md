@@ -326,7 +326,7 @@ stafihubd keys add $stafihub_WALLET
 - Set a keyring password. It is a local defense. The password applies to all wallets on the `~/.stafihub`.
 **Make Stafihub init**
 ```
-stafihubd init --chain-id $stafihub_CHAIN $stafihub_WALLET
+stafihubd init $stafihub_NODENAME --chain-id $stafihub_CHAIN
 ```
 - Write down `priv_validator_key.json` and `node_key.json` in a safe place. If you lose the priv_validator_key.json file, you will never get access to the validator.
 
@@ -338,7 +338,7 @@ wget -O $HOME/.stafihub/config/genesis.json "https://raw.githubusercontent.com/s
 
 Include peers in `config.toml`. By one command
 ```
-PEERS="4e2441c0a4663141bb6b2d0ea4bc3284171994b6@46.38.241.169:26656,79ffbd983ab6d47c270444f517edd37049ae4937@23.88.114.52:26656" ; \
+PEERS="6e9d988bf9812b02c46dcec474591bd10f81916f@45.94.58.160:26656,06c57407aea673fca396b01581a2d92957d48c4a@149.102.143.60:26656,5a6d8e1904c88c9f72d35df63b15d14504aaf030@164.92.159.170:26656,5e88d0d6866cd2f386e885de6eb0a1e3bd4f45c5@38.242.237.130:26656,1eaff7a3defa35de2b29f28d4729317d783f606c@149.102.139.101:26656,724430a2cf42b94f5da6b24d4741c7418fefa24e@194.60.201.153:26656,aae1ac9ef12897d7dc8755240cbdc41ee1171a55@38.242.215.200:26656,4e2441c0a4663141bb6b2d0ea4bc3284171994b6@46.38.241.169:26656,79ffbd983ab6d47c270444f517edd37049ae4937@23.88.114.52:26656" ; \
 sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stafihub/config/config.toml
 ```
 #### Change some `config.toml` settings
@@ -403,6 +403,7 @@ stafihubd tendermint unsafe-reset-all --home ~/.stafihub
 ```
 Then Start the service to synchronize a node
 ```
+stafihubd tendermint unsafe-reset-all --home ~/.stafihub
 sudo systemctl daemon-reload
 sudo systemctl enable stafihubd
 sudo systemctl restart stafihubd
