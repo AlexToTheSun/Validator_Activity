@@ -38,12 +38,17 @@ Done! Wait when your server produces snapshots and everyone can use it.🎉
 
 ## How to use
 You shoud know 4 things:
-- `Your_server_IP` - ip of your server with State Sync
+- `Your_server_IP` - find out ip of your server with State Sync--> `curl ifconfig.me`
 - `Your_rpc_port` (default is `26657`)
 - `Your_p2p_port` (default is `26656`)
-- `Your_node_id`: to find out node_id of the RPC server type the command `curl localhost:26657/status | jq '.result.node_info.id'`
+- `Your_node_id`: find out node_id of the RPC server--> `curl localhost:26657/status | jq '.result.node_info.id'` or `axelard tendermint show-node-id`
 - `Your_interval` - it is value of `snapshot-interval`/`pruning-keep-every`
 
+Or you could find out all by one command (exept ports. You should see them in config files). For example:
+```
+echo "$(axelard tendermint show-node-id)@$(curl ifconfig.me):26656"
+echo "$(axelard tendermint show-node-id)@$(curl ifconfig.me):26657"
+```
 #### Now just insert the values:
 Adding public RPC node to `persistance_peer` in `config.toml`.  
 Here you need `<Your_node_id>`, `<Your_server_IP>`, `<Your_p2p_port>`.
