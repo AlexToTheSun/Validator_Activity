@@ -1,9 +1,9 @@
 [As you know](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#setup-gravity-bridge), if you are validating on the Gravity Bridge blockchain, as a Validator you also **need to run the Gravity bridge components** or you will be slashed and removed from the validator set after about 16 hours.
 
-This component ([Orchestrator](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#setup-gravity-bridge-and-orchestrator-services)) doesn't work without connecting to Ethereum node. Если мы устанавливаем Gravity Bridge по официальной инструкции, we are running [Geth locally](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#download-and-install-geth). Это значит, что orchestrator будет подключаться к локальной ETH ноде. 
+This component ([Orchestrator](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#setup-gravity-bridge-and-orchestrator-services)) doesn't work without connecting to Ethereum node. If we install Gravity Bridge according to the official instructions, we are running [Geth locally](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/setting-up-a-validator.md#download-and-install-geth). This means that the orchestrator will connect to the local ETH node.
 
-### Как проверить что Orchestrator подключен к локальному GETH?
-При установке, мы скачиваем сервисный файл [orchestrator](https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/orchestrator.service), который выглядит так:
+### How to check if Orchestrator is connected to local GETH?
+During installation, we download the service file [orchestrator](https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/orchestrator.service), which looks like this:
 ```
 [Unit]
 Description=Gravity bridge orchestrator
@@ -20,11 +20,11 @@ Environment="HOME=/root"
 [Install]
 WantedBy=default.target
 ```
-В строке `ExecStart=/usr/bin/gbt orchestrator --fees "0ugraviton"` нет флага `--ethereum-rpc <ETHEREUM_RPC>`. Этот флаг говорит Orchestrator адрес ethereum-rpc ноды, к которой он будет подключаться.  
-Если этого флага нет, то у Orchestrator не остается вариантов - он подключится исключительно к локальному GETH.
+The line `ExecStart=/usr/bin/gbt orchestrator --fees "0ugraviton"` does not contain the `--ethereum-rpc <ETHEREUM_RPC>` flag. This flag tells Orchestrator the address of the ethereum-rpc node it will connect to.  
+If this flag is not present, then Orchestrator has no choice - it will connect exclusively to the local GETH.
 
-### По дэфолту GETH работает в `light` режиме
-Давайте посмотрим что прописано в сервисном файле GETH
+### By default GETH works in `light` mode
+Let's see what is written in the [GETH service file](https://raw.githubusercontent.com/Gravity-Bridge/Gravity-Docs/main/configs/geth.service)
 ```
 # Geth Ethereum fullnode
 [Unit]
@@ -49,11 +49,11 @@ ExecStart=/usr/sbin/geth \
 [Install]
 WantedBy=default.target
 ```
-В этом конфиге видно, что в строке `ExecStart=` прописаны флаги:
-- `--syncmode "light"` отвечающий за выбор режима синхронизации `light`
-- `--config /etc/geth-light-config.toml` который указывает путь к config файлу.  
+In this config, you can see that the `ExecStart=` line contains flags:
+- `--syncmode "light"` responsible for choosing the `light` synchronization mode.
+- `--config /etc/geth-light-config.toml` which specifies the path to the config file.
 
-### Проверим что локальный GETH работает хорошо?
+### Let's check that the local GETH works well
 View the status of your Ethereum node. If result is 'false' that means it is now synced!
 ```
 curl -H "Content-Type:application/json" -X POST -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://127.0.0.1:8545
@@ -62,7 +62,8 @@ Logs:
 ```
 journalctl -u geth.service -f --output cat
 ```
-Если у вас light нода потеряла пиры:
+#### ❗️ Attention
+If your light node has lost peers:
 ```
 INFO [07-18|07:39:22.005] Looking for peers                        peercount=1  tried=3 static=5
 INFO [07-18|07:39:32.090] Looking for peers                        peercount=1  tried=2 static=5
@@ -76,10 +77,11 @@ INFO [07-18|07:40:42.814] Looking for peers                        peercount=1  
 INFO [07-18|07:40:52.845] Looking for peers                        peercount=1  tried=1 static=5
 INFO [07-18|07:41:02.857] Looking for peers                        peercount=1  tried=2 static=5
 ```
-В таком случае необходимы действия.
-## Решение проблемы протери пиров light нодой
-У нас есть 3 варианта
-#### 1) Добавить пиры в light ноду с помощью диалогового окна.
+In this case, action is required to correct the problem. Otherwise the orchestrator will not work correctly and you will be slashed and removed from the validator set after about 16 hours.
+
+## Solving the problem of losing peers with a light node
+We have 3 options
+#### 1) Add peers to the light node using the cli dialog.
 
 Here is the [[list with active peers](https://gist.github.com/rfikki/e2a8c47f4460668557b1e3ec8bae9c11?permalink_comment_id=4191111#file-lightclient-peers-mainnet-latest-txt-L4)] for GETH from [discord](https://discord.com/channels/881943007115497553/881948977707221053/997219903297822770).
 Type:
@@ -90,10 +92,10 @@ Then copy and past content from the [peer-list](https://gist.github.com/rfikki/e
 ```
 admin.addPeer("enode://da0c61fe14ba9da1a9835b59d811553d21787448724cfe6412bc17f0b14586df91826d8286b2137342d09a8631df5ea548cf301294b05657c2a90f9c3d526721@143.198.119.44:30303");
 ```
-#### 2) Запуск GETH в `full` режиме
-Этот режим занимает много места на диске, но работает стабильнее, чем `light` режим. Перед тем как перейти на этот режим работы, проверьте, что у вас достаточно свободного места на NVMe, а так же настройте алертинг, на случай, если дисковое пространство неожиданно быстро станет заканчиваться.
+#### 2) Running GETH in `full` mode
+This mode takes up a lot of disk space, but is more stable than `light` mode. Before switching to this mode of operation, check that you have enough free space on NVMe, and also set up an alert in case the disk space starts to run out unexpectedly quickly.
 
-Строки отвечающие за режим работы `full` изначатьно закоментированы. Чтобы включить `full` режим, надо закомментировать `light` строки, и удалить символ # с `full` строк. Так будет выглядеть сервис файл после корректировки:
+The lines responsible for the `full` mode of operation are initially commented out. To enable `full` mode, comment out `light` lines, and remove the `#` character from `full` lines. This is what the service file will look like after the adjustment:
 ```
 # Geth Ethereum fullnode
 [Unit]
@@ -118,7 +120,7 @@ ExecStart=/usr/bin/geth \
 [Install]
 WantedBy=default.target
 ```
-Есть вероятность, что в конфиг файле `geth-full-config.toml` прийдется заменить `fast` на `full`. Либо вставить дополнительный флаг `--syncmode "fast" \`. Тогда получится так:
+It is possible that in the `geth-full-config.toml` config file you will have to replace `fast` with `full`. Or insert an additional flag `--syncmode "fast" \`. Then it will turn out like this:
 ```
 ExecStart=/usr/bin/geth \
 --syncmode "fast" \
