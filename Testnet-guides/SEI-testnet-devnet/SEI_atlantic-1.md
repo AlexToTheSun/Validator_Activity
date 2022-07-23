@@ -6,6 +6,13 @@ Useful links:
 - [Tasks](https://3pgv.notion.site/Sei-Network-Incentivized-Testnet-Seinami-1f3de71c76c24d4f862af936f0a5fe04)
 - [Docs](https://docs.seinetwork.io/nodes-and-validators/joining-testnets)
 # Instructions
+Short linksof this guide:
+- [Start installation](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-the-packeges)
+- [Commands](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#commands)
+- [Update to `1.0.6beta-val-count-fix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#Update-to-`1.0.6beta-val-count-fix`)
+- [Update to `1.0.7beta-postfix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#Update-to-`1.0.7beta-postfix`)
+
+
 #### Minimal serer protection
 [[Link to instruction](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md)] There we will protect server by:
 - Change the password
@@ -232,6 +239,67 @@ seid tx staking delegate --node "tcp://127.0.0.1:26657" $(seid keys show $sei_WA
 --from=$sei_WALLET \
 --gas=auto
 ```
+# Update to `1.0.6beta-val-count-fix`
+Stop seid:
+```
+sudo systemctl stop seid
+```
+go to the `$HOME` repository:
+```
+cd $HOME
+```
+delete the old downloaded directory:
+```
+sudo rm sei-chain -rf
+```
+Download the updated git:
+```
+git clone https://github.com/sei-protocol/sei-chain.git
+```
+go to the `sei-chain` repository:
+```
+cd sei-chain
+```
+Update sei:
+```
+git checkout master && git pull
+```
+Checkout fix:
+```
+git checkout 1.0.6beta-val-count-fix
+```
+Build seid:
+```
+make install
+```
+transfer the compiled binary to the place we need:
+```
+sudo cp /root/go/bin/seid /usr/local/bin/seid
+```
+restart:
+```
+sudo systemctl restart seid
+```
+Logs:
+```
+sudo journalctl -u seid -f -o cat
+```
+# Update to `1.0.7beta-postfix`
+```
+sudo systemctl stop seid
+cd $HOME
+sudo rm sei-chain -rf
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout master && git pull
+git checkout 1.0.7beta-postfix
+make install
+sudo cp /root/go/bin/seid /usr/local/bin/seid
+seid version --long | head
+sudo systemctl restart seid
+sudo journalctl -u seid -f -o cat
+```
+
 
 
 
