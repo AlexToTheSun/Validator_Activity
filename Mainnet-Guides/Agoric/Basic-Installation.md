@@ -16,7 +16,8 @@ In this tutorial, we will:
 - [Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#start-synchronization)
 - [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#create-the-validator)
 - [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#tmkms) (tmkms)
-- [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#Upgrade-`agoric-upgrade-6`)
+- [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#upgrade-agoric-upgrade-6)
+
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings.
 ### Change the password
