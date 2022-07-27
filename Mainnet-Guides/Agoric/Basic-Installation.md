@@ -1,4 +1,4 @@
-## Overview
+## Table of contents
 In this tutorial, we will:
 - [Make minimal server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#minimal-server-protection) 
   - [Change the password](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#change-the-password)
@@ -16,6 +16,7 @@ In this tutorial, we will:
 - [Start synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#start-synchronization)
 - [Create the validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#create-the-validator)
 - [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#tmkms) (tmkms)
+- [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Basic-Installation.md#Upgrade-`agoric-upgrade-6`)
 ## Minimal server protection
 It will not protect against all threats. Requires more advanced security settings.
 ### Change the password
@@ -484,7 +485,9 @@ It is **highly recommended** to protect your validator from double-signing case.
 This could prevent the Double-signing even in the event the validator process is compromised.
 Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server))] the guide of Installing tmkms on an additional server that will serve as protection.
 
-## Update 
+## Upgrade `agoric-upgrade-6`
+[[Releases](https://github.com/Agoric/ag0/releases)]
+Upgrade was NEEDED at height 5901622. Only after this block you should upgrade your node.
 ```
 rm -rf /root/ag0
 git clone https://github.com/Agoric/ag0
