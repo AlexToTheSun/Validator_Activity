@@ -483,3 +483,28 @@ It is **highly recommended** to protect your validator from double-signing case.
 [Official documentation](https://github.com/iqlusioninc/tmkms)
 This could prevent the Double-signing even in the event the validator process is compromised.
 Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/tmkms-(separated-server))] the guide of Installing tmkms on an additional server that will serve as protection.
+
+## Update 
+```
+rm -rf /root/ag0
+git clone https://github.com/Agoric/ag0
+cd ag0
+git checkout agoric-upgrade-6
+git pull origin agoric-upgrade-6
+make build
+. $HOME/.bash_profile
+$HOME/ag0/build/ag0 version
+```
+now stop the service, update and start
+```
+sudo systemctl stop agoricd
+cp $HOME/ag0/build/ag0 /usr/local/bin
+ag0 version
+sudo systemctl start agoricd
+ag0 status 2>&1 | jq .SyncInfo
+```
+Check. The node will start after 64% active set are upgraded
+```
+curl -s localhost:26657/dump_consensus_state | jq '.result.round_state.votes[0]'
+```
+![image](https://user-images.githubusercontent.com/30211801/181161879-7b06a66b-5ac4-4f22-be64-d10516fcc905.png)
