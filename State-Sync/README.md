@@ -28,7 +28,7 @@ The value of `snapshot-interval`/`pruning-keep-every`could be for example 5000, 
 #### Setting `config.toml`
 ```
 sed -i.bak -e "s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:26657\"%" $HOME/.axelar/config/config.toml
-sed -i.bak -e "s/^pex *=.*/pex = \"true\"/" $HOME/.axelar/config/config.toml
+sed -i.bak -E "s|^(pex[[:space:]]+=[[:space:]]+).*$|\1true|" $HOME/.axelar/config/config.toml
 ```
 4) Restart your node
 ```
