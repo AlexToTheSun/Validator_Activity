@@ -24,27 +24,27 @@ There is a [YouTube instruction](https://www.youtube.com/watch?v=_xQDTj1PcEw) in
   - Stirde RPC node
   - Gaia RPC node
   - Fund your Stride and Gaya keys
-2. Install and configure Hermes
+2. [Install and configure Hermes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Stride/Hermes_relayer_Stride-Gaia.md#install-and-configure-hermes)
   - Install Hermes
   - Hermes Configuration
   - Adding private keys
-3. Configure new clients for Stride and Gaia
+3. [Configure new clients for Stride and Gaia](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Stride/Hermes_relayer_Stride-Gaia.md#configure-clients)
   - Create-clients
   - Query client states
   - Update-clients
-4. Connection Handshake
+4. [Connection Handshake](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Stride/Hermes_relayer_Stride-Gaia.md#connection-handshake)
   - Conn-init
   - Conn-try
   - Conn-ack
   - Conn-confirm
   - Query connection
-5. Channel Handshake
+5. [Channel Handshake](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Stride/Hermes_relayer_Stride-Gaia.md#channel-handshake)
   - Chan-open-init
   - Chan-open-try
   - Chan-open-ack
   - Chan-open-confirm
   - Query channel
-6. Transactions
+6. [Transactions](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Stride/Hermes_relayer_Stride-Gaia.md#transactions)
 
 # Configure opend RPC nodes and Fund keys
 We will configure Hermes to operate between **Stride** and **Gaia** in testnets.
