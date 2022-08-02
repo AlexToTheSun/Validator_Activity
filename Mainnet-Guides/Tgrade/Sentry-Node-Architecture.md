@@ -124,12 +124,14 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/tgrade.service
 [Unit]
 Description=Tgrade Cosmos daemon
 After=network-online.target
+
 [Service]
 User=$USER
 ExecStart=$(which tgrade) start
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=65535
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -145,7 +147,8 @@ sudo ufw allow from <ip_n> to any port 26656/udp
 sudo ufw status verbose
 ```
 Where `<ip_1>`, `<ip_2>`,..., `<ip_n>` are the ip of servers with Sentry Node installed on them.
-### Edit config.toml
+
+## Edit `config.toml` for connecting to Tgrade chain by a private network.
 Open the config file by nano editor:
 ```
 nano ~/.tgrade/config/config.toml
@@ -182,8 +185,10 @@ tgrade status 2>&1 | jq .SyncInfo
 Wait until full synchronization. The `false` status indicates that the node is fully synchronized.
 
 
+## Next Step
+You have connected your validator node to a private network.
 
-
+The next step is  [wallet funding & validator creating](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Tgrade)
 
 
 
