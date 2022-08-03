@@ -1,3 +1,5 @@
+![tgrade_logo_500px](https://user-images.githubusercontent.com/30211801/182713898-39346cfa-df0f-45e8-9432-49de436dade1.png)
+
 # Tgrade Introduction
 #### Tgrade Site: https://tgrade.finance/
 #### Tgrade App: https://try.tgrade.finance/
@@ -27,5 +29,6 @@ Another important topic for Cosmos Hub networks is ibc relayer. Here we will wal
 5. [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/tmkms-validator-security.md)
 #### Optional step
 6. Setup Tgrade-Osmosis Hermes relayer.
+7. [How to run your own RPC with State Sync](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync).
 
 # 
