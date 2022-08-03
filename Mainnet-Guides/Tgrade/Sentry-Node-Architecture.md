@@ -188,29 +188,4 @@ Wait until full synchronization. The `false` status indicates that the node is f
 ## Next Step
 You have connected your validator node to a private network.
 
-The next step is  [wallet funding & validator creating](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Tgrade)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The next step is  [wallet funding & validator creating](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Tgrade/Wallet-Funding-%26-Validator-Creating.md).
