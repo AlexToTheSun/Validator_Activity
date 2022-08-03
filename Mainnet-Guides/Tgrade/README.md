@@ -1,4 +1,7 @@
 # Tgrade Introduction
+#### Tgrade Site: https://tgrade.finance/
+#### Tgrade App: https://try.tgrade.finance/
+
 The first Tendermint based [Proof of Engagement](https://medium.com/tgradefinance/proof-of-engagement-95a1a6a024f8)(PoE) network. This article contains theses that allow you to understand the approach of the Tgrade team to the decentralization of the network. Here is some of them:
 - Proof of Engagement provides the incentives for all of the community around a blockchain to be actively involved.
 - Proof of Engagement brings higher decentralisation through the combination of Engagement Rewards and Stake than a pure Proof of Stake mechanism.
@@ -18,6 +21,11 @@ Another important topic for Cosmos Hub networks is ibc relayer. Here we will wal
 
 # Step by step instructions
 1. [Server protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Minimum-server-protection.md)
-2. Sentr
+2. [Setup our Sentry Nodes to work in public network](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Basic-Installation-Synchronization.md)
+3. [Connect our Validator node to Sentry Nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md)
+4. [Upgrade to a Validator](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Wallet-Funding-%26-Validator-Creating.md)
+5. [Double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/tmkms-validator-security.md)
+#### Optional step
+6. Setup Tgrade-Osmosis Hermes relayer.
 
 # 
