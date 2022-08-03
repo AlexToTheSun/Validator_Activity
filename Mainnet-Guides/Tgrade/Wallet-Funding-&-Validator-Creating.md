@@ -16,10 +16,10 @@ Make a USDC deposit from Metamask (ethereum) to Osmosis (cosmos) by [Satellite](
 Run the following command syntax:
 ```
 tgrade tx poe create-validator \
-  --amount 0utgd \
-  --vesting-amount 285000000000utgd \
+  --amount 1000000utgd \
+  --vesting-amount 0utgd \
   --from $TGRADE_WALLET \
-  --pubkey $(sudo tgrade tendermint show-validator --home /opt/validator/.tgrade) \
+  --pubkey $(sudo tgrade tendermint show-validator --home /root/.tgrade) \
   --chain-id $TGRADE_CHAIN \
   --moniker "$TGRADE_NODENAME" \
   --fees 200000utgd \
@@ -30,6 +30,9 @@ tgrade tx poe create-validator \
   --node "tcp://127.0.0.1:26657" \
   --home /root/.tgrade
 ```
+> ❗️ Note that this command actual if you still don't have engagement points previosly assigned.
+> ✅ It is [possible to earn engagement points](https://github.com/confio/tgrade-networks#upgrade-to-a-validator)!
+
 Our validator will appears in the block-explorer: https://tgrade.aneka.io or https://www.mintscan.io/tgrade
 ### Delegate more liquid and/or vesting tokens to your valiator ( Optional )
 ```
@@ -40,3 +43,8 @@ tgrade tx poe self-delegate 100000000utgd 900000000utgd \
   --node "tcp://127.0.0.1:26657" \
   --home /root/.tgrade
 ```
+
+## Next step
+Now we have a validator.
+
+The next step is validator [double-signing protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/tmkms-validator-security.md).
