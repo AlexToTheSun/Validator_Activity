@@ -251,3 +251,8 @@ Restart the sshd service and you're done:
 sudo systemctl restart sshd
 ```
 Now When logging into the server, you will first need to enter a password, and then a two-factor authentication code. 🎉
+
+## Next Step
+We have protected our servers. 
+
+The next step is [Basic Installation Synchronization](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Basic-Installation-Synchronization.md) where we will install and sync our Sentry Nodes.  
