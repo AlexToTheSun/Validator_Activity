@@ -1,16 +1,20 @@
 # Overview
 Before we start installing and synchronizing the Tgrade node for the validator, we need to sync our Sentry Nodes. Since the validator should be in a private network with Sentry Nodes, and will communicate with the public network only through them.
-![image](https://user-images.githubusercontent.com/30211801/182358577-d0d43de1-6d50-4f85-a72a-fd4692cfa29f.png)
+
+### The most popular Sentry Node architecture
+![image](https://user-images.githubusercontent.com/30211801/182532318-c0982f6f-1a3b-45cd-a39a-5063fca01e11.png)
+One Sentry node will not be enough, because if it goes offline during a DDoS attack, then the validator node will also be offline, because validator synchronizes only from the Sentry node.
 
 # Table of contents
 - [Setting up Sentry nodes](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#setting-up-sentry-nodes)
-  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#install-agoric)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#install-tgrade)
   - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#edit-configtoml)
   - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#restart)
 - [Setting up a validator node](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#setting-up-a-validator-node)
+  - [Install](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#install-tgrade-node)
   - [Firewall configuration](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#firewall-configuration)
-  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#edit-configtoml-1)
-  - [Restart]()
+  - [Edit config.toml](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#edit-configtoml-for-connecting-to-tgrade-chain-by-a-private-network)
+  - [Restart](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md#start)
 
 # Setting up Sentry nodes
 It is worth installing at least 3 sentry nodes in the mainnet (preferably 4-5)
@@ -136,7 +140,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-### Firewall configuration
+## Firewall configuration
 The only thing is that now port 26656 is open to everyone. And you can close it and allow connection only to the IP of Sentry Nods. It is could be done like this:
 ```
 sudo ufw deny 26656/udp
@@ -169,7 +173,7 @@ Description of parameters:
 - `private_peer_ids = ""` - We do not enter anything, since the gossip protocol is disabled, and the node will not issue any peers to the general network. Moreover, Sentry Node works not only in a private but also in a public network.
 - `addr_book_strict = false` -  parameter allowing the validator to work in a private network. It will also be able to work in the public.
 
-### Start
+## Start
 ```
 tgrade tendermint unsafe-reset-all --home $HOME/.tgrade
 sudo systemctl daemon-reload
