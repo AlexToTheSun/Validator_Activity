@@ -112,7 +112,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-### Start sycn
+### Start synchronization from scratch
 ```
 tgrade tendermint unsafe-reset-all --home $HOME/.tgrade
 sudo systemctl daemon-reload
@@ -128,7 +128,8 @@ tgrade status 2>&1 | jq .SyncInfo
 Wait until full synchronization. The `false` status indicates that the node is fully synchronized.
 
 #### State Sycn
-You can use State Sycn from [allthatnode](https://www.allthatnode.com/tgrade.dsrv). Past state sync information to $HOME/.tgrade/config/config.toml
+1) You can use my State Sycn. [Here is the step by step guide to use](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Tgrade-Mainnet.md). 
+2) Or StateSync from [allthatnode](https://www.allthatnode.com/tgrade.dsrv). Past state sync information to $HOME/.tgrade/config/config.toml
 ```
 nano $HOME/.tgrade/config/config.toml
 ```
