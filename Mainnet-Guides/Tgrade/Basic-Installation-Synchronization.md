@@ -10,7 +10,9 @@
 - go version: `1.18.3`
 
 # Install Tgrade Node
-We need to set variables for convenient operation, set variables for convenient operation, install the software, ran init and set up the configuration files to be able to start the sync.
+> ❗️ Note, that in this instruction, we will connect the node to the Tgrade public network, it is recommended to do this only for Sentry Nodes, and after that connect the Validator to them in the private network. So let's start the installation and synchronization process for nodes without a validator.
+> 
+We need to set variables for convenient operation, install the software, ran init and set up the configuration files to be able to start the sync.
 ### Install software/dependencies
 Update & upgrade
 ```
@@ -142,3 +144,8 @@ sudo journalctl -u tgrade -f -o cat
 curl localhost:26657/status | jq
 tgrade status 2>&1 | jq .SyncInfo
 ```
+
+## Next Step
+We have connected your Sentry Nodes to a private network.
+
+The next step is [Sentry Node Architecture](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Sentry-Node-Architecture.md) where we will configure the Validator and Sentry Nodes to work in a private network.
