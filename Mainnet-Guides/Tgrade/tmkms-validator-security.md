@@ -101,7 +101,7 @@ sudo ufw enable
 sudo ufw status
 ss -tulpn
 ```
-You should change the SSH port. Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#change-the-ssh-port)]  
+You should change the SSH port. Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Minimum-server-protection.md#change-the-ssh-port)]  
 ### Init tmkms
 ```
 tmkms init $HOME/.tmkms/tgrade
@@ -121,18 +121,25 @@ nano $HOME/.tmkms/tgrade/tmkms.toml
 Edit the file like this:
 ```
 # Example Tendermint KMS configuration file
+
 ## Chain Configuration
+
 [[chain]]
 id = "tgrade-mainnet-1"
 key_format = { type = "bech32", account_key_prefix = "tgradepub", consensus_key_prefix = "tgradevalconspub" }
 state_file = "$HOME/.tmkms/tgrade/state/cosmoshub-3-consensus.json"
+
 ## Signing Provider Configuration
+
 ### Software-based Signer Configuration
+
 [[providers.softsign]]
 chain_ids = ["tgrade-mainnet-1"]
 key_type = "consensus"
 path = "$HOME/.tmkms/tgrade/secrets/cosmoshub-3-consensus.key"
+
 ## Validator Configuration
+
 [[validator]]
 chain_id = "tgrade-mainnet-1"
 addr = "tcp://<ip_VAL>:26658"
