@@ -126,7 +126,7 @@ Edit the file like this:
 
 [[chain]]
 id = "tgrade-mainnet-1"
-key_format = { type = "bech32", account_key_prefix = "tgradepub", consensus_key_prefix = "tgradevalconspub" }
+key_format = { type = "bech32", account_key_prefix = "tgradepub", consensus_key_prefix = "tgradepub" }
 state_file = "$HOME/.tmkms/tgrade/state/cosmoshub-3-consensus.json"
 
 ## Signing Provider Configuration
