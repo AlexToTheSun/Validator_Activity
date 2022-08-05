@@ -116,7 +116,7 @@ tmkms softsign import $HOME/.tmkms/tgrade/priv_validator_key.json $HOME/.tmkms/t
 rm $HOME/.tmkms/tgrade/priv_validator_key.json
 ```
 ### Edit tmkms.toml
-Open `tmkms.toml` in `nano`
+Here is the [tmkms.toml.example](https://github.com/iqlusioninc/tmkms/blob/main/tmkms.toml.example). Open `tmkms.toml` in `nano`
 ```
 nano $HOME/.tmkms/tgrade/tmkms.toml
 ```
@@ -128,7 +128,7 @@ Edit the file like this:
 
 [[chain]]
 id = "tgrade-mainnet-1"
-key_format = { type = "bech32", account_key_prefix = "tgradepub", consensus_key_prefix = "tgradepub" }
+key_format = { type = "bech32", account_key_prefix = "tgrade", consensus_key_prefix = "tgrade" }
 state_file = "$HOME/.tmkms/tgrade/state/cosmoshub-3-consensus.json"
 
 ## Signing Provider Configuration
@@ -149,6 +149,7 @@ secret_key = "$HOME/.tmkms/tgrade/home/secrets/kms-identity.key"
 protocol_version = "v0.34"
 reconnect = true
 ```
+- `type`, `account_key_prefix`, `consensus_key_prefix` you can see here tgrade' [app.go](https://github.com/confio/tgrade/blob/main/app/app.go#L109)
 - `addr` - the validator' server address. Shoud match the `priv_validator_laddr` in tgrade' `config.toml`.
 - `protocol_version` - find out `tgrade tendermint version`
 
