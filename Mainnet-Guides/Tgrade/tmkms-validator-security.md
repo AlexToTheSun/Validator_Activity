@@ -1,3 +1,5 @@
+# ❗️ In the process of troubleshooting.
+Tgrade don't use the sdk prefixes with PoE. So we should to find out non-standard prefixes `account_key_prefix` and `consensus_key_prefix` for Tgrade to use in tmkms.
 ## Here are instructions to setup TMKMS as a validator security for Tgrade Network
 #### Tendermint Key Management System
 The official documentation is [[here](https://github.com/iqlusioninc/tmkms#tendermint-kms-)]  
@@ -203,4 +205,4 @@ Don't forget **to backup and delete** the `priv_validator_key.json` file from th
 Congratulations, your validator now has a solid working architecture. Next step is optional - Tgrade-Osmosis relayer.
 
 ## Next optional step
-Tgrade-Osmosis relayer.
+[Tgrade-Osmosis relayer](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Hermes_relayer_Tgrade-Osmosis.md).
