@@ -111,29 +111,35 @@ tmkms init $HOME/.tmkms/iris
 Use [WinSCP](https://winscp.net/download/WinSCP-5.19.5-Setup.exe) to copy the `priv_validator_key.json` from the validator's node. And put it in the `$HOME/.tmkms/iris` folder.
 Then type the command below to import information from `priv_validator_key.json` to `cosmoshub-3-consensus.key`:
 ```
-tmkms softsign import $HOME/.tmkms/iris/priv_validator_key.json $HOME/.tmkms/iris/secrets/cosmoshub-3-consensus.key
+tmkms softsign import $HOME/.tmkms/iris/priv_validator_key.json $HOME/.tmkms/iris/secrets/irishub-1-consensus.key
 rm $HOME/.tmkms/iris/priv_validator_key.json
 ```
 ### Edit tmkms.toml
-Open `tmkms.toml` in `nano`
+Here is an example of [tmkms.toml](https://github.com/iqlusioninc/tmkms/blob/main/tmkms.toml.example). Open `tmkms.toml` in `nano`
 ```
 nano $HOME/.tmkms/iris/tmkms.toml
 ```
 Edit the file like this:
 ```
 # Example Tendermint KMS configuration file
+
 ## Chain Configuration
+
 [[chain]]
 id = "irishub-1"
-key_format = { type = "bech32", account_key_prefix = "iaapub", consensus_key_prefix = "ivaconspub" }
-state_file = "$HOME/.tmkms/iris/state/cosmoshub-3-consensus.json"
+key_format = { type = "bech32", account_key_prefix = "iap", consensus_key_prefix = "icp" }
+state_file = "$HOME/.tmkms/iris/state/irishub_priv_validator_state.json"
+
 ## Signing Provider Configuration
 ### Software-based Signer Configuration
+
 [[providers.softsign]]
 chain_ids = ["irishub-1"]
 key_type = "consensus"
-path = "$HOME/.tmkms/iris/secrets/cosmoshub-3-consensus.key"
+path = "$HOME/.tmkms/iris/secrets/irishub-1-consensus.key"
+
 ## Validator Configuration
+
 [[validator]]
 chain_id = "irishub-1"
 addr = "tcp://<ip_VAL>:26658"
