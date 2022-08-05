@@ -1,5 +1,6 @@
 ## Axelar Network State Sync
-### Chain: `axelar-testnet-casablanca-1`
+#### Explorers [Axelarscan](https://testnet-2.axelarscan.io/validators), [Ping.pub explorer](https://testnet.explorer.testnet.run/axelar-testnet-2/staking)
+#### Chain: `axelar-testnet-casablanca-1`
 Add my public RPC node to `persistance_peer` in `config.toml`
 ```
 peers="cc138f96d4d38bb3ba06f0a0181af53d16edb6df@195.3.221.174:26656"; \
@@ -9,7 +10,7 @@ Add variables
 ```
 SNAP_RPC="http://195.3.221.174:26657"; \
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 4000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 ```
@@ -20,12 +21,15 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" ~/.axelar/config/config.toml
 ```
-Restart the `axelard.service`
+Restart the `axelard.service` with `unsafe-reset-all` by one command:
 ```
+sudo systemctl stop axelard && \
+axelard unsafe-reset-all && \
 sudo systemctl restart axelard
 ```
 Logs and status
 ```
 journalctl -u axelard.service -f --output cat
 curl localhost:26657/status | jq '.result.sync_info'
+axelard status 2>&1 | jq .SyncInfo
 ```
