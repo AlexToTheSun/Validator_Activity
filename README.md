@@ -1,11 +1,12 @@
 # Turetskiy Validator Identity
 This is an actual information about my validator. Projects. Guides. Tools.
 ## Main-nets that I validate
+- [IRISnet](https://www.mintscan.io/iris/validators/iva19ul0uva3fgtm6cd6tceprre4ghsfh6h3u29lcg)
 - [Gravity](https://www.mintscan.io/gravity-bridge/validators/gravityvaloper1rqhsh8smda90d3n7txty38n44z5qfqpenp3q2v) [Bridge](https://gravity-bridge.ezstaking.io/validators/gravityvaloper1rqhsh8smda90d3n7txty38n44z5qfqpenp3q2v)
 - [Agoric](https://main.explorer.agoric.net/validator/agoricvaloper1dg6cl026x7fwjagasv7jjlcjkhn60wujwew05a)
-- [IRISnet](https://www.mintscan.io/iris/validators/iva19ul0uva3fgtm6cd6tceprre4ghsfh6h3u29lcg)
 - [Rizon](https://www.mintscan.io/rizon/validators/rizonvaloper14qd4n677jxsuh7fqg7z7kvj2dzjqdkv8pqv7tk)
 - [Desmos](https://www.mintscan.io/desmos/validators/desmosvaloper1cpr9l93e4s67svqg0crj0v35t3yl2a9zlst74m)
+- [Tgrade](https://www.mintscan.io/tgrade/validators/tgrade1z79h4cw0plrq423zzzd9273g7jawh4cu0gg5tn)
 
 ## Testnets
 - [Axelar](https://testnet.explorer.testnet.run/axelar-testnet-2/staking/axelarvaloper1eu28tqtanwe0fsl9nrfazr4re3rfewah889qg6)
@@ -14,7 +15,7 @@ This is an actual information about my validator. Projects. Guides. Tools.
 - [Clan Network](https://testnet.explorer.testnet.run/Clan%20Network/staking/clanvaloper182f9evzshwvf2h6pmcut4qdt26nm5l9jf6w8n3)
 - [Stride](https://stride.explorers.guru/validator/stridevaloper153pwnjajdfe9gwvwzuy3sr74f0uepyzpk6zs96) + [gaia](https://poolparty.stride.zone/GAIA/staking/cosmosvaloper153pwnjajdfe9gwvwzuy3sr74f0uepyzpnsj93q)
 - [SEI](https://sei.explorers.guru/validator/seivaloper1qr688u3h9v6xenm7uwn8sp79yh7tgu7672ddmx)
--[Rebus](https://rebus.explorers.guru/validator/rebusvaloper1vwrja0wdh7pxmdjxjyfuwvcs6s3lw4wd5nxcdq)
+- [Rebus](https://rebus.explorers.guru/validator/rebusvaloper1vwrja0wdh7pxmdjxjyfuwvcs6s3lw4wd5nxcdq)
 
 ## Guides for those who want to become a validator 
 Please note that most of the guides (anywhere) contain minimal guides and do not cover more advanced topics such as Sentry node architecture and double signature protection. In this case, I have been written articles and collected information for you in the [Validator' Security](https://github.com/AlexToTheSun/Validator_Activity#guides-for-advanced-validator-security-protection-and-other-settings) section.
