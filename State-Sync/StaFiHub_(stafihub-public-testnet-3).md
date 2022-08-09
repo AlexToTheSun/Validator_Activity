@@ -1,11 +1,11 @@
 ## StaFiHub Network State Sync
 ### Link to the GitHub testnet materials is [here](https://github.com/stafihub/network/tree/main/testnets/stafihub-public-testnet-3)
 ### Explorer [[here](https://testnet-explorer.stafihub.io/stafi-hub-testnet)]
-### Chain: `stafihub-public-testnet-3`
+### Chain: `stafihub-testnet-1`
 ### Site: https://www.stafihub.io/
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="47b37ba39550d97d40c34c0a108c6c35bb40f003@154.12.230.132:26656"; \
+peers="3780d7988e0e0c31c3a8c783f91233425af4771a@154.12.230.132:26656"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.stafihub/config/config.toml
 ```
 Add variables
