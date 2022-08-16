@@ -1,4 +1,4 @@
-![tgrade_logo_500px](https://user-images.githubusercontent.com/30211801/182713898-39346cfa-df0f-45e8-9432-49de436dade1.png)
+![Снимок экрана от 2022-08-16 21-55-27](https://user-images.githubusercontent.com/30211801/184946880-3f1e0d06-ca17-43df-bcf8-eca37586858c.png)
 
 # Tgrade Introduction
 #### Tgrade Site: https://tgrade.finance/
