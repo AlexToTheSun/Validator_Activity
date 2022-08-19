@@ -25,5 +25,4 @@ wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
 Explorers:
-- https://poolparty.stride.zone/
-- https://stride.explorers.guru/
+- https://sei.explorers.guru/
