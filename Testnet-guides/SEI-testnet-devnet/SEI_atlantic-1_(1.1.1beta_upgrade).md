@@ -1,7 +1,12 @@
 
 
 ## Updating process for 1.1.1beta release
-Build new binary
+
+Check your node block height. You must not ungrade before the block [3223245](https://sei.explorers.guru/block/3223245).
+```
+seid status 2>&1 | jq .SyncInfo
+```
+If your last block is 3223245 - build new binary:
 ```
 cd $HOME && rm $HOME/sei-chain -rf
 git clone https://github.com/sei-protocol/sei-chain.git && cd $HOME/sei-chain
