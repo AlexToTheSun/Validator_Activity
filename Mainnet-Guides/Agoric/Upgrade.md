@@ -1,6 +1,6 @@
 ## Table of contents
-- [Upgrade `agoric-upgrade-6`]
-- [Upgrade `agoric-upgrade-7`]
+- [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-6)
+- [Upgrade `agoric-upgrade-7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7)
 
 ## Upgrade `agoric-upgrade-6`
 [[Releases](https://github.com/Agoric/ag0/releases)]
