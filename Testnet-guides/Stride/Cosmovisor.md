@@ -17,7 +17,9 @@
   -  Cosmovisor updates bynary and restart the network.
   -  Don't forget, afte upgrade process is finished, to copy new bynary file from `$HOME/.stride/cosmovisor/upgrades/<name>/bin/strided` to an executable path `/usr/local/bin`
 ## Documetnation
+For more information aboun Cosmovisor you could see Official Docs:
 - https://github.com/cosmos/cosmos-sdk/tree/main/cosmovisor
+- https://docs.cosmos.network/main/run-node/cosmovisor.html
 
 ## Installation
 Here we will walk through the installation process step by step. The update process will be discussed in the next paragraphs.
@@ -80,6 +82,8 @@ Cosmovisor relies on the following environmental variables to work properly (see
 - `DAEMON_POLL_INTERVAL` - (default `300` milliseconds)
 - `DAEMON_DATA_BACKUP_DIR`  - option to set a custom backup directory. By default is `DAEMON_HOME`
 - `DAEMON_PREUPGRADE_MAX_RETRIES` -  (defaults to `0`) The maximum number of failed times to call `pre-upgrade`. After the maximum number of retries, cosmovisor fails the upgrade.
+
+Let's set up the `cosmovisor` environment variables thrue `.bash_profile` so it is automatically set in every session:
 ```
 cat <<'EOF' >> $HOME/.bash_profile
 export DAEMON_HOME=$HOME/.stride
@@ -90,18 +94,18 @@ EOF
 source ~/.bash_profile
 echo $DAEMON_NAME
 ```
-Create a folder for the genesis `strided` binary for cosmovisor
+
+**Create** the necessary folders for `cosmosvisor` in your `DAEMON_HOME` directory (~/.stride) and copy the current binary in `~/.stride/cosmovisor/genesis/bin`:
 ```
 mkdir -p ~/.stride/cosmovisor/genesis/bin/
+mkdir -p ~/.stride/cosmovisor/upgrades
+
+cp $HOME/stride/build/strided ~/.stride/cosmovisor/genesis/bin
 ```
-Copy the binary file to сreated folder
+Now you can check if your versions of cosmovisor and stride are current:
 ```
-cp $(which strided) ~/.stride/cosmovisor/genesis/bin/
-```
-Now we can check the cosmovisor version
-```
+strided version
 cosmovisor version
-# or
 strings $(which cosmovisor) | egrep -e "mod\s+github.com/cosmos/cosmos-sdk/cosmovisor"
 ```
 ![image](https://user-images.githubusercontent.com/30211801/185399388-5f7a558e-efa8-4635-8643-cab7acc475ed.png)
