@@ -32,5 +32,6 @@ Also there is my [RPC node with State Sync](https://github.com/AlexToTheSun/Vali
 #### Optional step
 6. [Setup Tgrade-Osmosis Hermes relayer](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Hermes_relayer_Tgrade-Osmosis.md)
 7. [How to run your own RPC with State Sync](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync)
+8. [Using Cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Cosmovisor.md)
 
-# 
+
