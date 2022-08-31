@@ -237,6 +237,9 @@ sudo journalctl -u prometheusd -f
 The port of prometheus is `9090`
 
 Now go to `http://<server_IP>:9090/` to check that prometheus is working.
+![Снимок экрана от 2022-08-31 15-37-44](https://user-images.githubusercontent.com/30211801/187669936-d23be177-0ddb-4d4e-b375-e473777d592d.png)
+If you go to Status -> Targets, you will see:
+![Снимок экрана от 2022-08-31 15-35-34](https://user-images.githubusercontent.com/30211801/187670054-645cc4e5-c198-4019-910f-f942038be563.png)
 
 ### Install Grafana
 - Usefull links [here](https://grafana.com/docs/grafana/latest/setup-grafana/)
@@ -255,7 +258,57 @@ sudo systemctl enable grafana-server && \
 sudo systemctl restart grafana-server
 sudo journalctl -u grafana-server -f
 ```
+You should see something like this:
+![Снимок экрана от 2022-08-31 15-40-10](https://user-images.githubusercontent.com/30211801/187670473-9028a582-e94b-403f-bf0c-4ed1fc67f37d.png)
+
 The port of Grafana is `3000`
 
-Now go to `http://<server_IP>:3000/` and inport the dashboard that you choose.
+Now go to `http://<server_IP>:3000/`
+### Grafana account configuration
+- Username - `admin`
+- Passwd - `admin`
+![Снимок экрана от 2022-08-31 13-55-19](https://user-images.githubusercontent.com/30211801/187671076-a7316047-5360-4265-85f3-ef5e60c2c207.png)
+
+#### 1) Add a Data Sources
+Now first of all - add a Data Sources. We should:
+- choose `Prometheus` 
+- write in the line HTTP `URL` your server (with prometheus and grafana) from which information will be loaded
+![image](https://user-images.githubusercontent.com/30211801/187673492-f7f77220-5815-4112-ab9d-9a55dbb6186b.png)
+![image](https://user-images.githubusercontent.com/30211801/187673684-9d403e0f-e2d4-4ad1-944e-4ed92a2543d9.png)
+Then type your server with prometheus and grafana:
+![image](https://user-images.githubusercontent.com/30211801/187685289-65413c4d-e2ac-4519-978b-7d21c38c2388.png)
+Click Save & test button.
+![image](https://user-images.githubusercontent.com/30211801/187686004-4274db4f-6229-4801-8036-47c68aee0bb0.png)
+
+> If in the future you will use another server - a log collector, then you will need to add the Data Source again, and when importing the dachboard, choose exactly the new Data Source. Below we will deal with this.
+
+2) Inport dashboard
+You could use this great dashboards:
+- `15991` [dashboard](https://grafana.com/grafana/dashboards/15991-cosmos-validator/) created by [kjnodes](http;//kjnodes.com)
+- `14914` [dashboard](https://grafana.com/grafana/dashboards/14914-cosmos-validator/) created by [freak12techno](https://github.com/freak12techno)
+
+Go to `Dashboard` -> `+Import`
+
+![image](https://user-images.githubusercontent.com/30211801/187688135-176922e0-b27c-4eb0-9454-c316f4ca4179.png)
+
+You have two options - type id of dashboard you choosed in `Import via grafana.com` or if you prepared your own one - click on `Upload JSON file` button:
+
+![image](https://user-images.githubusercontent.com/30211801/187690328-cd4c2740-f7b1-4ba4-8ba4-1aa68af11f82.png)
+![image](https://user-images.githubusercontent.com/30211801/187689847-c731d4a7-4d5e-4a58-a0a5-bec174d6e82b.png)
+
+Now select the Data Source you need (as you saw in the previous screenshots - I should choose prometheus-1) and press `import`
+
+![image](https://user-images.githubusercontent.com/30211801/187690926-e7a2275d-76b4-4f1a-94af-3cff99cf28d4.png)
+
+Congratulations, you have just set up monitoring of the validator and its server. 🎉
+![image](https://user-images.githubusercontent.com/30211801/187692059-75325fe1-64e5-42d7-9b53-b2437f418ddd.png)
+
+
+
+
+
+
+
+
+
 
