@@ -159,7 +159,7 @@ sudo mv prometheus-2.38.0.linux-amd64/consoles/ prometheus-2.38.0.linux-amd64/co
 ```
 Download prepared prometheus' config file. (Also you can see downloaded prometheus config file here `$HOME/prometheus-2.38.0.linux-amd64.tar.gz/prometheus.yml`)
 ```
-curl -sSL https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Source/Monitoring/prometheus.yml > $HOME/prometheus/prometheus.yml
+curl -sSL https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Source/Monitoring/prometheus.yml > $HOME/prometheus/prometheus.yml
 ```
 Delete downloaded folder
 ```
@@ -188,7 +188,7 @@ prometheus --help
 Download script for adding your nodes easely
 ```
 cd $HOME/prometheus
-wget -q -O add_node.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Source/Monitoring/add_node.sh && chmod +x add_node.sh
+wget -q -O add_node.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Source/Monitoring/add_node.sh && chmod +x add_node.sh
 ```
 Run command to add your nodes to promehteus:
 ```
