@@ -9,17 +9,21 @@ The first Tendermint based [Proof of Engagement](https://medium.com/tgradefinanc
 - Proof of Engagement brings higher decentralisation through the combination of Engagement Rewards and Stake than a pure Proof of Stake mechanism.
 - With Proof of Engagement there is little scope for validators to capture voting weight unless, in some cases, they have a relatively high level of engagement.
 
-For more Information about Grade you could read:
+For more Information about Tgrade you could read:
 - [Securing a blockchain with Proof of Engagement](https://medium.com/tgradefinance/securing-a-blockchain-with-proof-of-engagement-b13daa9befc)
 - [Delegators or no Delegators? Which path does Tgrade follow?](https://medium.com/tgradefinance/delegators-or-no-delegators-which-path-does-tgrade-follow-63a0a3543d18)
 - [Tendermint Announces Investment in Tgrade to bolster Cosmos’ growing DeFi ecosystem](https://medium.com/tgradefinance/tendermint-announces-investment-in-tgrade-to-bolster-cosmos-growing-defi-ecosystem-8394ebabb9b6)
 - [Tgrade: The blockchain made for business](https://medium.com/tgradefinance/tgrade-the-blockchain-made-for-business-c7654b34dafd)
-# Documents Introduction
+#  Introduction of these Documents
 This repository contains not only a simple installation option, but also advanced security settings that are highly recommended for mainnet validators.
 
-By this documentation we will setup [server security](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Minimum-server-protection.md). After that we will run Tgrade node with [Sentry Node Architecture](https://forum.cosmos.network/t/sentry-node-architecture-overview/454) for DDoS mitigation on Tgrade validator node. And will make a validator protection from double signing incident by [tmkms](https://github.com/iqlusioninc/tmkms).
+By this documentation we will setup [server security](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Minimum-server-protection.md). After that we will run Tgrade node with [Sentry Node Architecture](https://forum.cosmos.network/t/sentry-node-architecture-overview/454) for DDoS mitigation on Tgrade validator node. And will make a validator protection from double signing incident by [tmkms](https://github.com/iqlusioninc/tmkms). In addition, it is recommended to use [Monitoring](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Tgrade/Monitoring) to monitor all your servers as validator, sentry nodes, tmkms server etc.
 
 Another important topic for Cosmos Hub networks is ibc relayer. Here we will walk through the installation of[ Hermes IBC relayer](https://hermes.informal.systems/) between [Tgrade](https://tgrade.finance/) and [Osmosis](https://app.osmosis.zone) chains step by step.
+
+For upgrading of Tgrade bynary in more conviniate way - you can use [Cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Cosmovisor.md)
+
+
 
 Also there is my [RPC node with State Sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Tgrade-Mainnet.md) for Tgrade validator community. If you want to know more about Cosmos SDK State Sync read [the article](https://blog.cosmos.network/cosmos-sdk-state-sync-guide-99e4cf43be2f).
 
@@ -33,5 +37,6 @@ Also there is my [RPC node with State Sync](https://github.com/AlexToTheSun/Vali
 6. [Setup Tgrade-Osmosis Hermes relayer](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Hermes_relayer_Tgrade-Osmosis.md)
 7. [How to run your own RPC with State Sync](https://github.com/AlexToTheSun/Validator_Activity/tree/main/State-Sync)
 8. [Using Cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Tgrade/Cosmovisor.md)
+9. [Monitoring Grafana+Prometheus](https://github.com/AlexToTheSun/Validator_Activity/tree/main/Mainnet-Guides/Tgrade/Monitoring)
 
 
