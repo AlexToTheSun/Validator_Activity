@@ -53,6 +53,7 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/cosmos-exporter.service
 [Unit]
 Description=Cosmos Exporter
 After=network-online.target
+
 [Service]
 User=cosmos_exporter
 Group=cosmos_exporter
@@ -64,6 +65,7 @@ Restart=always
 RestartSec=2
 LimitNOFILE=800000
 KillSignal=SIGTERM
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -89,11 +91,13 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/node_exporter.service
 [Unit]
 Description=Node Exporter
 After=network.target
+
 [Service]
 User=node_exporter
 Group=node_exporter
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -206,6 +210,7 @@ sudo tee /etc/systemd/system/prometheusd.service > /dev/null <<EOF
 [Unit]
 Description=Prometheus
 After=network-online.target
+
 [Service]
 User=$USER
 Type=simple
@@ -219,6 +224,7 @@ ExecStart=/usr/local/bin/prometheus \
   --web.console.libraries="$HOME/prometheus/console_libraries" \
   --web.listen-address=0.0.0.0:9090 \
   --web.enable-lifecycle
+
 [Install]
 WantedBy=multi-user.target
 EOF
