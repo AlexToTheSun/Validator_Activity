@@ -69,6 +69,12 @@ sourced init $SOURCE_NODENAME --chain-id $SOURCE_CHAIN
 ```
 curl -s  https://raw.githubusercontent.com/Source-Protocol-Cosmos/testnets/master/sourcechain-testnet/genesis.json > ~/.source/config/genesis.json
 ```
+### Config your node by changing `client.toml`
+- Specify your rpc port (below there is a default rpc port)
+```
+sourced config chain-id $SOURCE_CHAIN
+sourced config node tcp://localhost:26657
+```
 ### Setting up config files
 Seend and peers
 ```
