@@ -42,7 +42,12 @@ For delegate more use this command:
 ```
 sourced tx staking delegate --chain-id $SOURCE_CHAIN $(sourced keys show $SOURCE_WALLET --bech val -a) <amount>usource --from $SOURCE_WALLET --gas-prices 0.025usource -y
 ```
-
+Logs and status
+```
+sudo journalctl -u sourced -f -o cat
+curl localhost:26657/status | jq
+sourced status 2>&1 | jq .SyncInfo
+```
 ## Next step
 Now we have a validator.
 
