@@ -169,7 +169,7 @@ LimitNOFILE=1024
 WantedBy=multi-user.target
 EOF
 ```
-Start tmkmsion
+Start tmkmsstafihub
 ```
 sudo systemctl enable tmkmsstafihub
 sudo systemctl daemon-reload
