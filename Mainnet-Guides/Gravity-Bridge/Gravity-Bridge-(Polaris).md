@@ -1,6 +1,7 @@
 Official instruction is here https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/upgrading.md
 
-# BackUp
+# Polaris
+## BackUp
 Make a complete copy of your `$HOME/.gravity folder`.
 ```
 cp -r --reflink=auto ~/.gravity gravity-bridge-polaris-backup/
@@ -25,17 +26,17 @@ cp -r ~/.gravity gravity-bridge-polaris-backup/
 ```
 cp ~/.gravity/data/priv_validator_state.json validator-state-backup.json
 ```
-# Check
+## Check
 ```
 gravity status 2>&1| jq .SyncInfo
 ```
 
-# Stop
+## Stop
 ```
 sudo systemctl stop gravity-node
 sudo systemctl stop orchestrator
 ```
-# Upgrading
+## Upgrading
 ```
 rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
 ```
@@ -54,14 +55,57 @@ chmod +x *
 sudo mv * /usr/bin/
 gbt --version
 ```
-# Restart the chain
+## Restart the chain
 ```
 service gravity-node start
 service orchestrator restart
 ```
-# Logs
+## Logs
 ```
 journalctl -u gravity-node.service -f --output cat
 journalctl -u orchestrator -f
 ```
- 
+
+# Pleiades Upgrade - Phase I
+## Check
+```
+gravity status 2>&1| jq .SyncInfo
+```
+The block should be `3608063`.
+
+![image](https://user-images.githubusercontent.com/30211801/188734354-55fc88d1-cd73-4e4f-8895-34b70de79e90.png)
+
+## Stop
+```
+sudo systemctl stop gravity-node
+sudo systemctl stop orchestrator
+```
+## Upgrading
+```
+rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
+```
+Upgrading gravity chain binary
+```
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.7.0/gravity-linux-amd64
+mv gravity-linux-amd64 gravity
+chmod +x gravity
+cp /root/gravity-bin/gravity /usr/bin/
+gravity version
+```
+Upgrading GBT
+```
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.7.0/gbt
+chmod +x *
+sudo mv * /usr/bin/
+gbt --version
+```
+## Restart the chain
+```
+service gravity-node start
+service orchestrator restart
+```
+## Logs
+```
+journalctl -u gravity-node.service -f --output cat
+journalctl -u orchestrator -f
+```
