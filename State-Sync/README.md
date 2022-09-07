@@ -10,7 +10,7 @@ To do this, you need to make only a few things.
 2) Make the reset of the entire date, which was loaded with previous synchronization attempts.
 3) Enter information for synchronization by state sync to `config.toml`
 4) Restart
-## How to run your own RPC with State Sync
+# How to run your own RPC with State Sync
 On the example of the Axelar Network.
 1) Install the Axelar' binary https://docs.axelar.dev/validator/setup/manual
 2) Download the blockchain a convenient way for you (Synchronize)
@@ -36,7 +36,7 @@ sudo systemctl restart axelard
 ```
 Done! Wait when your server produces snapshots and everyone can use it.🎉
 
-## How to use
+## How to use your State Sync
 You shoud know 4 things:
 - `Your_server_IP` - find out ip of your server with State Sync--> `curl ifconfig.me`
 - `Your_rpc_port` (default is `26657`)
