@@ -84,7 +84,7 @@ addr_book_strict = false
 
 ```
 Description of parameters:
-- `pex = true` - The node will only connect to Sentry Nodes from the persistent_peers list and will not propagate its address to the network. Thereby limiting the traffic.
+- `pex = false` - The node will only connect to Sentry Nodes from the persistent_peers list and will not propagate its address to the network. Thereby limiting the traffic.
 - `persistent_peers = "<nodeid_sentry>@<ip_sentry>:26656,...."` - a list of addresses of your Sentry Nodes, so that you can connect to them.
 - `private_peer_ids = ""` - We do not enter anything, since the gossip protocol is disabled, and the node will not issue any peers to the general network. Moreover, Sentry Node works not only in a private but also in a public network.
 - `addr_book_strict = false` -  parameter allowing the validator to work in a private network. It will also be able to work in the public.
@@ -99,7 +99,7 @@ Since the validator node will now connect exclusively to your Sentry Nodes, whic
 
 Since we previously configured the config.toml of the validator node to synchronize using State Sync, we need to disable this feature. Otherwise, the node will try to download Snapshot from the public node - this will not work. Enter:
 ```
-sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\false|" ~/.gravity/config/config.toml
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\false|" ~/.agoric/config/config.toml
 ```
 Start sync:
 ```
