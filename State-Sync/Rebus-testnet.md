@@ -22,7 +22,7 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.rebusd/config/config.toml
 ```
-Restart the `icad.service` with `unsafe-reset-all` by one command:
+Restart the `rebusd.service` with `unsafe-reset-all` by one command:
 ```
 sudo systemctl stop rebusd && \
 rebusd tendermint unsafe-reset-all --home $HOME/.rebusd && \
