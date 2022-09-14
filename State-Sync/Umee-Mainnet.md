@@ -2,11 +2,11 @@
 #### Explorers [Guru](https://umee.explorers.guru/), [Mintscan](https://www.mintscan.io/umee/)
 
 ## Info
-- [Public RPC enpoint](http://161.97.105.150:26657/)
-- [Public API](http://161.97.105.150:1317/)
-- chain: `umee-1`
-- snapshot-keep-recent: `2000`
-- 
+- Public RPC enpoint: http://161.97.105.150:26657/
+- Public API: http://161.97.105.150:1317/
+- Chain: `umee-1`
+- Snapshot-keep-recent: `2000`
+
 ## Umee Network State Sync
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
