@@ -24,7 +24,7 @@ Here we will walk through the installation process step by step. The update proc
 - [Update and install dependencies](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#update-and-install-dependencies)
 - [Install cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#install-cosmovisor-v010-version)
 - [Install Cosmos SDK application](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#install-cosmos-sdk-application)
-- [Setting up variables for cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#lets-set-variables-for-cosmovisor)
+- [Setting up variables for cosmovisor](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#setting-up-environment-variables-for-cosmovisor)
 - [Start cosmovisor by service](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Umee/Cosmovisor.md#start-cosmovisor-by-service)
 ### Update and install dependencies
 Update and install dependencies
