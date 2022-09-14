@@ -39,7 +39,7 @@ go version
 # go version go1.18.3 linux/amd64
 ```
 ### Install the latest version of Umee
-All versions can be viewed [here](https://github.com/umee-network/umee/releases/)
+All releases can be viewed [here](https://github.com/umee-network/umee/releases/)
 ```
 cd ~
 rm -rf /root/umee
@@ -56,8 +56,8 @@ umeed version
 - `<YOUR_MONIKER>` - Your node name
 - `<YOUR_WALLET>` - Your wallet name
 ```
-UMEE_NODENAME=Turetskiy
-UMEE_WALLET=Turetskiy
+UMEE_NODENAME=<YOUR_MONIKER>
+UMEE_WALLET=<YOUR_WALLET>
 UMEE_CHAIN=umee-1
 
 echo 'export UMEE_NODENAME='\"${UMEE_NODENAME}\" >> $HOME/.bash_profile
