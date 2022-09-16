@@ -1,6 +1,10 @@
-Officiall link is here https://github.com/haqq-network/validators-contest
+#### Official links
+- Github: https://github.com/haqq-network/validators-contest
+- Docs: https://docs.haqq.network/guides/validators/setup.html
+- Crew3: https://haqq-val-contest.crew3.xyz/
+- HAQQ faucet: https://testedge2.haqq.network/
 
-Explorer: 
+Explorers: 
   - https://haqq.explorers.guru/
   - https://testnet.manticore.team/haqq
 
