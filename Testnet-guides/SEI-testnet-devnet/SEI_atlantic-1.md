@@ -11,8 +11,8 @@ Short linksof this guide:
 - [Commands](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#commands)
 - [Update to `1.0.6beta-val-count-fix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#Update-to-`1.0.6beta-val-count-fix`)
 - [Update to `1.0.7beta-postfix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#Update-to-`1.0.7beta-postfix`)
-
-
+- [Update to `1.2.0beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#Update-to-`1.2.0beta`)
+1.2.0beta
 #### Minimal serer protection
 [[Link to instruction](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md)] There we will protect server by:
 - Change the password
@@ -299,7 +299,27 @@ seid version --long | head
 sudo systemctl restart seid
 sudo journalctl -u seid -f -o cat
 ```
-
+# Update to `1.2.0beta`
+```
+sudo systemctl stop seid
+cd $HOME
+sudo rm sei-chain -rf
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout master
+git pull --tags --force
+git checkout tags/1.2.0beta
+make install
+sudo cp /root/go/bin/seid /usr/local/bin/seid
+seid version --long | head
+sudo systemctl restart seid
+```
+Status and logs
+```
+seid status 2>&1 | jq
+seid status 2>&1 | jq .SyncInfo
+sudo journalctl -u seid -f -o cat
+```
 
 
 
