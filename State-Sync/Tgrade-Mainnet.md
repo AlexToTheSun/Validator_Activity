@@ -1,6 +1,12 @@
 #### Link to the GitHub materials is [here](https://github.com/confio/tgrade-networks)
 #### Explorers [Aneka](https://tgrade.aneka.io/), [Mintscan](https://www.mintscan.io/tgrade/)
-#### Chain: `tgrade-mainnet-1`
+
+## Info
+- Public RPC enpoint: http://95.214.55.131:27657/
+- Public API: http://95.214.55.131:27317/
+- Chain: `tgrade-mainnet-1`
+- Snapshot-keep-recent: `2000`
+
 ## Tgrade Network State Sync
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
