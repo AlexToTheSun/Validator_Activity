@@ -31,7 +31,7 @@ tgrade tx poe create-validator \
   --home /root/.tgrade
 ```
 > ❗️ Note that this command actual if you still don't have engagement points previosly assigned.
-> ✅ It is [possible to earn engagement points](https://github.com/confio/tgrade-networks#upgrade-to-a-validator)!
+> ✅ It is [possible to earn engagement points](https://github.com/confio/tgrade-networks#upgrade-to-a-validator)! The application form is [here](https://docs.google.com/forms/d/e/1FAIpQLScJxyazrE5XqhKPiU_3FAI1kuPdMUTnX3gUj_ZX3Q1vluZ0Dg/viewform).
 
 Our validator will appears in the block-explorer: https://tgrade.aneka.io or https://www.mintscan.io/tgrade
 ### Delegate more liquid and/or vesting tokens to your valiator ( Optional )
