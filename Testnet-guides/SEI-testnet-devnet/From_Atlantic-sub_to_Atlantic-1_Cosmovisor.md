@@ -42,9 +42,20 @@ Disable state sync
 ```
 sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.sei/config/config.toml
 ```
-USE [STATE SYNC]() guide or [SNAPSHOT](https://brocha.in/testnet/sei/snapshot)
+USE [SNAPSHOT](https://brocha.in/testnet/sei/snapshot)from [BRO team](https://brocha.in/):
+```
+# Stop the service and reset the data
+sudo systemctl stop seid
+rm -rf $HOME/.sei/data
+# Download the latest snapshot
+SNAPSHOT_FILE=$(curl -Ls https://snapshots.brocha.in/sei/atlantic-1.json | jq -r .file)
+curl -L https://snapshots.brocha.in/sei/$SNAPSHOT_FILE | lz4 -dc - | tar -xf - -C $HOME/.sei
+# Restart the service and check the log
+sudo systemctl restart seid
+sudo journalctl -u seid -f --no-hostname -o cat
+```
 
-Wait for the blockchain to sync
+#### Wait for the blockchain to sync
 ```
 seid status 2>&1 | jq .SyncInfo
 ```
@@ -54,7 +65,7 @@ seid status 2>&1 | jq .SyncInfo
 ```
 go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
 
-cd $HOME/go/bin/cosmovisor /usr/local/bin
+mv $HOME/go/bin/cosmovisor /usr/local/bin
 ```
 Environment variables
 ```
@@ -78,16 +89,20 @@ Check the cosmovisor and sei version
 strings $(which cosmovisor) | egrep -e "mod\s+github.com/cosmos/cosmos-sdk/cosmovisor"
 ~/.sei/cosmovisor/genesis/bin/seid version
 ```
-Create servece file for cosmovisor
+Delete old and Create new servece file with cosmovisor
 ```
-sudo tee /etc/systemd/system/seid-visor.service > /dev/null <<EOF  
+sudo systemctl stop seid
+sudo systemctl disable seid
+rm /etc/systemd/system/seid.service
+
+sudo tee /etc/systemd/system/seid.service > /dev/null <<EOF  
 [Unit]
 Description=SEI Full Node
 After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which cosmovisor) run start
+ExecStart=$(which cosmovisor) start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -101,16 +116,12 @@ Environment="UNSAFE_SKIP_BACKUP=true"
 WantedBy=multi-user.target
 EOF
 ```
-Stop an old service
-```
-sudo systemctl stop seid
-```
-Run new
+Run seid.service
 ```
 sudo systemctl daemon-reload
-sudo systemctl enable seid-visor
-sudo systemctl restart seid-visor
-sudo journalctl -u seid-visor -f -o cat
+sudo systemctl enable seid
+sudo systemctl restart seid
+sudo journalctl -u seid -f -o cat
 ```
 
 ### Upgrading the binary
@@ -126,11 +137,11 @@ make install
 Create a folder:
 ```
 mkdir -p $HOME/.sei/cosmovisor/upgrades/1.2.0beta/bin
-mv  /root/go/bin/seid $HOME/.sei/cosmovisor/upgrades/v2.0.0/bin
+mv /root/go/bin/seid $HOME/.sei/cosmovisor/upgrades/1.2.0beta/bin
 ```
 Check the version for upgrading
 ```
-$HOME/.sei/cosmovisor/upgrades/v2.0.0/bin/seid version
+$HOME/.sei/cosmovisor/upgrades/1.2.0beta/bin/seid version
 ```
 🎉 You are ready to upgrade.
 
