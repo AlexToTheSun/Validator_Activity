@@ -1,5 +1,11 @@
 ## Agoric Network State Sync
-### Chain: `agoric-3`
+### Info
+- Public RPC enpoint: http://154.12.241.178:26657/
+- Public API: http://154.12.241.178:1317/
+- Chain: `agoric-3`
+- Snapshot-keep-recent: `1000`
+- Explorer: [Bigdipper](https://bigdipper.live/agoric), [Guru](https://agoric.explorers.guru/)
+
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
 peers="9373c1dbf0a040d2c76b120f8472871b92852f62@154.12.241.178:26656"; \
