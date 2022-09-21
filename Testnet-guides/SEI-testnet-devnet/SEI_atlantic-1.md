@@ -314,6 +314,15 @@ make install
 sudo cp /root/go/bin/seid /usr/local/bin/seid
 seid version --long | head
 ```
+#### Update your chain_id
+If you are using variables in the file `$HOME/.bash_profile` - go there and change `atlantic-sub-1` to `atlantic-1`:
+```
+nano $HOME/.bash_profile
+```
+Update Client file
+```
+seid config chain-id atlantic-1
+```
 #### SEI Network State Sync
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
