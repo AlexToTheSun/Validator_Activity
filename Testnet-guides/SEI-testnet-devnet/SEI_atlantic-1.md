@@ -11,7 +11,7 @@ Short linksof this guide:
 - [Commands](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#commands)
 - [Update to `1.0.6beta-val-count-fix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-106beta-val-count-fix)
 - [Update to `1.0.7beta-postfix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-107beta-postfix)
-- [Update to `1.2.0beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-120beta)
+- [Update to `1.2.0beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-120beta-if-you-were-on-sub-chains)
 
 
 #### Minimal serer protection
