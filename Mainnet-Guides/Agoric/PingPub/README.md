@@ -1,31 +1,33 @@
 ### Installation
-nginx
+**We need Nginx**
 ```
 sudo apt install nginx
 ```
-nodejs:
+**Install nodejs v16.x:**
+
+[Here](https://github.com/nodesource/distributions#installation-instructions) is the official installation instructions
 ```
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
-yarn
+**Install yarn**
 ```
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn
 yarn --version
 ```
-PingPub
+**Download PingPub**
 ```
 cd ~
 git clone https://github.com/ping-pub/explorer.git
 cd explorer
 ```
-clean
+**Delete unnecessary network json files**
 ```
 rm src/chains/mainnet/*
 ```
-Add config
+**Add config**
 ```
 sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/agoric.json
 {
@@ -41,7 +43,7 @@ sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/agoric.json
         "symbol": "BLD",
         "exponent": "6",
         "coingecko_id": "", 
-        "logo": "https://raw.githubusercontent.com/kj89/testnet_manuals/main/pingpub/logos/sei.png"
+        "logo": "https://raw.githubusercontent.com/Agoric/agoric-sdk/master/packages/wallet/ui/public/tokens/BLD.svg"
     },{
         "base": "urun",
         "symbol": "RUN",
@@ -50,12 +52,12 @@ sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/agoric.json
         "logo": ""
     }],
     "addr_prefix": "agoric",
-    "logo": "https://raw.githubusercontent.com/Agoric/agoric-sdk/master/packages/wallet/ui/public/tokens/BLD.svg"
+    "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Agoric/PingPub/agoric.png"
 }
 EOF
 ```
 
-Build
+**Build**
 ```
 cd ~/explorer
 yarn && yarn build
@@ -64,16 +66,7 @@ systemctl restart nginx.service
 ```
 DONE
 
-Add more
-```
-wget https://gist.githubusercontent.com/ryssroad/3a283625a40587bbfb31b0fe9ab37c07/raw/27a6cba0c9b3c40dbfee31008e35e113c937db89/axelar.json
-cp axelar.json ~/explorer/src/chains/mainnet
-```
-```
-wget https://gist.githubusercontent.com/ryssroad/6c6fc57d9e02d983e26064c89b4d48b8/raw/a7d4ee2362ebaf0f709ef36895930dcab3bab631/juno.json
-cp juno.json ~/explorer/src/chains/mainnet
-```
-Rebuild
+You can add more configs, after that rebuild again:
 ```
 cd ~/explorer
 yarn && yarn build
