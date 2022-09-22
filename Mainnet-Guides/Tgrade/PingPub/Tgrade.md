@@ -26,10 +26,10 @@ sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/tgrade.json
       "symbol": "TGD",
       "exponent": "6",
       "coingecko_id": "",
-      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Tgrade/PingPub/tgrade.png"
+      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Tgrade/PingPub/Tgrade.svg"
     }],
   "addr_prefix": "tgrade",
-  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Tgrade/PingPub/tgrade.png"
-}
+  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Tgrade/PingPub/Tgrade.svg"
+}          
 EOF
 ```
