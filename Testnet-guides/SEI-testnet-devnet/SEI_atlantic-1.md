@@ -301,6 +301,7 @@ sudo systemctl restart seid
 sudo journalctl -u seid -f -o cat
 ```
 # Update to `1.2.0beta` If you were on sub chains
+#### Update `seid` binary
 ```
 sudo systemctl stop seid
 cd $HOME
@@ -314,6 +315,7 @@ make install
 sudo cp /root/go/bin/seid /usr/local/bin/seid
 seid version --long | head
 ```
+
 #### Update your chain_id
 If you are using variables in the file `$HOME/.bash_profile` - go there and change `atlantic-sub-1` to `atlantic-1`:
 ```
@@ -323,10 +325,15 @@ Update Client file
 ```
 seid config chain-id atlantic-1
 ```
-#### SEI Network State Sync
+
+#### Download genesis for `atlantic-1`
+```
+wget -qO $HOME/.sei/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-incentivized-testnet/genesis.json"
+```
+#### Use SEI State Sync
 Add this public RPC node to `persistance_peer` in `config.toml`
 ```
-peers="7f1970d704045b9908a18e9ec35c6b942c73ccfb@212.23.222.28:21656"; \
+peers="8b418588806a607c2e1c8883c1041080b0f7a72f@212.23.222.28:21656"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.sei/config/config.toml
 
 # Add variables
@@ -336,7 +343,7 @@ BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
-# Now enter all the datat to `config.toml`
+# Set all the data into config.toml
 sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
