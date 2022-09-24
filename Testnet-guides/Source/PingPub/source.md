@@ -1,3 +1,4 @@
+```
 sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/source.json
 {
   "chain_name": "source",
@@ -13,9 +14,10 @@ sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/source.json
       "symbol": "SOURCE",
       "exponent": "6",
       "coingecko_id": "",
-      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Source/PingPub/source.png"
+      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Source/PingPub/source.png"
     }],
   "addr_prefix": "source",
-  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Mainnet-Guides/Source/PingPub/source.png"
-}          
+  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Source/PingPub/source.png"
+}
 EOF
+```
