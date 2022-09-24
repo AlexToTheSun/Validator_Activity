@@ -1,4 +1,8 @@
 ### Installation
+Update & upgrade
+```
+sudo apt update && sudo apt upgrade -y
+```
 **We need Nginx**
 ```
 sudo apt install nginx
@@ -17,10 +21,20 @@ echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/deb
 sudo apt-get update && sudo apt-get install yarn
 yarn --version
 ```
-**Download PingPub**
+#### Download PingPub
+You can just download PingPub
 ```
 cd ~
 git clone https://github.com/ping-pub/explorer.git
+cd explorer
+```
+
+Or you can fork PingPub' [repository](https://github.com/ping-pub/explorer) and make your brunch. After that Download your fork:
+- `<your_github_name>`
+- `<your_brunch>`
+```
+cd ~
+git clone --branch <your_brunch> https://github.com/<your_github_name>/explorer.git
 cd explorer
 ```
 **Delete unnecessary network json files**
@@ -29,6 +43,8 @@ rm src/chains/mainnet/*
 ```
 **Add config**
 Enter your values:
+- find out `coin-type`: `haqqd keys add --help`
+- find out `cosmos_sdk_version`: `haqqd version --long`
 - add `http://api_IP:api_PORT`
 - add `http://rpc_IP:rpc_PORT`
 ```
