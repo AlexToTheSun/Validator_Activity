@@ -29,7 +29,12 @@ git clone https://github.com/ping-pub/explorer.git
 cd explorer
 ```
 
-Or you can fork PingPub' [repository](https://github.com/ping-pub/explorer) and make your brunch. After that Download your fork:
+Or you can fork PingPub' [repository](https://github.com/ping-pub/explorer) and make your brunch. After that Download your fork.
+What you could change:
+1. Donload your Logo files [here](https://github.com/ping-pub/explorer/tree/master/public)
+2. Change `/favicon.ico` to `/logo.svg` [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L11)
+3. Update name in navigation menu [here](https://github.com/ping-pub/explorer/blob/master/themeConfig.js#L12)
+4. 
 - `<your_github_name>`
 - `<your_brunch>`
 ```
