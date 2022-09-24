@@ -5,7 +5,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 **We need Nginx**
 ```
-sudo apt install nginx
+sudo apt install nginx -y
 ```
 **Install nodejs v16.x:**
 
@@ -31,10 +31,13 @@ cd explorer
 
 Or you can fork PingPub' [repository](https://github.com/ping-pub/explorer) and make your brunch. After that Download your fork.
 What you could change:
-1. Donload your Logo files [here](https://github.com/ping-pub/explorer/tree/master/public)
-2. Change `/favicon.ico` to `/logo.svg` [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L11)
+1. Download your Logo files [here](https://github.com/ping-pub/explorer/tree/master/public)
+2. Change `/favicon.ico` to `/logo.svg` [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L11), and title [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L16).
 3. Update name in navigation menu [here](https://github.com/ping-pub/explorer/blob/master/themeConfig.js#L12)
-4. 
+4. Update name in the Home page [here](https://github.com/ping-pub/explorer/blob/master/src/views/Home.vue#L10)
+5. [Update](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js) your social links, [icon](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js#L22) for ecosystem (your other blockchains).
+
+Insert your values:
 - `<your_github_name>`
 - `<your_brunch>`
 ```
@@ -68,10 +71,10 @@ sudo tee <<EOF >$HOME/explorer/src/chains/mainnet/haqq.json
       "symbol": "ISLM",
       "exponent": "18",
       "coingecko_id": "",
-      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Haqq/explorer/HAQQ.png"
+      "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Haqq/explorer/HAQQ.svg"
     }],
   "addr_prefix": "haqq",
-  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Haqq/explorer/HAQQ.png"
+  "logo": "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Haqq/explorer/HAQQ.svg"
 }
 EOF
 ```
