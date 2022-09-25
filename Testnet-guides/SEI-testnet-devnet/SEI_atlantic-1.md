@@ -352,7 +352,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.sei/confi
 Restart the `seid.service` with `unsafe-reset-all` by one command:
 ```
 sudo systemctl stop seid && \
-seid tendermint unsafe-reset-all --home ~/.seid && \
+seid tendermint unsafe-reset-all --home ~/.sei && \
 sudo systemctl restart seid
 ```
 Status and logs
