@@ -1,6 +1,7 @@
 # Table of contetn
-1. Update to v1.1.0
-
+1. Update to `v1.1.0`
+   - [Manually](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#manually)
+   - [Auto update-restart script](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#auto-update-restart-script)
 ## Update to v1.1.0
 ### Manually
 Check your node block height. You must not ungrade before the block [256200](https://haqq.explorers.guru/block/256200).
@@ -104,4 +105,14 @@ sudo /bin/bash $HOME/update_script.sh
 After updating - kill tmux session:
 ```
 tmux kill-session -t update
+```
+Logs and status:
+```
+sudo journalctl -u haqqd -f -o cat
+haqqd status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
