@@ -6,7 +6,7 @@ Naturally, this is **dangerous**, in terms of the fact that if attackers hack in
 
 But for this type of monitoring, there are a lot of dashboards have been created. Therefore, we will consider it.
 
-To keep your collector server safe, please, protect it with the [Minimum-server-protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md) instructions.
+To keep your collector server safe, please, protect it with the [Minimum-server-protection](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Validator-Security/Minimum-server-protection.md) instructions.
 
 # Installation
 The whole monitoring installation process consists of several stages.
@@ -110,7 +110,7 @@ sudo systemctl start cosmos-exporter
 sudo systemctl start node_exporter
 ```
 ## Installing monitoring on the separate server
-First of all we should set up [server sequrity](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md). 
+First of all we should set up [server sequrity](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Validator-Security/Minimum-server-protection.md). 
 
 And make sure that the ports we need are open:
 ```
