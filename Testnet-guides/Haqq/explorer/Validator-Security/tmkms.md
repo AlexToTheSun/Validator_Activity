@@ -1,4 +1,4 @@
-## Here are instructions to setup TMKMS as a Key Management System for for Haqq validator.
+## Here is the instruction to setup TMKMS as a Key Management System for Haqq validator.
 #### Tendermint Key Management System
 The official documentation is [[here](https://github.com/iqlusioninc/tmkms#tendermint-kms-)]  
 
@@ -194,7 +194,7 @@ You will see logs on the tmkms will change to:
 
 
 ## Done
-Congratulations, your validator now has a solid working architecture.
+Congratulations, your validator now has a double-signing protection.
 
 ### Commands for restart/logs tmkms and haqqd 
 ```
