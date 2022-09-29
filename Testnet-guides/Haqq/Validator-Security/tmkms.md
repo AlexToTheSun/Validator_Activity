@@ -90,7 +90,8 @@ sudo ufw enable
 sudo ufw status
 ss -tulpn
 ```
-You should change the SSH port. Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Minimum-server-protection.md#change-the-ssh-port)]  
+You should change the SSH port. Click [[here](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Validator-Security/Minimum-server-protection.md#change-the-ssh-port)]  
+
 ### Init tmkms
 ```
 tmkms init $HOME/.tmkms/haqq
