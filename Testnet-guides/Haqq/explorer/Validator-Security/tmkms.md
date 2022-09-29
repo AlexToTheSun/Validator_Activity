@@ -9,17 +9,7 @@ Advantage of this method instead of basic installation:
 If you already run a validator node. It's not too late to set up tmkms. Follow the instructions below.
 ## Analogue
 To prevent double-signing protection, as an analogue, you can use [[horcrux](https://github.com/strangelove-ventures/horcrux)]. 
-## Overview
-- [Setting up a Validator node]()
-  - [Firewall configuration]()
-  - [Edit config.toml]()
-- [Setting up a tmkms server]()
-  - [Install tmkms]()
-  - [Firewall configuration]()
-  - [Init tmkms]()
-  - [Copy priv_validator_key.json from validator node]()
-  - [Edit tmkms.toml]()
-- [Restert both validator and tmkms]()
+
 
 # Setting up a Validator node
 We already  [[have](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Node-insallation.md)] a validator in `haqq_54211-2` testnet.
@@ -110,7 +100,7 @@ tmkms init $HOME/.tmkms/haqq
 ### Copy `priv_validator_key.json` from validator node
 Use scp command to copy priv_validator_key.json from validator to your VM running TMKMS:
 ```
-scp user@123.456.32.123:~/.haqqd/config/priv_validator_key.json ~/.tmkms/haqq
+scp root@123.456.32.123:~/.haqqd/config/priv_validator_key.json ~/.tmkms/haqq
 ```
 Or use [WinSCP](https://winscp.net/download/WinSCP-5.19.5-Setup.exe) to copy the `priv_validator_key.json` from the validator's node. And put it in the `$HOME/.tmkms/haqq` folder.
 
@@ -218,37 +208,31 @@ journalctl -u haqqd -f --output cat
 ```
 Don't forget **to backup and delete** the `priv_validator_key.json` file from the validator node. Now you won't need it. Keep it in a secure place, such as a flash drive.
 # Troubleshooting
+#### Type of key_format
 The [official instruction](https://docs.haqq.network/guides/kms/kms.html) for editing the `$HOME/.tmkms/agoric/tmkms.toml` file, suggests the line:
 ```
 key_format = { type = "cosmos-json", account_key_prefix = "haqqpub", consensus_key_prefix = "haqqvalconspub" }
 ```
-![image](https://user-images.githubusercontent.com/30211801/192987584-6aaae889-3642-4751-b15d-6de7bfa46808.png)
-
-
-**If you run tmkms with this value** (`type = "cosmos-json"`) you will see an error:
-
-![image](https://user-images.githubusercontent.com/30211801/192985199-8a7f07f3-1012-4c4d-8b81-c241de1e2022.png)
-
-Logs:
+It is ok in case if you use generation command from the official guide:
 ```
-root@tmkms1:~# tmkms start -c $HOME/.tmkms/haqq/tmkms.toml
-2022-09-29T08:09:25.277181Z  INFO tmkms::commands::start: tmkms 0.12.2 starting                                                                                                              up...
-error: error loading configuration: I/O error: No such file or directory (os err                                                                                                             or 2) at path "/root/$HOME/.tmkms/haqq/state/.tmpBkyfCU"
-
-root@tmkms1:~# tmkms start $HOME/.tmkms/haqq/tmkms.toml
-error: Found argument '/root/.tmkms/haqq/tmkms.toml' which wasn't expected, or i                                                                                                             sn't valid in this context
-
-USAGE:
-    tmkms start [OPTIONS]
-
-For more information try --help
+tmkms softsign keygen ./config/secrets/secret_connection_key
+tmkms softsign import $HOME/tmkms/config/secrets/priv_validator_key.json $HOME/tmkms/config/secrets/priv_validator_key
 ```
-## How to fix
+BUT if you used tmkms.toml and the command from my guide:
+```
+tmkms softsign import $HOME/.tmkms/haqq/priv_validator_key.json $HOME/.tmkms/haqq/secrets/haqq-consensus.key
+```
+then you must use `type = "bech32"`
 
-We should change type from "cosmos-json" to "bech32".
-Edit the `$HOME/.tmkms/agoric/tmkms.toml` file, make the line with `key_format` look like that:
-```
-key_format = { type = "bech32", account_key_prefix = "haqqpub", consensus_key_prefix = "haqqvalconspub" }
-```
-And after tmkms restart you will see that tmkms is now working:
-![image](https://user-images.githubusercontent.com/30211801/192982290-eb38642a-94f5-4146-8ced-bf2bbd13cc6b.png)
+Thank you!
+
+
+
+
+
+
+
+
+
+
+
