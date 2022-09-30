@@ -18,10 +18,10 @@ Installation of exporters for each type of data that will be exported via a sepa
 - Prometheus
 - Grafana
 # Installing exporters on validator and sentry nodes' servers
-Make shure that you enabled connection with prometheus in `$HOME/.umee/config/config.toml`, if not:
+Make shure that you enabled connection with prometheus in `$HOME/.haqqd/config/config.toml`, if not:
 ```
-sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.umee/config/config.toml
-sudo systemctl restart umeed
+sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.haqqd/config/config.toml
+sudo systemctl restart haqqd
 ```
 Default `prometheus` port is `26660`.
 
