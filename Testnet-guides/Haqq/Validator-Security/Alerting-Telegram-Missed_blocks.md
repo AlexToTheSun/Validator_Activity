@@ -44,7 +44,7 @@ go build
 ```
 For running in the background we have to copy the file to the system apps folder:
 ```
-sudo cp /root/go/bin/main /usr/local/bin/missed-blocks-checker
+cp /root/missed-blocks-checker/main /usr/local/bin/missed-blocks-checker
 ```
 Copy config.example.toml and name it so that you can understand it is for HAQQ project:
 ```
@@ -215,7 +215,7 @@ sed -i.bak 's/^exclude-validators/# exclude-validators/' /root/missed-blocks-che
 ```
 #### It remains to modify manually a few terms:
 ```
-nano /root/missed-blocks-checker/config.<Cosmos_project>.toml
+nano /root/missed-blocks-checker/config.haqq.toml
 ```
 - paste the address of the validator in this type (with `[]`):
 ```
