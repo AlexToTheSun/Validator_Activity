@@ -21,6 +21,20 @@ echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/deb
 sudo apt-get update && sudo apt-get install yarn
 yarn --version
 ```
+#### Edit Nginx' config file
+Open it in nano
+```
+nano /etc/nginx/sites-available/default
+```
+Go to `location` and change the line `try_files $uri $uri/ =404;` to `try_files $uri $uri/ /index.html;`. It will looks like that:
+```
+location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ /index.html;
+}
+```
+
 #### Download PingPub
 You can just download PingPub
 ```
@@ -31,11 +45,15 @@ cd explorer
 
 Or you can fork PingPub' [repository](https://github.com/ping-pub/explorer) and make your brunch. After that Download your fork.
 What you could change:
-1. Download your Logo files [here](https://github.com/ping-pub/explorer/tree/master/public)
-2. Change `/favicon.ico` to `/logo.svg` [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L11), and title [here](https://github.com/ping-pub/explorer/blob/master/public/index.html#L16).
-3. Update name in navigation menu [here](https://github.com/ping-pub/explorer/blob/master/themeConfig.js#L12)
-4. Update name in the Home page [here](https://github.com/ping-pub/explorer/blob/master/src/views/Home.vue#L10)
-5. [Update](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js) your social links, [icon](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js#L22) for ecosystem (your other blockchains).
+1. **Logo**. Download your Logo files [here](https://github.com/ping-pub/explorer/tree/master/public)
+2. **index.html**. Change `/favicon.ico` to `/logo.svg` on line [L11](https://github.com/ping-pub/explorer/blob/master/public/index.html#L11), and title on [L16](https://github.com/ping-pub/explorer/blob/master/public/index.html#L16).
+3. **themeConfig.js**. Update name in navigation menu [here](https://github.com/ping-pub/explorer/blob/master/themeConfig.js#L12)
+4. **Home.vue** Update name in the Home page [here](https://github.com/ping-pub/explorer/blob/master/src/views/Home.vue#L10)
+5. **index.js**. [Update](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js) your social links, [icon](https://github.com/ping-pub/explorer/blob/master/src/navigation/vertical/index.js#L22) for ecosystem (your other blockchains).
+6. **Error404.vue**. [Line 7](https://github.com/ping-pub/explorer/blob/master/src/views/error/Error404.vue#L7)
+7. **ChainNotExist.vue**. [Line 7](https://github.com/ping-pub/explorer/blob/master/src/views/error/ChainNotExist.vue#L7)
+8. **AppFooter.vue**. [Line 9](https://github.com/ping-pub/explorer/blob/master/src/%40core/layouts/components/AppFooter.vue#L9)
+9. **PlaceForm.vue**. [Line 419](https://github.com/ping-pub/explorer/blob/master/src/views/components/KlineTrade/PlaceForm.vue#L419)
 
 Insert your values:
 - `<your_github_name>`
