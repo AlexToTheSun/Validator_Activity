@@ -93,6 +93,10 @@ Send a link to the guide in the task "False alarm!" on the portal https://haqq-v
 
 ### 8. Can you hear me? 👀
 `250XP` Do not to miss the voting that the team will conduct.
+- `<number>`
+```
+haqqd tx gov vote <number> yes --from $HAQQ_WALLET -y
+```
 
 All votings see [here](https://haqq.explorers.guru/proposals) and [here](https://testnet.manticore.team/haqq/gov)
 #### Submitting 8 task
