@@ -1,6 +1,6 @@
 #### Link to the GitHub materials is [here](https://github.com/OllO-Station)
 #### Official [Docs](https://docs.ollo.zone/validators/running_a_node)
-#### Explorers [manticore](https://testnet.manticore.team/ollo)
+#### Explorers [Turetskiy](http://turnodes.com/ollo) [Manticore](https://testnet.manticore.team/ollo)
 
 ## Info
 - Public RPC enpoint: http://185.16.39.3:32657
