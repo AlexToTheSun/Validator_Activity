@@ -204,6 +204,7 @@ tee $HOME/update_script.sh > /dev/null <<EOF
 for((;;)); do
   height=\$(curl -s localhost:$rpc_port/status | jq -r .result.sync_info.latest_block_height)
     if ((height==$halt_height)); then
+      systemctl stop $service_name
       cp $new_binary $current_binary
       systemctl restart $service_name
       echo restart
@@ -241,9 +242,22 @@ sudo journalctl -u haqqd -f -o cat
 haqqd status 2>&1 | jq .SyncInfo
 ```
 Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
 ```
 wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+### Troubleshooting
+If you get errors like:
+```
+6:55PM INF executed block height=355560 module=consensus num_invalid_txs=0 num_valid_txs=0 server=node
+panic: cannot delete latest saved version (6)
+
+ERR CONSENSUS FAILURE!!! err="cannot delete latest saved version (6)" module=consensus server=node stack="goroutine 2798
+```
+These errors was in the previous evmos upgrade, we should temporary use `pruning = nothing`:
+```
+sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.haqqd/config/app.toml
 ```
 
 
