@@ -65,9 +65,10 @@ echo $OLLO_NODENAME $OLLO_WALLET $OLLO_CHAIN
 ```
 ollod init $OLLO_NODENAME --chain-id $OLLO_CHAIN
 ```
-### Download `genesis.json`
+### Download `genesis.json` and `addrbook.json`
 ```
 curl -s  https://raw.githubusercontent.com/OllO-Station/ollo/master/networks/ollo-testnet-0/genesis.json > ~/.ollo/config/genesis.json
+curl -s  https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/OLLO/addrbook.json > ~/.ollo/config/addrbook.json
 ```
 ### Config your node by changing `client.toml`, `app.toml` and `client.toml`
 #### Config your node by changing `client.toml`
