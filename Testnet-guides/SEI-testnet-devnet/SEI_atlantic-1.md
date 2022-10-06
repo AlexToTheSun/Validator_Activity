@@ -12,6 +12,7 @@ Short linksof this guide:
 - [Update to `1.0.6beta-val-count-fix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-106beta-val-count-fix)
 - [Update to `1.0.7beta-postfix`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-107beta-postfix)
 - [Update to `1.2.0beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-120beta-if-you-were-on-sub-chains)
+- [Update to `1.2.2beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-122beta)
 
 
 #### Minimal serer protection
@@ -362,6 +363,154 @@ seid status 2>&1 | jq .SyncInfo
 sudo journalctl -u seid -f -o cat
 ```
 
+# Update to `1.2.2beta`
 
+### Manually
+Check your node block height. You must not ungrade before the block [7 792 938](https://haqq.explorers.guru/block/7792938).
+```
+seid status 2>&1 | jq .SyncInfo
+```
+
+If your last block is 7792938 - build new binary:
+```
+sudo systemctl stop seid
+cd $HOME
+sudo rm sei-chain -rf
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout master
+git pull --tags --force
+git checkout tags/1.2.2beta
+make install
+sudo cp /root/go/bin/seid /usr/local/bin/seid
+seid version --long | head
+```
+Restart the `seid.service`:
+```
+sudo systemctl restart seid
+```
+Logs and status:
+```
+sudo journalctl -u seid -f -o cat
+seid status 2>&1 | jq
+seid status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+
+### Auto update-restart script 2
+For this script we will use `tmux`
+```
+sudo apt update && sudo apt install tmux -y
+```
+Build new binary:
+```
+cd $HOME
+sudo rm sei-chain -rf
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout master
+git pull --tags --force
+git checkout tags/1.2.2beta
+make install
+/root/go/bin/seid version --long | head
+/usr/local/bin/seid version --long | head
+```
+Set variables:
+-  check and write to the var your `your_rpc_port`
+```
+current_binary="/usr/local/bin/seid"
+new_binary="/root/go/bin/seid"
+halt_height="7792938"
+service_name="seid"
+rpc_port="your_rpc_port"
+```
+
+Check output:
+```
+echo $current_binary \
+&& $new_binary version \
+&& curl -s localhost:$rpc_port/status | grep -E 'network|latest_block_height' \
+&& service $service_name status | grep -E 'loaded|active'
+```
+Output example:
+```
+/usr/local/bin/seid
+1.2.2beta
+      "network": "atlantic-1",
+      "latest_block_height": "7769748",
+     Loaded: loaded (/etc/systemd/system/seid.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2022-10-06 11:12:16 UTC; 7min ago
+```
+
+Create update script:
+```
+tee $HOME/update_script.sh > /dev/null <<EOF
+#!/bin/bash
+for((;;)); do
+  height=\$(curl -s localhost:$rpc_port/status | jq -r .result.sync_info.latest_block_height)
+    if ((height==$halt_height)); then
+      systemctl stop $service_name
+      cp $new_binary $current_binary
+      systemctl restart $service_name
+      echo restart
+      break
+    else
+      echo \$height
+    fi
+  sleep 3
+done
+EOF
+```
+Make the script executable:
+```
+chmod +x $HOME/update_script.sh
+```
+
+Create tmux session:
+```
+tmux new -s update
+```
+
+Run script in tmux
+```
+sudo /bin/bash $HOME/update_script.sh
+```
+
+### tmux command
+Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
+
+List of sessions
+```
+tmux ls
+```
+Connect to the session again
+```
+tmux attach -t update
+```
+> Don't stop the script by CTRL+C 
+
+
+### After updating 
+Logs and status:
+```
+sudo journalctl -u seid -f -o cat
+seid status 2>&1 | jq .SyncInfo
+```
+
+Kill tmux session:
+```
+tmux kill-session -t update
+```
+
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
 
 
