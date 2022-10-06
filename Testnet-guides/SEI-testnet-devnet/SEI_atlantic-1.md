@@ -401,7 +401,7 @@ wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
 
-### Auto update-restart script 2
+### Auto update-restart script
 For this script we will use `tmux`
 ```
 sudo apt update && sudo apt install tmux -y
@@ -479,6 +479,8 @@ Run script in tmux
 ```
 sudo /bin/bash $HOME/update_script.sh
 ```
+You will see this:
+![image](https://user-images.githubusercontent.com/30211801/194302684-d9bbec10-9c81-4966-9a06-c986eb55762a.png)
 
 ### tmux command
 Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
