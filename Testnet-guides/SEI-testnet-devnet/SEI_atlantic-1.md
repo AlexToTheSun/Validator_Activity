@@ -366,7 +366,7 @@ sudo journalctl -u seid -f -o cat
 # Update to `1.2.2beta`
 
 ### Manually
-Check your node block height. You must not ungrade before the block [7 792 938](https://haqq.explorers.guru/block/7792938).
+Check your node block height. You must not ungrade before the block [7 792 938](https://sei.explorers.guru/block/7792938).
 ```
 seid status 2>&1 | jq .SyncInfo
 ```
