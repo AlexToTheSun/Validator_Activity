@@ -211,131 +211,176 @@ hermes keys add --chain ${chain_id_SEI} --mnemonic-file $HOME/.hermes/${chain_id
 hermes keys add --chain ${chain_id_OllO} --mnemonic-file $HOME/.hermes/${chain_id_OllO}.mnemonic
 ```
 
-#### Create a ollo client on sei
-```
-hermes create client --host-chain atlantic-1 --reference-chain ollo-testnet-0
-```
-Here we get `07-tendermint-728`
+#### Find free channels
 
-![Снимок экрана от 2022-10-11 01-29-03](https://user-images.githubusercontent.com/30211801/194955189-872b250e-92e2-453e-84b8-a75593d98d53.png)
+```
+hermes query channels --chain atlantic-1
+hermes query channels --chain ollo-testnet-0
+```
+#### Register channel
+```
+hermes create channel --a-chain atlantic-1 --b-chain ollo-testnet-0 --a-port transfer --b-port transfer --order unordered --new-client-connection
+```
+At the end will get logs:
+```
+2022-10-12T13:06:24.643911Z ERROR ThreadId(67) send_tx_with_account_sequence_retry{id=atlantic-1}:estimate_gas: failed to simulate tx. propagating error to caller: gRPC call failed with status: status: Unknown, message: "account sequence mismatch, expected 273, got 271: incorrect account sequence", details: [], metadata: MetadataMap { headers: {"content-type": "application/grpc", "x-cosmos-block-height": "8434908"} }
+2022-10-12T13:06:24.643932Z  WARN ThreadId(67) send_tx_with_account_sequence_retry{id=atlantic-1}: failed at estimate_gas step mismatching account sequence gRPC call failed with status: status: Unknown, message: "account sequence mismatch, expected 273, got 271: incorrect account sequence", details: [], metadata: MetadataMap { headers: {"content-type": "application/grpc", "x-cosmos-block-height": "8434908"} }. refresh account sequence number and retry once
+2022-10-12T13:06:24.646893Z  INFO ThreadId(67) send_tx_with_account_sequence_retry{id=atlantic-1}: refresh: retrieved account sequence=273 number=1995
+2022-10-12T13:06:25.468528Z  INFO ThreadId(67) wait_for_block_commits: waiting for commit of tx hashes(s) 8AF15B1EFB4D0D2A0735812BEA77FEE37DBD08D0961FA9C04A86678816FABE39 id=atlantic-1
+2022-10-12T13:06:28.842484Z  INFO ThreadId(01) 🎊  atlantic-1 => OpenConfirmChannel(
+    OpenConfirm {
+        height: Height {
+            revision: 1,
+            height: 8434912,
+        },
+        port_id: PortId(
+            "transfer",
+        ),
+        channel_id: Some(
+            ChannelId(
+                "channel-399",
+            ),
+        ),
+        connection_id: ConnectionId(
+            "connection-381",
+        ),
+        counterparty_port_id: PortId(
+            "transfer",
+        ),
+        counterparty_channel_id: Some(
+            ChannelId(
+                "channel-2",
+            ),
+        ),
+    },
+)
 
-#### Create a sei client on ollo
-```
-hermes create client --host-chain ollo-testnet-0 --reference-chain atlantic-1
-```
-![Снимок экрана от 2022-10-11 01-32-11](https://user-images.githubusercontent.com/30211801/194955656-372b40d8-ea0a-4c96-83e7-145274cc2d14.png)
+2022-10-12T13:06:32.124495Z  INFO ThreadId(01) channel handshake already finished for Channel {
+    ordering: Unordered,
+    a_side: ChannelSide {
+        chain: BaseChainHandle {
+            chain_id: ChainId {
+                id: "ollo-testnet-0",
+                version: 0,
+             },
+            runtime_sender: Sender { .. },
+        },
+        client_id: ClientId(
+            "07-tendermint-3",
+        ),
+        connection_id: ConnectionId(
+            "connection-4",
+        ),
+        port_id: PortId(
+            "transfer",
+        ),
+        channel_id: Some(
+            ChannelId(
+                "channel-2",
+            ),
+        ),
+        version: None,
+    },
+    b_side: ChannelSide {
+        chain: BaseChainHandle {
+            chain_id: ChainId {
+                id: "atlantic-1",
+                version: 1,
+            },
+            runtime_sender: Sender { .. },
+        },
+        client_id: ClientId(
+            "07-tendermint-729",
+        ),
+        connection_id: ConnectionId(
+            "connection-381",
+        ),
+        port_id: PortId(
+            "transfer",
+        ),
+        channel_id: Some(
+            ChannelId(
+                "channel-399",
+            ),
+        ),
+        version: None,
+    },
+}   connection_delay: 0ns,
 
-We get `07-tendermint-2`
+SUCCESS Channel {
+    ordering: Unordered,
+    a_side: ChannelSide {
+        chain: BaseChainHandle {
+            chain_id: ChainId {
+                id: "ollo-testnet-0",
+                version: 0,
+            },
+            runtime_sender: Sender { .. },
+        },
+        client_id: ClientId(
+            "07-tendermint-3",
+        ),
+        connection_id: ConnectionId(
+            "connection-4",
+        ),
+        port_id: PortId(
+            "transfer",
+        ),
+        channel_id: Some(
+            ChannelId(
+                "channel-2",
+            ),
+        ),
+        version: None,
+    },
+    b_side: ChannelSide {
+        chain: BaseChainHandle {
+            chain_id: ChainId {
+                id: "atlantic-1",
+                version: 1,
+            },
+            runtime_sender: Sender { .. },
+        },
+        client_id: ClientId(
+            "07-tendermint-729",
+        ),
+        connection_id: ConnectionId(
+            "connection-381",
+        ),
+        port_id: PortId(
+            "transfer",
+        ),
+        channel_id: Some(
+            ChannelId(
+                "channel-399",
+            ),
+        ),
+        version: None,
+    },
+    connection_delay: 0ns,
+}
+```
+So we could see the information about chanels that have been created for current chains:
+```
+ollo
+      chain-id: ollo-testnet-0
+      client-id: 07-tendermint-3
+      connection-id: connection-4
+      channel-id: channel-2
+      
+sei
+      chain-id: atlantic-1
+      client-id: 07-tendermint-729
+      connection-id: connection-381
+      channel-id: channel-399
+```
 
-### Query client state
-a ollo client on sei
+# Transactions
+Here we will send 795000 usei from SEI chain to OllO chain (namely to SEI client generated on OllO chain)
 ```
-hermes query client state --chain atlantic-1 --client 07-tendermint-728
+seid tx ibc-transfer transfer transfer channel-399 ollo1p4rryfyyfl2rxzg2dugtgkluj8m4umynkw0mud 795000usei --from $WALLET --fees 200usei
 ```
-a sei client on ollo
+Now we will send 795000 utollo from OllO chain to SEI client generated on OllO chain.
 ```
-hermes query client state --chain ollo-testnet-0 --client 07-tendermint-2
+ollod tx ibc-transfer transfer transfer channel-2 sei1qr688u3h9v6xenm7uwn8sp79yh7tgu76q9ur6k 795000utollo --from $WALLET --fees 200utollo
 ```
-### update-client
-#### Update the ollo client on sei
-```
-hermes update client --host-chain atlantic-1 --client 07-tendermint-728
-```
-
-#### Update the sei client on ollo
-```
-hermes update client --host-chain ollo-testnet-0 --client 07-tendermint-2
-```
-
-# Connection Handshake
-Source:
-- https://github.com/informalsystems/hermes-ibc-workshop/blob/main/docs/connection.md
-- https://hermes.informal.systems/tutorials/local-chains/raw/connection.html
-### conn-init
-```
-hermes tx conn-init --dst-chain atlantic-1 --src-chain ollo-testnet-0 --dst-client 07-tendermint-728 --src-client 07-tendermint-2
-```
-![Снимок экрана от 2022-10-11 01-43-03](https://user-images.githubusercontent.com/30211801/194956864-f4d015b2-1d37-4ad2-80bb-701747137c9d.png)
-
-
-We get `connection-379`
-### conn-try
-```
-hermes tx conn-try --dst-chain ollo-testnet-0 --src-chain atlantic-1 --dst-client 07-tendermint-2 --src-client 07-tendermint-728 --src-conn connection-379
-```
-![Снимок экрана от 2022-07-31 22-53-09](https://user-images.githubusercontent.com/30211801/182041046-d5122ace-3070-4d2a-9180-1cc32df763d7.png)
-
-Here we HAVE AN ERROR:
-![Снимок экрана от 2022-10-11 02-20-01](https://user-images.githubusercontent.com/30211801/194960909-5e47888c-3429-4deb-875c-f609d318ca31.png)
-
-
-We get `connection-35`
-### conn-ack
-```
-hermes tx raw conn-ack --dst-chain atlantic-1 --src-chain ollo-testnet-0 --dst-client 07-tendermint-728 --src-client 07-tendermint-2 --dst-conn connection-379 --src-conn connection-35
-```
-![Снимок экрана от 2022-07-31 22-55-03](https://user-images.githubusercontent.com/30211801/182041098-7a9d4338-c863-42f1-9acb-33451619d941.png)
-
-### conn-confirm
-```
-hermes tx raw conn-confirm --dst-chain ollo-testnet-0 --src-chain atlantic-1 --dst-client 07-tendermint-2 --src-client 07-tendermint-728 --dst-conn connection-35 --src-conn connection-379
-```
-![Снимок экрана от 2022-07-31 22-55-42](https://user-images.githubusercontent.com/30211801/182041126-fb0a2439-52aa-40a7-b5b4-9586432839f9.png)
-
-### Query connection
-Now we should have both connection states `Open`
-first
-```
-hermes query connection end --chain atlantic-1 --connection connection-379
-```
-![Снимок экрана от 2022-07-31 22-58-04](https://user-images.githubusercontent.com/30211801/182041188-ed5ae1a8-89e1-4688-97f0-bb8313eca40f.png)
-
-second
-```
-hermes query connection end --chain ollo-testnet-0 --connection connection-35
-```
-![Снимок экрана от 2022-07-31 22-58-27](https://user-images.githubusercontent.com/30211801/182041198-5e20f843-2796-4a07-b703-f6be54b40630.png)
-
-
-# Channel Handshake
-Source:
-- https://github.com/informalsystems/hermes-ibc-workshop/blob/main/docs/channel.md
-- https://hermes.informal.systems/tutorials/local-chains/raw/channel.html
-### chan-open-init
-```
-hermes tx raw chan-open-init --dst-chain atlantic-1 --src-chain ollo-testnet-0 --dst-conn connection-379 --dst-port transfer --src-port transfer --order UNORDERED
-```
-![Снимок экрана от 2022-07-31 23-02-57](https://user-images.githubusercontent.com/30211801/182041317-c82a233d-fe2f-4436-815a-25dbf5cdcac4.png)
-We get `channel-276`
-
-### chan-open-try
-```
-hermes tx raw chan-open-try --dst-chain ollo-testnet-0 --src-chain atlantic-1 --dst-conn connection-35 --dst-port transfer --src-port transfer --src-chan channel-276
-```
-![Снимок экрана от 2022-07-31 23-04-10](https://user-images.githubusercontent.com/30211801/182041343-772b635f-1c89-47f9-81b5-39471953b75e.png)
-We get `channel-30`
-### chan-open-ack
-```
-hermes tx raw chan-open-ack --dst-chain atlantic-1 --src-chain ollo-testnet-0 --dst-conn connection-379 --dst-port transfer --src-port transfer --dst-chan channel-276 --src-chan channel-30
-```
-![Снимок экрана от 2022-07-31 23-06-51](https://user-images.githubusercontent.com/30211801/182041433-f7b21d7b-1e4d-44c0-acfd-8b28c62045fd.png)
-
-### chan-open-confirm
-```
-hermes tx raw chan-open-confirm --dst-chain ollo-testnet-0 --src-chain atlantic-1 --dst-conn connection-35 --dst-port transfer --src-port transfer --dst-chan channel-30 --src-chan channel-276
-```
-![Снимок экрана от 2022-07-31 23-05-13](https://user-images.githubusercontent.com/30211801/182041381-e775fe3d-1060-4e90-9ddd-96175e9b9d8a.png)
-
-### Query channel
-```
-hermes query channel end --chain atlantic-1 --port transfer --channel channel-276
-```
-![Снимок экрана от 2022-07-31 23-07-23](https://user-images.githubusercontent.com/30211801/182041449-b67b00de-b787-4f47-846a-fe3ac325cf2b.png)
-```
-hermes query channel end --chain ollo-testnet-0 --port transfer --channel channel-30
-```
-![Снимок экрана от 2022-07-31 23-07-56](https://user-images.githubusercontent.com/30211801/182041470-81cada2f-346a-4e3f-97d8-aeb8b9f1bdea.png)
-
-
-
-
