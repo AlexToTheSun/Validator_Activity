@@ -6,7 +6,7 @@
    - [Manually](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#manually-2)
    - [Auto update-restart script](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#auto-update-restart-script-2)
 3. Genesis update guide `haqq_54211-3`
-   - [Manually]()
+   - [Manually](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#genesis-update-guide-haqq_54211-3)
 
 ## Update to v1.1.0
 ### Manually
