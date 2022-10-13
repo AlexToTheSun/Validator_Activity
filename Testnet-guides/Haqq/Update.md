@@ -303,6 +303,10 @@ Config your node by changing client.toml
 ```
 haqqd config chain-id $HAQQ_CHAIN
 ```
+Disable State Sync
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.haqqd/config/config.toml
+```
 Restart
 ```
 sudo systemctl restart haqqd
@@ -313,7 +317,12 @@ sudo journalctl -u haqqd -f -o cat
 curl localhost:26657/status | jq
 haqqd status 2>&1 | jq .SyncInfo
 ```
-
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
 
 
 
