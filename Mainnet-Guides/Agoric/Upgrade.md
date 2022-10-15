@@ -1,6 +1,7 @@
 ## Table of contents
 - [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-6)
 - [Upgrade `agoric-upgrade-7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7)
+- [Upgrade `agoric-upgrade-7-2`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7-2)
 
 ## Upgrade `agoric-upgrade-6`
 [[Releases](https://github.com/Agoric/ag0/releases)]
@@ -80,4 +81,44 @@ Check. The chain will start after 67% active set are upgraded
 ```
 wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+
+## Upgrade `agoric-upgrade-7-2`
+- [[Current Release](https://github.com/Agoric/ag0/releases/tag/agoric-upgrade-7-2)]
+
+As we downloaded `https://github.com/Agoric/ag0` before, let's update the repository and build the new binary
+```
+cd ag0
+git fetch --all --tags
+git checkout tags/agoric-upgrade-7-2
+make clean
+VERSION=agoric-upgrade-7-2 make build
+$HOME/ag0/build/ag0 version
+```
+Chack sha256sum
+```
+sha256sum $HOME/ag0/build/ag0
+# 3a9ccd3a52a986677a42a89bc00f464f2cb9ef70791461dda6724af7ea2422a4  /root/ag0/build/ag0
+```
+Now stop the service
+```
+sudo systemctl stop agoricd
+```
+Change binary
+```
+cp $HOME/ag0/build/ag0 /usr/local/bin
+ag0 version
+```
+#Or you can just download the binary:
+```
+wget -O ag0 https://github.com/Agoric/ag0/releases/download/agoric-upgrade-7/ag0-agoric-upgrade-7-2-linux-amd64
+chmod +x ag0
+mv ag0 /usr/local/bin
+ag0 version
+```
+Start
+```
+sudo systemctl start agoricd
+ag0 status 2>&1 | jq .SyncInfo
+journalctl -u agoricd -f --output cat
 ```
