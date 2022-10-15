@@ -104,7 +104,8 @@ Run script in tmux
 sudo /bin/bash $HOME/update_script.sh
 ```
 You will see this:
-![image](https://user-images.githubusercontent.com/30211801/194302684-d9bbec10-9c81-4966-9a06-c986eb55762a.png)
+![Снимок экрана от 2022-10-15 17-19-48](https://user-images.githubusercontent.com/30211801/195988635-8060798d-8e27-4fb3-8cf2-aac998566359.png)
+
 
 ### tmux command
 Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
