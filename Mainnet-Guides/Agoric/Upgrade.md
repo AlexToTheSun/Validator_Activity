@@ -111,7 +111,7 @@ ag0 version
 ```
 #Or you can just download the binary:
 ```
-wget -O ag0 https://github.com/Agoric/ag0/releases/download/agoric-upgrade-7/ag0-agoric-upgrade-7-2-linux-amd64
+wget -O ag0 https://github.com/Agoric/ag0/releases/download/agoric-upgrade-7-2/ag0-agoric-upgrade-7-2-linux-amd64
 chmod +x ag0
 mv ag0 /usr/local/bin
 ag0 version
