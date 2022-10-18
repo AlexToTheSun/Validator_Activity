@@ -6,7 +6,7 @@ As we downloaded `https://github.com/irisnet/irishub` before, let's update the r
 cd irishub
 git fetch --all --tags
 git checkout tags/v1.3.1
-git pull origin v1.3.0
+git pull origin v1.3.1
 make clean
 VERSION=v1.3.1 make install
 $HOME/go/bin/iris version
