@@ -28,7 +28,6 @@ Change binary
 cp desmos /usr/local/bin
 /usr/local/bin/desmos version
 ```
-#Or you can just download the binary:
 
 Start
 ```
