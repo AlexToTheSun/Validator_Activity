@@ -3,6 +3,7 @@
 # Tgrade Introduction
 #### Tgrade Site: https://tgrade.finance/
 #### Tgrade App: https://try.tgrade.finance/
+#### For Governance visit: https://dapp.tgrade.finance/validators
 
 The first Tendermint based [Proof of Engagement](https://medium.com/tgradefinance/proof-of-engagement-95a1a6a024f8)(PoE) network. This article contains theses that allow you to understand the approach of the Tgrade team to the decentralization of the network. Here is some of them:
 - Proof of Engagement provides the incentives for all of the community around a blockchain to be actively involved.
