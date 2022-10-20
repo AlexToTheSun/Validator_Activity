@@ -176,7 +176,7 @@ $faucet <your address>
 ### Upgrade to a Validator
 ```
 uptickd tx staking create-validator \
---chain-id uptick_7000-1 \
+--chain-id $UP_CHAIN \
 --commission-rate=0.07 \
 --commission-max-rate=0.2 \
 --commission-max-change-rate=0.1 \
@@ -192,7 +192,14 @@ uptickd tx staking create-validator \
 ```
 Find out your validator: https://explorer.testnet.uptick.network/uptick-network-testnet/staking
 
-### Useful commands
+#### Validator role request
+- Type your discord ID instead of `Discord ID`
+```
+uptickd tx bank send $(uptickd keys show $UP_WALLET -a) uptick1ncn0k65x3esuzxztzymd0s0kwhun7wxnrcc9mw 4900auptick --chain-id=uptick_7000-1 --note="Validator Role Request: Discord ID"
+```
+Then go to discord and post a link on your tx.
+
+# Useful commands
 Logs and status
 ```
 sudo journalctl -u uptickd -f -o cat
@@ -225,9 +232,14 @@ Unsafe-reset-all
 ```
 uptickd tendermint unsafe-reset-all --home $HOME/.uptickd
 ```
-## Tx
+### Tx
 - If you have configured your node by `uptickd config node tcp://localhost:26657` then there is no need in `--node "tcp://127.0.0.1:26657"` flag.
 - as we have `minimum-gas-prices = 0.0auptick` so there is no need in `--fees` flag.
+
+Send some tokens:
+```
+uptickd tx bank send <sender> <receiver> <amount>auptick --chain-id=uptick_7000-1 --note=""
+```
 
 How to vote:
 - `<prop_ID>` - ID of a proposal. You can find info about Uptick Governance [[here](https://explorer.testnet.uptick.network/uptick-network-testnet/proposals)]
@@ -255,7 +267,10 @@ uptickd tx staking edit-validator \
 --details="" \
 --moniker=""
 ```
+Send some tockens:
+```
 
+```
 #### Wallets, delegations and rewards
 To see how many tokens are in your wallet:
 ```
@@ -279,9 +294,5 @@ uptickd tx staking delegate $(uptickd keys show $UP_WALLET --bech val -a) <amoun
 --chain-id=$UP_CHAIN \
 --from=$UP_WALLET
 ```
-
-
-
-
 
 
