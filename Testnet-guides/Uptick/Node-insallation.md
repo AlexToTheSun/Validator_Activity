@@ -96,7 +96,7 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0auptick\"/" $HOM
 ```
 #### Download `addrbook.json`
 ```
-wget -qO $HOME/.uptickd/config/addrbook.json "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Uptick/addrbook.json"
+wget -qO $HOME/.uptickd/config/addrbook.json "https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Uptick/addrbook.json"
 ```
 #### Disk usage optimization
 Pruning configuration
@@ -160,4 +160,128 @@ curl localhost:26657/status | jq
 uptickd status 2>&1 | jq .SyncInfo
 ```
 Wait until full synchronization. The `false` status indicates that the node is fully synchronized.
+
+# Wallet Funding && Validator Creating
+### Create your Uptick wallet
+```
+uptickd keys add $UP_WALLET
+```
+### Fund your wallet
+Go to the `#faucet` in Uptick [Discord](https://discord.gg/tuEmZs35gq)
+
+Faucet command:
+```
+$faucet <your address>
+```
+### Upgrade to a Validator
+```
+uptickd tx staking create-validator \
+--chain-id uptick_7000-1 \
+--commission-rate=0.07 \
+--commission-max-rate=0.2 \
+--commission-max-change-rate=0.1 \
+--min-self-delegation="1" \
+--amount=4900000000000000000auptick \
+--pubkey $(uptickd tendermint show-validator) \
+--moniker $UP_NODENAME \
+--identity=""
+--details=""
+--website=""
+--from=$UP_WALLET \
+--gas="auto"
+```
+Find out your validator: https://explorer.testnet.uptick.network/uptick-network-testnet/staking
+
+### Useful commands
+Logs and status
+```
+sudo journalctl -u uptickd -f -o cat
+curl localhost:26657/status | jq
+uptickd status 2>&1 | jq .SyncInfo
+```
+Find out your wallet:
+```
+uptickd keys show $UP_WALLET -a
+```
+Your validator:
+```
+uptickd keys show $UP_WALLET --bech val -a
+```
+Information about your validator:
+```
+uptickd query staking validator $(uptickd keys show $UP_WALLET --bech val -a)
+```
+
+List of commands to interact with `uptickd.service`
+```
+sudo systemctl daemon-reload
+sudo systemctl enable uptickd
+sudo systemctl restart uptickd
+sudo systemctl status uptickd
+sudo systemctl stop uptickd
+sudo systemctl disable uptickd
+```
+Unsafe-reset-all
+```
+uptickd tendermint unsafe-reset-all --home $HOME/.uptickd
+```
+## Tx
+- If you have configured your node by `uptickd config node tcp://localhost:26657` then there is no need in `--node "tcp://127.0.0.1:26657"` flag.
+- as we have `minimum-gas-prices = 0.0auptick` so there is no need in `--fees` flag.
+
+How to vote:
+- `<prop_ID>` - ID of a proposal. You can find info about Uptick Governance [[here](https://explorer.testnet.uptick.network/uptick-network-testnet/proposals)]
+```
+uptickd tx gov vote <prop_ID> yes --from $UP_WALLET -y
+```
+
+Unjail:
+```
+uptickd tx slashing unjail \
+--chain-id $UP_CHAIN \
+--from $UP_WALLET
+```
+
+Change the validator parameters:
+```
+uptickd tx staking edit-validator \
+--from=$UP_WALLET \
+--chain-id=$UP_CHAIN \
+--commission-rate="" \
+--commission-max-rate="" \
+--commission-max-change-rate="" \
+--website="" \
+--identity="" \
+--details="" \
+--moniker=""
+```
+
+#### Wallets, delegations and rewards
+To see how many tokens are in your wallet:
+```
+uptickd q bank balances $(uptickd keys show $UP_WALLET -a)
+```
+Withdraw all delegation rewards:
+```
+uptickd tx distribution withdraw-all-rewards --from=$UP_WALLET --chain-id=$UP_CHAIN
+```
+Withdraw validator commission:
+```
+uptickd tx distribution withdraw-rewards $(uptickd keys show $UP_WALLET --bech val -a) \
+--chain-id $UP_CHAIN \
+--from $UP_WALLET \
+--commission \
+--yes
+```
+Self delegation:
+```
+uptickd tx staking delegate $(uptickd keys show $UP_WALLET --bech val -a) <amount_to_delegate>auptick \
+--chain-id=$UP_CHAIN \
+--from=$UP_WALLET
+```
+
+
+
+
+
 
