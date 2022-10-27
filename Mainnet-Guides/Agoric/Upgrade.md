@@ -1,3 +1,7 @@
+Explorers:
+- https://agoric.explorers.guru/
+- https://bigdipper.live/agoric/validators
+- https://explorer-turetskiy.xyz/agoric
 ## Table of contents
 - [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-6)
 - [Upgrade `agoric-upgrade-7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7)
@@ -128,4 +132,103 @@ journalctl -u agoricd -f --output cat
 - [Release](https://github.com/Agoric/agoric-sdk/releases/tag/pismoA)
 - [Official guide](https://github.com/Agoric/agoric-sdk/wiki/ag0-to-agd-upgrade-for-mainnet-1-launch)
 - [Polkachu guide](https://github.com/polkachu/validator-guide/blob/main/upgrade_guides/agoric/upgrade_agoric-upgrade-8.md)
+#### Install Node.js and yarn
+Install node.js v16. Following Node.js download instructions:
+```sh
+# Download the nodesource PPA for Node.js
+curl https://deb.nodesource.com/setup_16.x | sudo bash
+
+# Install the Yarn package manager
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+# Update Ubuntu
+sudo apt-get update
+sudo apt upgrade -y
+
+# Install Node.js, Yarn, and build tools
+# Install jq for formatting of JSON data
+# We'll need git below.
+sudo apt install nodejs=16.* yarn build-essential git jq -y
+
+# verify installation
+node --version | grep 16
+yarn --version
+```
+#### Install Agoric SDK
+We’ll install the Agoric SDK from source using `git clone`.
+```sh
+# Writeable directory of your choice. $HOME will do.
+cd ~
+git clone https://github.com/Agoric/agoric-sdk -b pismoA
+cd agoric-sdk
+
+# Install and build Agoric Javascript packages
+yarn install && yarn build
+
+# Install and build Agoric Cosmos SDK support
+(cd packages/cosmic-swingset && make)
+```
+❗️Note that you will need to keep the `agoric-sdk` directory intact when running the validator, as it contains data files necessary for correct operation.
+```
+agd version --long
+```
+The output should start with:
+```
+name: agoriccosmos
+server_name: ag-cosmos-helper
+version: 0.32.2
+commit: 2c812d221
+build_tags: ',ledger'
+go: go version go1.18.1 linux/amd64
+```
+If the software version does not match, then please check your `$PATH` to ensure the correct `agd` is running.
+#### Configure `agd.service`
+```
+sudo tee <<EOF >/dev/null /etc/systemd/system/agd.service
+[Unit]
+Description=Agoric Cosmos daemon
+After=network-online.target
+
+[Service]
+# OPTIONAL: turn on JS debugging information.
+#SLOGFILE=.agoric/data/chain.slog
+User=$USER
+# OPTIONAL: turn on Cosmos nondeterminism debugging information
+#ExecStart=$HOME/go/bin/agd start --log_level=info --trace-store=.agoric/data/kvstore.trace
+ExecStart=$HOME/go/bin/agd start --log_level=warn
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=4096
+Environment="PATH=/home/ubuntu/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/ubuntu/agoric-sdk/packages/cosmic-swingset/bin"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable agd
+sudo systemctl daemon-reload
+```
+Check `systemctl status agd`. The result should look like:
+```
+○ agd.service - Agoric Cosmos daemon
+     Loaded: loaded (/etc/systemd/system/agd.service; enabled; vendor preset: enabled)
+     Active: inactive (dead)
+```
+Check that `agd` has access to the same key material that `ag0` was using:
+```
+ag0 tendermint show-validator
+agd tendermint show-validator
+```
+#### Stop and disable `ag0` (or you may have `agoricd`)
+```
+sudo systemctl stop ag0
+sudo systemctl disable ag0
+```
+#### Start `agd`
+```
+sudo systemctl restart agd
+agd status 2>&1 | jq .SyncInfo
+journalctl -u agd -f --output cat
+```
 
