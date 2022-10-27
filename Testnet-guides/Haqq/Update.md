@@ -7,6 +7,8 @@
    - [Auto update-restart script](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#auto-update-restart-script-2)
 3. Genesis update guide `haqq_54211-3`
    - [Manually](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#genesis-update-guide-haqq_54211-3)
+4. Upgrade to `v1.2.1`
+   - [Auto update-restart script](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/Haqq/Update.md#auto-update-restart-script-4)
 
 ## Update to v1.1.0
 ### Manually
@@ -325,4 +327,118 @@ wget -qO- http://localhost:26657/consensus_state \
 ```
 
 
+
+## Update to [v1.2.1](https://github.com/haqq-network/haqq/releases/tag/v1.2.1)
+### Auto update-restart script 4
+For this script we will use `tmux`
+```
+sudo apt update && sudo apt install tmux -y
+```
+Build new binary:
+```
+cd $HOME && rm -rf /root/haqq
+git clone https://github.com/haqq-network/haqq && cd $HOME/haqq
+git checkout v1.2.1
+make install
+```
+Set variables:
+- `your_rpc_port`
+```
+current_binary="/usr/local/bin/haqqd"
+new_binary="$HOME/go/bin/haqqd"
+halt_height="686300"
+service_name="haqqd"
+rpc_port="your_rpc_port"
+```
+
+Check output:
+```
+echo $current_binary \
+&& $new_binary version \
+&& curl -s localhost:$rpc_port/status | grep -E 'network|latest_block_height' \
+&& service $service_name status | grep -E 'loaded|active'
+```
+Output example:
+```
+/usr/local/bin/haqqd
+"1.2.1"
+      "network": "haqq_54211-3",
+      "latest_block_height": "683276",
+     Loaded: loaded (/etc/systemd/system/haqqd.service; disabled; vendor preset: enabled)
+     Active: active (running) since Thu 2022-10-20 18:53:26 UTC; 6 days ago
+```
+
+Create update script:
+```
+tee $HOME/update_script.sh > /dev/null <<EOF
+#!/bin/bash
+for((;;)); do
+  height=\$(curl -s localhost:$rpc_port/status | jq -r .result.sync_info.latest_block_height)
+    if ((height==$halt_height)); then
+      systemctl stop $service_name
+      cp $new_binary $current_binary
+      systemctl restart $service_name
+      echo restart
+      break
+    else
+      echo \$height
+    fi
+  sleep 3
+done
+EOF
+```
+Make the script executable:
+```
+chmod +x $HOME/update_script.sh
+```
+
+Create tmux session:
+```
+tmux new -s update
+```
+
+Run script in tmux
+```
+sudo /bin/bash $HOME/update_script.sh
+```
+### tmux command
+Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
+
+List of sessions
+```
+tmux ls
+```
+Connect to the session again
+```
+tmux attach -t update
+```
+> ! Don't stop the script by CTRL+C 
+
+### After updating - kill tmux session:
+```
+tmux kill-session -t update
+```
+Logs and status:
+```
+sudo journalctl -u haqqd -f -o cat
+haqqd status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+### Troubleshooting
+If you get errors like:
+```
+6:55PM INF executed block height=355560 module=consensus num_invalid_txs=0 num_valid_txs=0 server=node
+panic: cannot delete latest saved version (6)
+
+ERR CONSENSUS FAILURE!!! err="cannot delete latest saved version (6)" module=consensus server=node stack="goroutine 2798
+```
+These errors was in the previous evmos upgrade, we should temporary use `pruning = nothing`:
+```
+sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.haqqd/config/app.toml
+```
 
