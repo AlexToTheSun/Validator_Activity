@@ -2,6 +2,7 @@
 - [Upgrade `agoric-upgrade-6`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-6)
 - [Upgrade `agoric-upgrade-7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7)
 - [Upgrade `agoric-upgrade-7-2`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-7-2)
+- [Upgrade `agoric-upgrade-8`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Agoric/Upgrade.md#upgrade-agoric-upgrade-8)
 
 ## Upgrade `agoric-upgrade-6`
 [[Releases](https://github.com/Agoric/ag0/releases)]
@@ -122,3 +123,9 @@ sudo systemctl start agoricd
 ag0 status 2>&1 | jq .SyncInfo
 journalctl -u agoricd -f --output cat
 ```
+
+## Upgrade `agoric-upgrade-8`
+- [Release](https://github.com/Agoric/agoric-sdk/releases/tag/pismoA)
+- [Official guide](https://github.com/Agoric/agoric-sdk/wiki/ag0-to-agd-upgrade-for-mainnet-1-launch)
+- [Polkachu guide](https://github.com/polkachu/validator-guide/blob/main/upgrade_guides/agoric/upgrade_agoric-upgrade-8.md)
+
