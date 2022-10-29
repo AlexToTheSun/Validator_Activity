@@ -188,7 +188,7 @@ prometheus --help
 Download script for adding your nodes easely
 ```
 cd $HOME/prometheus
-wget -q -O add_node.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Uptick/Validator-Security/Monitoring/add_node.sh && chmod +x add_node.sh
+wget -q -O add_node.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Uptick/Monitoring/add_node.sh && chmod +x add_node.sh
 ```
 Run command to add your nodes to promehteus:
 ```
