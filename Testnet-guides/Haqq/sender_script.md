@@ -23,9 +23,11 @@ chmod +x $HOME/sender_script.sh
 ```
 Create tmux session:
 ```
-tmux new -s update
+tmux new -s sender
 ```
 Run script in tmux
 ```
 sudo /bin/bash $HOME/sender_script.sh
 ```
+### Materials used
+[1](https://www.linux.org.ru/forum/general/5261307) [2](https://crontab.guru/#0-5_*_*_*_*) [3](https://losst.pro/kak-dobavit-komandu-v-cron) [4](https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804-ru) 
