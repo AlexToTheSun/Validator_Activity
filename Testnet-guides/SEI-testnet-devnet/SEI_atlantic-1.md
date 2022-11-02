@@ -676,7 +676,8 @@ wget -qO- http://localhost:26657/consensus_state \
 
 #  Downgrade to `1.2.2beta`
 Now we have  a new generated genesis file that starts from initial height 9736350 (bypassing all the bad heights from 1.2.3beta updating). 
-```
+```sh
+# Build the right bynary
 sudo systemctl stop seid
 cd $HOME
 sudo rm sei-chain -rf
@@ -689,6 +690,7 @@ make install
 sudo cp /root/go/bin/seid /usr/local/bin/seid
 seid version --long | head
 
+# Backup
 mkdir $HOME/key_backup 
 cp $HOME/.sei/config/priv_validator_key.json $HOME/key_backup
 cp $HOME/.sei/data/priv_validator_state.json $HOME/key_backup
@@ -699,8 +701,9 @@ cp $HOME/.sei/config/app.toml $HOME/key_backup
 rm $HOME/.sei/config/genesis.json
 
 seid tendermint unsafe-reset-all --home $HOME/.sei
-seid init --chain-id atlantic-1 $sei_MONIKER
 
+# Make shure that state sync is disable:
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.haqqd/config/config.toml
 
 cp $HOME/key_backup/priv_validator_key.json $HOME/.sei/config/
 cp $HOME/key_backup/priv_validator_state.json $HOME/.sei/data/
@@ -723,3 +726,25 @@ seid tx slashing unjail \
   --chain-id=$sei_CHAIN \
   --gas=auto
 ```
+### Troubleshooting
+1) Make shure that you disable State Sync
+```
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.haqqd/config/config.toml
+```
+2) While unjailing: if you got this error:
+```
+Error: rpc error: code = InvalidArgument desc = account sequence mismatch, expected 312, got 311: incorrect account sequence: invalid request
+```
+![Снимок экрана от 2022-11-02 21-32-43](https://user-images.githubusercontent.com/30211801/199561049-86b8e169-295f-4cca-8ccd-d6036452b7c7.png)
+
+Then add `-s <number>` flag, where `<number>` is expected value of the output.
+```
+seid tx slashing unjail \
+  --broadcast-mode=block \
+  --from=$sei_WALLET \
+  --chain-id=$sei_CHAIN \
+  --gas=auto \
+  -s <number>
+```
+
+
