@@ -715,3 +715,11 @@ sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.s
 sudo systemctl restart seid
 sudo journalctl -u seid -f -o cat
 ```
+Unjailing command:
+```
+seid tx slashing unjail \
+  --broadcast-mode=block \
+  --from=$sei_WALLET \
+  --chain-id=$sei_CHAIN \
+  --gas=auto
+```
