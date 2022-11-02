@@ -14,6 +14,7 @@ Short linksof this guide:
 - [Update to `1.2.0beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-120beta-if-you-were-on-sub-chains)
 - [Update to `1.2.2beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-122beta)
 - [Update to `1.2.3beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#update-to-123beta)
+- [Downgrade to `1.2.2beta`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/SEI-testnet-devnet/SEI_atlantic-1.md#downgrade-to-122beta)
 
 
 #### Minimal serer protection
@@ -673,3 +674,44 @@ wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
 
+#  Downgrade to `1.2.2beta`
+Now we have  a new generated genesis file that starts from initial height 9736350 (bypassing all the bad heights from 1.2.3beta updating). 
+```
+sudo systemctl stop seid
+cd $HOME
+sudo rm sei-chain -rf
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout master
+git pull --tags --force
+git checkout tags/1.2.2beta
+make install
+sudo cp /root/go/bin/seid /usr/local/bin/seid
+seid version --long | head
+
+mkdir $HOME/key_backup 
+cp $HOME/.sei/config/priv_validator_key.json $HOME/key_backup
+cp $HOME/.sei/data/priv_validator_state.json $HOME/key_backup
+cp $HOME/.sei/config/client.toml $HOME/key_backup
+cp $HOME/.sei/config/config.toml $HOME/key_backup
+cp $HOME/.sei/config/app.toml $HOME/key_backup
+
+rm $HOME/.sei/config/genesis.json
+
+seid tendermint unsafe-reset-all --home $HOME/.sei
+seid init --chain-id atlantic-1 $sei_MONIKER
+
+
+cp $HOME/key_backup/priv_validator_key.json $HOME/.sei/config/
+cp $HOME/key_backup/priv_validator_state.json $HOME/.sei/data/
+cp $HOME/key_backup/client.toml  $HOME/.sei/config/
+cp $HOME/key_backup/config.toml $HOME/.sei/config/
+cp $HOME/key_backup/app.toml $HOME/.sei/config/
+wget -O $HOME/.sei/config/genesis.json https://atlantic-1-regenesis.s3.us-west-1.amazonaws.com/genesis.json
+
+peers="5d73c65c85dc761eeba3a696d8b981963e03146f@54.241.145.170:26656"
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.sei/config/config.toml
+
+sudo systemctl restart seid
+sudo journalctl -u seid -f -o cat
+```
