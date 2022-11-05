@@ -729,7 +729,7 @@ seid tx slashing unjail \
 ### Troubleshooting
 1) Make shure that you disable State Sync
 ```
-sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.haqqd/config/config.toml
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.sei/config/config.toml
 ```
 2) While unjailing: if you got this error:
 ```
