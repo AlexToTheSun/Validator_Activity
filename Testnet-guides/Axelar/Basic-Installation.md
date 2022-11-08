@@ -325,4 +325,13 @@ axelard keys show validator --bech val -a
 axelard q nexus chain-maintainers avalanche
 axelard q nexus chain-maintainers ethereum
 ```
-
+Edit validator
+```
+axelard tx staking edit-validator \
+--moniker="<>" \
+--details="<>" \
+--website=<> \
+--identity=<> \
+--chain-id axelar-testnet-casablanca-1 \
+--from=validator
+```
