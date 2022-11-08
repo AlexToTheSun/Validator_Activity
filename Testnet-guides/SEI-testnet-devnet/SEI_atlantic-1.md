@@ -771,30 +771,20 @@ cp $HOME/.sei/config/config.toml $HOME/key_backup
 cp $HOME/.sei/config/app.toml $HOME/key_backup
 cp $HOME/.sei/wasm $HOME/key_backup
 
-
 seid tendermint unsafe-reset-all --home $HOME/.sei
-
 
 cp $HOME/key_backup/priv_validator_key.json $HOME/.sei/config/
 cp $HOME/key_backup/priv_validator_state.json $HOME/.sei/data/
 cp $HOME/key_backup/client.toml  $HOME/.sei/config/
 cp $HOME/key_backup/config.toml $HOME/.sei/config/
 cp $HOME/key_backup/app.toml $HOME/.sei/config/
+```
+After that use State sync from https://www.theamsolutions.info/sei-network 
 
-# Use State Sync
-SNAP_RPC="https://sei-testnet-rpc.brocha.in:443"
-STATE_SYNC_PEER=94b63fddfc78230f51aeb7ac34b9fb86bd042a77@sei-testnet.p2p.brocha.in:30533
-LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
-TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
-s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
-s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
-s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.sei/config/config.toml
-sed -i.bak -e "s|^persistent_peers *=.*|persistent_peers = \"$STATE_SYNC_PEER\"|" \
-  $HOME/.sei/config/config.toml
+❗️Use just state sync. No need copy paste all commands , just state sync🤓
 
-# Restert
+Restert:
+```
 sudo systemctl restart seid
 sudo journalctl -u seid -f -o cat
 ```
