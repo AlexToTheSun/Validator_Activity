@@ -1,3 +1,4 @@
+### Official github: https://github.com/irisnet/mainnet/tree/master/upgrade
 ## Upgrade `v1.3.1`
 - [[Current Release v1.3.1](https://github.com/irisnet/irishub/releases/tag/v1.3.1)]
 
