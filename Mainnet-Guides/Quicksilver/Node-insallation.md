@@ -3,7 +3,8 @@
   - https://github.com/ingenuity-build/quicksilver
   - https://github.com/ingenuity-build/mainnet
 - Website: https://quicksilver.zone
-- 
+- **Mainnet Faucet**: https://faucet.huginn.tech/
+
 Explorers: 
   - https://quicksilver.explorers.guru/
   - https://www.mintscan.io/quicksilver
@@ -14,7 +15,7 @@ Explorers:
 - Denom: `uqck`
 - Denom-coefficient: `1000000`
 - Genesis [File](https://raw.githubusercontent.com/ingenuity-build/mainnet/main/genesis.json)
-- go version: `1.18.3`
+- go version: `1.19`
 
 # Quicksilver Node Install
  Update & upgrade
@@ -27,8 +28,8 @@ sudo apt-get install nano mc git gcc g++ make curl build-essential tmux chrony w
 ```
 Install GO
 ```
-wget -O go1.18.3.linux-amd64.tar.gz https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz && rm go1.18.3.linux-amd64.tar.gz
+wget -O go1.19.4.linux-amd64.tar.gz https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz && rm go1.19.4.linux-amd64.tar.gz
 cat <<'EOF' >> $HOME/.bash_profile
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
@@ -38,7 +39,7 @@ EOF
 . $HOME/.bash_profile
 cp /usr/local/go/bin/go /usr/bin
 go version
-# go version go1.18.3 linux/amd64
+# go version go1.19.4 linux/amd64
 ```
 ### Install the latest version of Quicksilver
 All releases can be viewed [here](https://github.com/ingenuity-build/quicksilver/releases/tag)
@@ -58,12 +59,15 @@ quicksilverd version --long | head
 ```
 Q_NODENAME=<YOUR_MONIKER>
 Q_WALLET=<YOUR_WALLET>
+Q_RPC_PORT=<YOUR_RPC_PORT>
 Q_CHAIN=quicksilver-1
+
 echo 'export Q_NODENAME='\"${Q_NODENAME}\" >> $HOME/.bash_profile
 echo 'export Q_WALLET='\"${Q_WALLET}\" >> $HOME/.bash_profile
 echo 'export Q_CHAIN='\"${Q_CHAIN}\" >> $HOME/.bash_profile
+echo 'export Q_RPC_PORT='\"${Q_RPC_PORT}\" >> $HOME/.bash_profile
 source $HOME/.bash_profile
-echo $Q_NODENAME $Q_WALLET $Q_CHAIN
+echo $Q_NODENAME $Q_WALLET $Q_CHAIN $Q_RPC_PORT
 ```
 ### Init your config files
 ```
@@ -78,7 +82,7 @@ curl -s https://raw.githubusercontent.com/ingenuity-build/mainnet/main/genesis.j
 - Specify your rpc port, instead of the default `26657`.
 If on your server there are two Cosmos SDK apps then you have to Change ports. After that you should specify your new RPC port in `client.toml`:
 ```
-quicksilverd config node tcp://localhost:26657
+quicksilverd config node tcp://localhost:$Q_RPC_PORT
 quicksilverd config chain-id $Q_CHAIN
 ```
 #### Seeds and peers
@@ -88,7 +92,7 @@ sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" ~/.quicksilverd/config/config.
 ```
 #### Minimum gas prices
 ```
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0aISLM\"/" $HOME/.quicksilverd/config/app.toml
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0001uqck\"/" $HOME/.quicksilverd/config/app.toml
 ```
 #### Disk usage optimization
 Pruning configuration
@@ -129,10 +133,39 @@ sudo systemctl restart quicksilverd
 Logs and status
 ```
 sudo journalctl -u quicksilverd -f -o cat
-curl localhost:26657/status | jq
+curl localhost:$Q_RPC_PORT/status | jq
 quicksilverd status 2>&1 | jq .SyncInfo
 ```
 Wait until full synchronization. The `false` status indicates that the node is fully synchronized.
 
 ### Or use State Sync
 For synchronization and saving space on the server, you can use [state sync](https://github.com/AlexToTheSun/Validator_Activity/blob/main/State-Sync/Quicksilver.md)
+
+
+### Create a validator
+```
+quicksilverd tx staking create-validator \
+--amount 1000000uqck \
+--commission-max-change-rate "0.1" \
+--commission-max-rate "0.20" \
+--commission-rate "0.06" \
+--min-self-delegation "1" \
+--details="" \
+--website="" \
+--identity="" \
+--security-contact="" \
+--pubkey=$(quicksilverd tendermint show-validator) \
+--moniker=$Q_NODENAME \
+--gas=250000 \
+--chain-id quicksilver-1 \
+--from=$Q_WALLET \
+--node http://75.119.144.167:26657/
+```
+
+### Commands
+```
+quicksilverd q bank balances $(quicksilverd keys show $Q_WALLET -a)
+
+
+quicksilverd tx slashing unjail --from $Q_WALLET --chain-id=$Q_CHAIN --yes --fees 50uqck
+```
