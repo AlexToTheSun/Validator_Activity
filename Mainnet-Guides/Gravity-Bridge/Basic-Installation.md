@@ -81,7 +81,7 @@ mkdir gravity-bin
 cd gravity-bin
 
 # the gravity chain binary itself
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.5.2/gravity-linux-amd64
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.7.2/gravity-linux-amd64
 mv gravity-linux-amd64 gravity
 
 chmod +x gravity
@@ -92,7 +92,7 @@ gravity unsafe-reset-all
 ## Download the latest version of Gravity chain and the Gravity tools (GBT)
 ```
 cd gravity-bin
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.5.2/gbt
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.7.1/gbt
 chmod +x *
 sudo mv * /usr/bin/
 gbt --version
