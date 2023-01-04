@@ -214,8 +214,18 @@ rpc_port="your_rpc_port"
 ```
 Check output:
 ```
-echo $current_binary \
-&& $new_binary version \
+echo Gravity old binary \
+&& echo $current_grav_binary \
+&& $current_grav_binary version \
+&& echo Gravity new binary \
+&& echo $new_grav_binary \
+&& $new_grav_binary version \
+&& echo GBT old binary \
+&& echo $current_gbt_binary \
+&& $current_gbt_binary --version \
+&& echo GBT new binary \
+&& echo $new_gbt_binary \
+&& $new_gbt_binary --version \
 && curl -s localhost:$rpc_port/status | grep -E 'network|latest_block_height' \
 && service $service_grav_name status | grep -E 'loaded|active' \
 && service $service_gbt_name status | grep -E 'loaded|active'
