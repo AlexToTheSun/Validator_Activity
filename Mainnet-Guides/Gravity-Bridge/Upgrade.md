@@ -1,6 +1,6 @@
 # Table of contents
 1. [Update to 1.7.2](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-172-with-new-fixes)
-2. [Update to 1.8.1](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-180)
+2. [Update to 1.8.1](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-181)
 ## Update to 1.7.2 with new fixes
 ### Manually
 Check your node block height. You must not ungrade before the block [4146500](https://www.mintscan.io/gravity-bridge/blocks/4146500).
