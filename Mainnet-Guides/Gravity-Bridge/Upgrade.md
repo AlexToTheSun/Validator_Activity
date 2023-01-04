@@ -1,6 +1,6 @@
 # Table of contents
 1. [Update to 1.7.2](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-172-with-new-fixes)
-2. [Update to 1.8.0](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-180)
+2. [Update to 1.8.1](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-180)
 ## Update to 1.7.2 with new fixes
 ### Manually
 Check your node block height. You must not ungrade before the block [4146500](https://www.mintscan.io/gravity-bridge/blocks/4146500).
@@ -141,8 +141,8 @@ wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
 
-## Update to 1.8.0
-### Manually 1.8.0
+## Update to 1.8.1
+### Manually 1.8.1
 Check your node block height. You must not ungrade before the block [5264000](https://www.mintscan.io/gravity-bridge/blocks/5264000).
 ```
 gravity status 2>&1 | jq .SyncInfo
@@ -152,11 +152,11 @@ If your last block is 5264000 - Upgrade the binary:
 ```sh
 # gravity chain binary
 rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.0/gravity-linux-amd64
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.1/gravity-linux-amd64
 mv gravity-linux-amd64 gravity
 
 # gbt binary
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.0/gbt
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.1/gbt
 
 chmod +x *
 sudo mv * /usr/bin/
@@ -176,7 +176,7 @@ gravity status 2>&1 | jq
 gravity status 2>&1 | jq .SyncInfo
 ```
 
-### Auto update-restart script 1.8.0
+### Auto update-restart script 1.8.1
 For this script we will use `tmux`
 ```
 sudo apt update && sudo apt install tmux -y
@@ -184,9 +184,9 @@ sudo apt update && sudo apt install tmux -y
 Download new version:
 ```
 rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.0/gravity-linux-amd64
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.1/gravity-linux-amd64
 mv gravity-linux-amd64 gravity
-wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.0/gbt
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.8.1/gbt
 chmod +x *
 cd $HOME
 
