@@ -5,6 +5,7 @@
 - Fauset: https://testedge2.haqq.network/
 
 Explorers and checkers: 
+  - https://www.scale3labs.com/check/sui
   - https://sui.explorers.guru/node
   - https://node.sui.zvalid.com/
 
@@ -93,8 +94,23 @@ Logs and status
 ```
 sudo journalctl -u suid -f -o cat
 ```
-
-
+### Useful Commands
+Check the node version
+```
+curl --silent http://127.0.0.1:9184/metrics | grep "uptime{version"
+```
+Check the last block on your node
+```
+curl --location --request POST http://127.0.0.1:9000/ \
+--header 'Content-Type: application/json' \
+--data-raw '{ "jsonrpc":"2.0", "method":"sui_getTotalTransactionNumber","id":1}'; echo
+```
+Check the last block on RPC node
+```
+curl --location --request POST https://fullnode.testnet.sui.io:443 \
+--header 'Content-Type: application/json' \
+--data-raw '{ "jsonrpc":"2.0", "method":"sui_getTotalTransactionNumber","id":1}'; echo
+```
 
 
 
