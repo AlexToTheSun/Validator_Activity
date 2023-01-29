@@ -61,6 +61,16 @@ mv ~/sui/target/release/sui /usr/local/bin/
 sui-node -V
 sui -V
 ```
+In the config file `$HOME/.sui/sui-config/client.yaml` there is a DevNet RPC `rpc: "https://gateway.devnet.sui.io:443"`. You can change it manually on `rpc: "https://fullnode.testnet.sui.io:443"` OR run the command:
+```
+sui client switch --env https://fullnode.testnet.sui.io:443
+```
+### THE LIST OF PUBLIC SUI RPC TESTNET SERVERS
+-  https://sui-api.rpcpool.com/
+-  https://sui-testnet.public.blastapi.io/
+-  https://rpc.ankr.com/sui_testnet
+-  https://fullnode.testnet.vincagame.com/
+  
 ### Create service file for SUI
 ```
 echo "[Unit]
@@ -111,6 +121,12 @@ curl --location --request POST https://fullnode.testnet.sui.io:443 \
 --header 'Content-Type: application/json' \
 --data-raw '{ "jsonrpc":"2.0", "method":"sui_getTotalTransactionNumber","id":1}'; echo
 ```
+Check TPS on your node in Testnet:
+```sh
+wget -O $HOME/check_testnet_tps.sh https://raw.githubusercontent.com/bartosian/sui_helpers/main/check_testnet_tps.sh && chmod +x $HOME/check_testnet_tps.sh && $HOME/check_testnet_tps.sh
 
+# to run it again:
+$HOME/check_testnet_tps.sh
+```
 
 
