@@ -73,6 +73,40 @@ curl --location --request POST 'https://fullnode.testnet.sui.io:443/' --header '
 curl -q localhost:9184/metrics 2>/dev/null |grep '^highest_synced_checkpoint'
 ```
 
+# How to remove DB (if you have trouble with fork blocks)
+```
+2023-02-05T12:05:43.216223Z  INFO sui_node: SuiNode started!
+2023-02-05T12:05:43.245323Z ERROR typed_store::rocks: error=rocksdb error: Corruption: block checksum mismatch: stored = 453905640, computed = 3420653554, type = 1  in /var/sui/suidb/store/perpetual/019862.sst offset 54291452 size 3114
+2023-02-05T12:05:43.245341Z ERROR telemetry_subscribers: panicked at 'store operation should not fail: RocksDBError("Corruption: block checksum mismatch: stored = 453905640, computed = 3420653554, type = 1  in /var/sui/suidb/store/perpetual/019862.sst offset 54291452 size 3114")', /root/sui/crates/sui-network/src/state_sync/mod.rs:1065:14 panic.file="/root/sui/crates/sui-network/src/state_sync/mod.rs" panic.line=1065 panic.column=14
+thread 'tokio-runtime-worker' panicked at 'store operation should not fail: RocksDBError("Corruption: block checksum mismatch: stored = 453905640, computed = 3420653554, type = 1  in /var/sui/suidb/store/perpetual/019862.sst offset 54291452 size 3114")', /root/sui/crates/sui-network/src/state_sync/mod.rs:1065:14
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+suid.service: Main process exited, code=killed, status=6/ABRT
+suid.service: Failed with result 'signal'.
+suid.service: Scheduled restart job, restart counter is at 4.
+Stopped Sui Node.
+Started Sui Node.
+```
+I suspect that the problem with such logs may be that some fullnodes can broadcast data that went into the fork. I propose to take full nodes from the letter
+```
+sudo systemctl stop suid
+cd $HOME && rm -rf $HOME/.sui/db/*
+```
+Add peers (instead of `- address: ""` there should be `- address: "/dns/<dns name>/udp/<port>"`)
+```
+sudo tee -a $HOME/.sui/fullnode.yaml  >/dev/null <<EOF
+
+p2p-config:
+  seed-peers:
+    - address: ""
+
+EOF
+```
+Restart
+```
+sudo systemctl restart suid
+journalctl -u suid -f
+```
+
 **Explorers and checkers:** 
   - https://www.scale3labs.com/check/sui
   - https://sui.explorers.guru/node
