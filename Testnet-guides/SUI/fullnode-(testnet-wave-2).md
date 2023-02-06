@@ -21,7 +21,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 Install the required packages
 ```
-sudo apt-get install -y --no-install-recommends tzdata ca-certificates build-essential libssl-dev libclang-dev pkg-config openssl protobuf-compiler cmake
+sudo apt-get install -y --no-install-recommends tzdata ca-certificates build-essential libssl-dev libclang-dev pkg-config openssl protobuf-compiler cmake nano mc git gcc g++ make curl build-essential tmux chrony wget jq yarn
 ```
  Install Rust
  ```
@@ -53,13 +53,28 @@ Copy of fullnode.yaml and update path to db and genesis file in it
 cp $HOME/sui/crates/sui-config/data/fullnode-template.yaml $HOME/.sui/fullnode.yaml
 sed -i.bak "s|db-path:.*|db-path: \"$HOME\/.sui\/db\"| ; s|genesis-file-location:.*|genesis-file-location: \"$HOME\/.sui\/genesis.blob\"| ; s|127.0.0.1|0.0.0.0|" $HOME/.sui/fullnode.yaml
 ```
+Add peers
+```
+sudo tee -a $HOME/.sui/fullnode.yaml  >/dev/null <<EOF
+
+p2p-config:
+  seed-peers:
+   - address: "/ip4/65.109.32.171/udp/8084"
+   - address: "/ip4/65.108.44.149/udp/8084"
+   - address: "/ip4/95.214.54.28/udp/8080"
+   - address: "/ip4/136.243.40.38/udp/8080"
+   - address: "/ip4/84.46.255.11/udp/8084"
+   - address: "/ip4/135.181.6.243/udp/8088"
+
+EOF
+```
+
+
 Build SUI binaries
 ```
-cargo build --release
-mv ~/sui/target/release/sui-node /usr/local/bin/
-mv ~/sui/target/release/sui /usr/local/bin/
+cargo build --release --bin sui-node
+mv $HOME/sui/target/release/sui-node /usr/local/bin/
 sui-node -V
-sui -V
 ```
 In the config file `$HOME/.sui/sui-config/client.yaml` there is a DevNet RPC `rpc: "https://gateway.devnet.sui.io:443"`. You can change it manually on `rpc: "https://fullnode.testnet.sui.io:443"` OR run the command:
 ```
@@ -85,10 +100,9 @@ Restart=on-failure
 LimitNOFILE=65535
 
 [Install]
-WantedBy=multi-user.target" > $HOME/suid.service
-
-mv $HOME/suid.service /etc/systemd/system/
-
+WantedBy=multi-user.target" > /etc/systemd/system/suid.service
+```
+```
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
 EOF
