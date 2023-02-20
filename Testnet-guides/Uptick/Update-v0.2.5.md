@@ -69,6 +69,7 @@ Run script in tmux
 sudo /bin/bash $HOME/update_script.sh
 ```
 DONE!
+> ! Don't stop the script by CTRL+C 
 
 ## Useful Commands
 ### tmux command
@@ -82,7 +83,7 @@ Connect to the session again
 ```
 tmux attach -t update
 ```
-> ! Don't stop the script by CTRL+C 
+
 ### After updating - kill tmux session:
 ```
 tmux kill-session -t update
