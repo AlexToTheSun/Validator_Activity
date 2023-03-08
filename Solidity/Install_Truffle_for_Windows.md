@@ -14,6 +14,7 @@ This will install programs such as:
 ## Documetnation
 - [Install Truffle on Windows 10-11](https://trufflesuite.zendesk.com/hc/en-us/articles/8150057408923-install-Truffle-on-Windows-10-11) we will use this article with small but important clarifications.
 - [Zkevm testnet docs](https://docs.zkevm.consensys.net/developers/quickstart/deploy-smart-contract/truffle#write-the-migration-script)
+- [Boxes with projects](https://trufflesuite.com/docs/truffle/how-to/create-a-project/)
 
 
 
@@ -186,5 +187,9 @@ Please ensure that Dashboard is connected to the ConsenSys zkEVM testnet by conn
 cd D:\zkEVM\test-truffle
 truffle migrate --network dashboard
 ```
+5. Navigate back to localhost:24012. You should see a prompt asking your to confirm the deployment. Click Confirm.
+![Screenshot_1](https://user-images.githubusercontent.com/30211801/223775627-30adbaae-6ce9-4b07-8876-b9969f5daead.png)
+
+
 
 
