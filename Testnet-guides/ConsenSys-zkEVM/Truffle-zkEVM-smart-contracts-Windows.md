@@ -1,21 +1,25 @@
 > ❗️ Please note that the installation must be carried out on the computer on which you have installed a browser with Metamask. Installation on a rented server (Vultr, Contabo, etc) is not relevant for Truffle.
 
 # Table of content
-1. Documetnation
-2. Node.js installation
-3. Truffle installation
-4. Get/write a smart contract
-5. Deployment of smart contract
+1. [Documetnation](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-smart-contracts-Windows.md#documetnation)
+2. [Node.js installation](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-smart-contracts-Windows.md#nodejs-installation)
+3. [Truffle installation](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-smart-contracts-Windows.md#truffle-installation)
+4. [Get/write a smart contract](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-smart-contracts-Windows.md#getwrite-a-smart-contract)
+5. [Deployment of smart contract](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-smart-contracts-Windows.md#deployment-of-smart-contract)
 
 ## Documetnation
 - [Install Truffle on Windows 10-11](https://trufflesuite.zendesk.com/hc/en-us/articles/8150057408923-install-Truffle-on-Windows-10-11) we will use this article with important clarifications.
+- [Truffle Suite on Windows](https://trufflesuite.com/guides/how-to-install-truffle-and-testrpc-on-windows-for-blockchain-development/)
 - [Zkevm testnet docs](https://docs.zkevm.consensys.net/developers/quickstart/deploy-smart-contract/truffle#write-the-migration-script)
 - [Boxes with projects](https://trufflesuite.com/docs/truffle/how-to/create-a-project/)
+- [Truffle installation](https://trufflesuite.com/docs/truffle/how-to/install/)
+- [Truffle for VS Code extension (Optional)](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
+- [Youtube video: tutorial for beginners](https://www.youtube.com/watch?v=62f757RVEvU)
+- [YouTube video: How to Install Truffle on windows](https://youtu.be/f7DQ0l2556I)
 
 ## Node.js installation
 We will use:
 - [instructions for Windows](https://trufflesuite.zendesk.com/hc/en-us/articles/8150057408923-install-Truffle-on-Windows-10-11)
-- 
 
 1) See recommended version at https://nodejs.org/en/ and download it.
 2) Then follow a **Step 1** of the [instructions for Windows](https://trufflesuite.zendesk.com/hc/en-us/articles/8150057408923-install-Truffle-on-Windows-10-11) as shown in the screenshots:  
@@ -110,16 +114,16 @@ It will open a window on port `24012`.
 
 2. Navigate to `localhost:24012` in your browser.
 The site with Dashboard will automatically open. You will see:
-![image](https://user-images.githubusercontent.com/30211801/223714573-09e37eba-6402-4c6e-ac94-986277a1c20b.png)
+![223714573-09e37eba-6402-4c6e-ac94-986277a1c20b](https://user-images.githubusercontent.com/30211801/223980018-e288b5c3-890e-4049-ab99-89ec161d11a7.png)
 
 3. Select wallet and network in Metamask.
 
 Please ensure that Dashboard is connected to the ConsenSys zkEVM testnet by connecting your MetaMask wallet to ConsenSys zkEVM. For reference, the ConsenSys zkEVM testnet network ID is `59140`. For that - use an email from hello@infura.io
 
-![image](https://user-images.githubusercontent.com/30211801/223717172-344ffd8a-65fc-46a8-9e43-b65b5a22ab7e.png)
+![223717172-344ffd8a-65fc-46a8-9e43-b65b5a22ab7e](https://user-images.githubusercontent.com/30211801/223978956-709a5c45-c050-4348-8d72-622e57b200e3.png)
 
 4. Click connect:
-![image](https://user-images.githubusercontent.com/30211801/223718302-239ba3b0-40c1-4dc1-9bcb-0d361fe85f24.png)
+![223718302-239ba3b0-40c1-4dc1-9bcb-0d361fe85f24](https://user-images.githubusercontent.com/30211801/223977963-9431251c-4cde-4767-b827-71fd7c24a16d.png)
 
 5. Run in a separate terminal (open second session as administrator):
 ```
