@@ -17,5 +17,5 @@ Within the ConsenSys zkEVM Testnet, you can do the following activities (this is
 - Ethereum smart contracts ([Remix](https://remix.ethereum.org/), [Truffle](https://trufflesuite.com/))
 
 Since the UniSwap platform is familiar to everyone; [Guides for using Remix](https://mirror.xyz/0xmantle.eth/fqShZvkflgNT5-iuniswLRlVWKl4pM7VTQojOt_Oass) already exist then - **Here we will look at how to use Truffle** - tools for smart contract development (deployment of smart contracts).
-- Truffle. Deployment of smart contracts on Windows.
-- Truffle. Deployment of smart contracts on Ubuntu.
+- [Truffle. Deployment of smart contracts on Windows.](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-Windows.md)
+- [Truffle. Deployment of smart contracts on Ubuntu.](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Testnet-guides/ConsenSys-zkEVM/Truffle-zkEVM-Ubuntu.md)
