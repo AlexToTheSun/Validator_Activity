@@ -1,3 +1,7 @@
+# Table of contents
+1. [Update to `v1.1.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v123)
+2. [Update to `v1.2.7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v127) [auto]
+
 ## Update to v1.2.3
 ### Manually
 The chain appears to have halted so we need to replace your v1.2.2 binary with v1.2.3 and restart.
