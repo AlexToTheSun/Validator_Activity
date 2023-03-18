@@ -71,22 +71,22 @@ Check output:
 ```
 echo $current_binary \
 && $new_binary version \
-&& curl -s localhost:$rpc_port/status | grep -E 'network|latest_block_height' \
+&& curl -s localhost:$rpc_port/status | jq | grep -E 'network|latest_block_height' \
 && service $service_name status | grep -E 'loaded|active'
 ```
 Output example:
 ```
 /usr/local/bin/quicksilverd
-"v1.2.7"
+v1.2.7
       "network": "quicksilver-2",
-      "latest_block_height": "683276",
-     Loaded: loaded (/etc/systemd/system/quicksilverd.service; disabled; vendor preset: enabled)
-     Active: active (running) since Thu 2022-10-20 18:53:26 UTC; 6 days ago
+      "latest_block_height": "1088764",
+     Loaded: loaded (/etc/systemd/system/quicksilverd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2023-03-04 21:11:29 UTC; 1 weeks 6 days ago
 ```
 
 Create update script:
 ```
-tee $HOME/update_script.sh > /dev/null <<'EOF'
+tee $HOME/update_script.sh > /dev/null << EOF
 #!/bin/bash
 for((;;)); do
   height=\$(curl -s localhost:${rpc_port}/status | jq -r .result.sync_info.latest_block_height)
