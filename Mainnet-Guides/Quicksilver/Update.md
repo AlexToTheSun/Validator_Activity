@@ -1,6 +1,7 @@
 # Table of contents
 1. [Update to `v1.1.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v123)
 2. [Update to `v1.2.7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v127) [auto]
+3. [Update to `v1.2.9`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v129) [auto]
 
 ## Update to v1.2.3
 ### Manually
@@ -151,6 +152,118 @@ wget -qO- http://localhost:26657/consensus_state \
 ```
 
 
+## Update to v1.2.9
+- [Link v1.2.9](https://github.com/ingenuity-build/quicksilver/releases/tag/v1.2.9)
+- Height: [1279200](https://quicksilver.explorers.guru/block/1279200)
+### Auto update-restart script
+
+For this script we will use `tmux`
+```
+sudo apt update && sudo apt install tmux -y
+```
+Build new binary:
+```bash
+cd $HOME/quicksilver
+git fetch --all
+git checkout v1.2.9
+make install
+
+# Check old binary
+quicksilverd version --long | head
+# echo $(which quicksilverd) && $(which quicksilverd) version
+# Check new binary
+$HOME/go/bin/quicksilverd version --long | head
+    #version: v1.2.9
+    #commit: ee5349ef0b123cd6ea4ed54769dd26c0717f7821
+```
+Set variables:
+- `your_rpc_port`
+```
+current_binary="/usr/local/bin/quicksilverd"
+new_binary="$HOME/go/bin/quicksilverd"
+halt_height="1279200"
+service_name="quicksilverd"
+rpc_port="your_rpc_port"
+```
+
+Check output:
+```
+echo $current_binary \
+&& $new_binary version \
+&& curl -s localhost:$rpc_port/status | jq | grep -E 'network|latest_block_height' \
+&& service $service_name status | grep -E 'loaded|active'
+```
+Output example:
+```
+/usr/local/bin/quicksilverd
+1.2.9
+      "network": "quicksilver-2",
+      "latest_block_height": "1266818",
+     Loaded: loaded (/etc/systemd/system/quicksilverd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2023-03-20 13:16:36 UTC; 1 weeks 3 days ago
+```
+
+Create update script:
+```
+tee $HOME/update_script.sh > /dev/null << EOF
+#!/bin/bash
+for((;;)); do
+  height=\$(curl -s localhost:${rpc_port}/status | jq -r .result.sync_info.latest_block_height)
+    if ((height==${halt_height})); then
+      systemctl stop ${service_name}
+      cp ${new_binary} ${current_binary}
+      systemctl restart ${service_name}
+      echo restart
+      break
+    else
+      echo \$height
+    fi
+  sleep 3
+done
+EOF
+```
+Make the script executable:
+```
+chmod +x $HOME/update_script.sh
+```
+
+Create tmux session:
+```
+tmux new -s update
+```
+
+Run script in tmux
+```
+sudo /bin/bash $HOME/update_script.sh
+```
+### tmux command
+Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
+
+List of sessions
+```
+tmux ls
+```
+Connect to the session again
+```
+tmux attach -t update
+```
+> ! Don't stop the script by CTRL+C 
+
+### After updating - kill tmux session:
+```
+tmux kill-session -t update
+```
+Logs and status:
+```
+sudo journalctl -u quicksilverd -f -o cat
+quicksilverd status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
 
 
 
