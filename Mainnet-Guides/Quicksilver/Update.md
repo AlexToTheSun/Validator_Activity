@@ -2,6 +2,7 @@
 1. [Update to `v1.1.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v123)
 2. [Update to `v1.2.7`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v127) [auto]
 3. [Update to `v1.2.9`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Quicksilver/Update.md#update-to-v129) [auto]
+4. Update to v1.2.9-hotfix.0
 
 ## Update to v1.2.3
 ### Manually
@@ -265,7 +266,39 @@ wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
 
+## Update to v1.2.9-hotfix.0
+- [Link v1.2.9-hotfix.0](https://github.com/ingenuity-build/quicksilver/releases/tag/v1.2.9-hotfix.0)
 
+Build new binary:
+```bash
+cd $HOME/quicksilver
+git fetch --all
+git checkout v1.2.9-hotfix.0
+make install
+
+# Check old binary
+quicksilverd version --long | head
+# echo $(which quicksilverd) && $(which quicksilverd) version
+# Check new binary
+$HOME/go/bin/quicksilverd version --long | head
+    #version: v1.2.9-hotfix.0
+    #commit: ee5349ef0b123cd6ea4ed54769dd26c0717f7821
+
+# Update
+sudo systemctl stop quicksilverd
+cp $HOME/go/bin/quicksilverd /usr/local/bin
+sudo systemctl restart quicksilverd
+```
+Logs and status:
+```
+sudo journalctl -u quicksilverd -f -o cat
+quicksilverd status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
 
 
 
