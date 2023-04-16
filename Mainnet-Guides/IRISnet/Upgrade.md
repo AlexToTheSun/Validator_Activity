@@ -99,3 +99,67 @@ Output example:
      Loaded: loaded (/etc/systemd/system/irisd.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2023-04-16 17:52:01 UTC; 1h 9min ago
 ```
+
+Create update script:
+```
+tee $HOME/update_script.sh > /dev/null << EOF
+#!/bin/bash
+for((;;)); do
+  height=\$(curl -s localhost:${rpc_port}/status | jq -r .result.sync_info.latest_block_height)
+    if ((height==${halt_height})); then
+      systemctl stop ${service_name}
+      cp ${new_binary} ${current_binary}
+      systemctl restart ${service_name}
+      echo restart
+      break
+    else
+      echo \$height
+    fi
+  sleep 3
+done
+EOF
+```
+Make the script executable:
+```
+chmod +x $HOME/update_script.sh
+```
+
+Create tmux session:
+```
+tmux new -s update
+```
+
+Run script in tmux
+```
+sudo /bin/bash $HOME/update_script.sh
+```
+### tmux command
+Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
+
+List of sessions
+```
+tmux ls
+```
+Connect to the session again
+```
+tmux attach -t update
+```
+
+> ! Don't stop the script by CTRL+C 
+### After updating - kill tmux session:
+```
+tmux kill-session -t update
+```
+Logs and status:
+```
+sudo journalctl -u irisd -f -o cat
+iris status 2>&1 | jq .SyncInfo
+```
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+
+
