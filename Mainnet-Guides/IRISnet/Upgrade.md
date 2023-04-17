@@ -54,6 +54,106 @@ journalctl -u irisd -f --output cat
 - [Link v2.0.0](https://github.com/irisnet/mainnet/blob/master/upgrade/v2.0.0.md)
 - Height: [19514010](https://www.mintscan.io/iris/blocks/19514010)
 
+### Upgrade `app.toml`
+⚠️ This upgrade involves configuration modification, and the following configuration needs to be added to `app.toml`. 
+
+Run the command below:
+```
+sudo tee -a $HOME/.iris/config/app.toml  >/dev/null <<'EOF'
+
+###############################################################################
+### EVM Configuration ###
+###############################################################################
+
+[evm]
+
+# Tracer defines the 'vm.Tracer' type that the EVM will use when the node is run in
+# debug mode. To enable tracing use the '--evm.tracer' flag when starting your node.
+# Valid types are: json|struct|access_list|markdown
+tracer = ""
+
+# MaxTxGasWanted defines the gas wanted for each eth tx returned in ante handler in check tx mode.
+# defualt = 0
+max-tx-gas-wanted = 40000000
+
+###############################################################################
+### JSON RPC Configuration ###
+###############################################################################
+
+[json-rpc]
+
+# Enable defines if the gRPC server should be enabled.
+enable = true
+
+# Address defines the EVM RPC HTTP server address to bind to.
+# If you want to expose it externally, change it to: address = "0.0.0.0:8545"
+address = "127.0.0.1:8545"
+
+# Address defines the EVM WebSocket server address to bind to.
+# If you want to expose it externally, change it to: address = "0.0.0.0:8546"
+ws-address = "127.0.0.1:8546"
+
+# API defines a list of JSON-RPC namespaces that should be enabled
+# Example: "eth,txpool,personal,net,debug,web3"
+api = "eth,net,web3"
+
+# GasCap sets a cap on gas that can be used in eth_call/estimateGas (0=infinite). Default: 25,000,000.
+gas-cap = 40000000
+
+# EVMTimeout is the global timeout for eth_call. Default: 5s.
+evm-timeout = "5s"
+
+# TxFeeCap is the global tx-fee cap for send transaction. Default: 1eth.
+txfee-cap = 1
+
+# FilterCap sets the global cap for total number of filters that can be created
+filter-cap = 200
+
+# FeeHistoryCap sets the global cap for total number of blocks that can be fetched
+feehistory-cap = 100
+
+# LogsCap defines the max number of results can be returned from single 'eth_getLogs' query.
+logs-cap = 10000
+
+# BlockRangeCap defines the max block range allowed for 'eth_getLogs' query.
+block-range-cap = 10000
+
+# HTTPTimeout is the read/write timeout of http json-rpc server.
+http-timeout = "30s"
+
+# HTTPIdleTimeout is the idle timeout of http json-rpc server.
+http-idle-timeout = "2m0s"
+
+# AllowUnprotectedTxs restricts unprotected (non EIP155 signed) transactions to be submitted via
+# the node's RPC when the global parameter is disabled.
+allow-unprotected-txs = false
+
+# MaxOpenConnections sets the maximum number of simultaneous connections
+# for the server listener.
+max-open-connections = 0
+
+# EnableIndexer enables the custom transaction indexer for the EVM (ethereum transactions).
+enable-indexer = false
+
+# MetricsAddress defines the EVM Metrics server address to bind to. Pass --metrics in CLI to enable
+# Prometheus metrics path: /debug/metrics/prometheus
+metrics-address = "0.0.0.0:6065"
+
+###############################################################################
+### TLS Configuration ###
+###############################################################################
+
+[tls]
+
+# Certificate path defines the cert.pem file path for the TLS configuration.
+certificate-path = ""
+
+# Key path defines the key.pem file path for the TLS configuration.
+key-path = ""
+EOF
+```
+
+
 ### Auto update-restart script
 
 For this script we will use `tmux`
@@ -121,7 +221,7 @@ EOF
 ```
 Make the script executable:
 ```
-chmod +x $HOME/update_script.sh
+chmod +x $HOME/update_script.sh 
 ```
 
 Create tmux session:
@@ -133,6 +233,8 @@ Run script in tmux
 ```
 sudo /bin/bash $HOME/update_script.sh
 ```
+If you want to use the EVM function, you need to open the JRPC access endpoint of the EVM on the node.  See more: https://github.com/irisnet/mainnet/blob/master/upgrade/v2.0.0.md
+
 ### tmux command
 Detach from "update" session type `Ctrl+b d` (the session will continue to run in the background): 
 
