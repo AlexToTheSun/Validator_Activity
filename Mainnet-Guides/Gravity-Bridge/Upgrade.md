@@ -1,6 +1,7 @@
 # Table of contents
 1. [Update to 1.7.2](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-172-with-new-fixes)
 2. [Update to 1.8.1](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-181)
+3. [Update to 1.9.0](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Gravity-Bridge/Upgrade.md#update-to-190)
 ## Update to 1.7.2 with new fixes
 ### Manually
 Check your node block height. You must not ungrade before the block [4146500](https://www.mintscan.io/gravity-bridge/blocks/4146500).
@@ -292,6 +293,54 @@ gravity status 2>&1 | jq .SyncInfo
 Kill tmux session:
 ```
 tmux kill-session -t update
+```
+Find out how many % of nodes were updated:
+- use your uwn rpc port instead `26657`
+```
+wget -qO- http://localhost:26657/consensus_state \
+| jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
+```
+
+
+## Update to 1.9.0
+### Manually 1.9.0
+See the [official discord announcement](https://discord.com/channels/881943007115497553/918354118660198400/1101151515575599244).
+```
+gravity status 2>&1 | jq .SyncInfo
+```
+Update gravity and gbt bynaries:
+```sh
+# gravity chain binary
+rm -rf /root/gravity-bin && mkdir gravity-bin && cd gravity-bin
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.9.0/gravity-linux-amd64
+mv gravity-linux-amd64 gravity
+
+# gbt binary
+wget https://github.com/Gravity-Bridge/Gravity-Bridge/releases/download/v1.9.0/gbt
+
+chmod +x *
+sudo mv * /usr/bin/
+gravity version
+gbt --version
+```
+Restart the `gravity-node.service` and `orchestrator.service` :
+```
+sudo systemctl restart gravity-node
+sudo service orchestrator restart
+```
+Logs and status:
+```
+sudo journalctl -u gravity-node -f -o cat
+journalctl -u orchestrator -f --output cat
+gravity status 2>&1 | jq
+gravity status 2>&1 | jq .SyncInfo
+```
+
+### After updating 
+Logs and status:
+```
+sudo journalctl -u gravity-node -f -o cat
+gravity status 2>&1 | jq .SyncInfo
 ```
 Find out how many % of nodes were updated:
 - use your uwn rpc port instead `26657`
