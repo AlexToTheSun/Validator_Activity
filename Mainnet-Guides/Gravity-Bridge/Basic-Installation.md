@@ -387,7 +387,15 @@ It is **highly recommended** to protect your validator from double-signing case.
 See an official link [here](https://github.com/Gravity-Bridge/Gravity-Docs/blob/main/docs/relaying.md).
 
 
-
+## How to unjail
+Wait for full synchronization:
+```
+gravity status 2>&1| jq
+```
+Then run the command:
+```
+gravity tx slashing unjail --from $Grav_wallet --chain-id gravity-bridge-3 --gas-prices 0.1ugraviton --gas-adjustment 1.5 --gas auto -y
+```
 
 
 
