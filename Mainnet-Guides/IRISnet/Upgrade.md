@@ -1,6 +1,7 @@
 # Table of contents
 1. [Update to `v1.3.1`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v131)
 2. [Update to `v2.0.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v200) [auto]
+3. [Update to `v2.0.2`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v202)
 
 ### Official IrisNet github: https://github.com/irisnet/mainnet/tree/master/upgrade
 
@@ -263,5 +264,35 @@ Find out how many % of nodes were updated:
 wget -qO- http://localhost:26657/consensus_state \
 | jq ".result.round_state.height_vote_set[0].prevotes_bit_array"
 ```
+
+## Upgrade `v2.0.2`
+
+- [Link v2.0.2](https://github.com/irisnet/irishub/releases/tag/v2.0.2)
+
+### Upgrade
+```
+# Build
+cd $HOME
+rm -rf /root/irishub
+git clone https://github.com/irisnet/irishub
+cd $HOME/irishub
+git checkout v2.0.2
+make install
+# Check
+iris version --long | head
+$HOME/go/bin/iris version --long | head
+
+# Update
+sudo systemctl stop irisd
+cp $HOME/go/bin/iris /usr/local/bin
+sudo systemctl restart irisd
+```
+Logs and status:
+```
+sudo journalctl -u irisd -f -o cat
+iris status 2>&1 | jq .SyncInfo
+```
+
+
 
 
