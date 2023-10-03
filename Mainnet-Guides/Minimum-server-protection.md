@@ -9,6 +9,11 @@ In this tutorial, we will:
 - [SSH key login](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#ssh-key-login)
 - [Install File2ban](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#install-file2ban)
 - [2FA for SSH](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/Minimum-server-protection.md#2fa-for-ssh)
+## Universal Script
+This script includes all modules from this article and you could choose which module to run. The modules go one by one, interactively.
+```
+wget -O server-protection.sh https://raw.githubusercontent.com/AlexToTheSun/Cosmos_Quick_Wiki/main/Scripts/server-protection.sh && chmod +x server-protection.sh && ./server-protection.sh
+```
 ### Change the password
 ```
 passwd
