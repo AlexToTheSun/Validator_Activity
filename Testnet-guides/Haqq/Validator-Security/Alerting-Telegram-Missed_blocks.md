@@ -193,15 +193,17 @@ echo $config_path
 
 #### Now let's enter all the data in config.toml of missed-blocks-checker:
 ```
-sed -i -E "s|^(chat[[:space:]]+=[[:space:]]+).*$|\1\"$Your_User_ID\"| ; \
-s|^(token[[:space:]]+=[[:space:]]+).*$|\1\"$Telegram_Bot_Token\"| ; \
+sed -i -E "s|^(chat[[:space:]]+=[[:space:]]+)-123.*$|\1"$Your_User_ID"| ; \
+s|^chat[[:space:]]+=[[:space:]]+\"\#general\"|# chat[[:space:]]+=[[:space:]]+\"\#general\"| ; \
+s|^(token[[:space:]]+=[[:space:]]+)\"111:222\".*$|\1\"$Telegram_Bot_Token\"| ; \
+s|^token[[:space:]]+=[[:space:]]+\"\#xorb-xxxyyyy\"|# token[[:space:]]+=[[:space:]]+\"\#xorb-xxxyyyy\"| ; \
 s|^(bech-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_prefix\"| ; \
 s|^(bech-validator-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_prefix\"| ; \
 s|^(bech-validator-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_pubkey_prefix\"| ; \
 s|^(bech-consensus-node-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_prefix\"| ; \
 s|^(bech-consensus-node-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_pubkey_prefix\"| ; \
-s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1$include_validators| ; \
-s|^(exclude-validators[[:space:]]+=[[:space:]]+).*$|\1$exclude_validators| ; \
+s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1\[\"$include_validators\]\"| ; \
+s|^(exclude-validators[[:space:]]+=[[:space:]]+).*$|\# \1$exclude_validators| ; \
 s|^(grpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$grpc_address\"| ; \
 s|^(rpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$rpc_address\"| ; \
 s|^(level[[:space:]]+=[[:space:]]+).*$|\1\"$level\"| ; \
@@ -209,31 +211,7 @@ s|^(mintscan-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$mintscan_prefix\"| ; \
 s|^(validator-page-pattern[[:space:]]+=[[:space:]]+).*$|\1\"$validator_page_pattern\"| ; \
 s|^(config-path[[:space:]]+=[[:space:]]+).*$|\1\"$config_path\"|" /root/missed-blocks-checker/config.haqq.toml
 ```
-And lets comment `exclude-validators`
-```
-sed -i.bak 's/^exclude-validators/# exclude-validators/' /root/missed-blocks-checker/config.haqq.toml
-```
-#### It remains to modify manually a few terms:
-```
-nano /root/missed-blocks-checker/config.haqq.toml
-```
-- paste the address of the validator in this type (with `[]`):
-```
-include-validators = ["<your_validator>"] 
-```
-- Telegram chat should be without `""`:
-```
-# A Telegram chat to send messages to.
-chat = 234234234
-```
-- Remove info for slak so it looks like this:
-```
-[slack]
-# A Slack bot token.
-token = ""
-# A Slack channel or username to send messages to.
-chat = ""
-```
+
 After that let's restart service
 ```
 sudo systemctl restart missed-blocks-checker
