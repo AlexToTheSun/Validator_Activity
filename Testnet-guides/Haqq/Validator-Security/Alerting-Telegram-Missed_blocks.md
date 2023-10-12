@@ -194,16 +194,16 @@ echo $config_path
 #### Now let's enter all the data in config.toml of missed-blocks-checker:
 ```
 sed -i -E "s|^(chat[[:space:]]+=[[:space:]]+)-123.*$|\1"$Your_User_ID"| ; \
-s|^chat[[:space:]]+=[[:space:]]+\"\#general\"|# chat[[:space:]]+=[[:space:]]+\"\#general\"| ; \
+s|^(chat[[:space:]]+=[[:space:]]+\"\#general\")|# \1| ; \
 s|^(token[[:space:]]+=[[:space:]]+)\"111:222\".*$|\1\"$Telegram_Bot_Token\"| ; \
-s|^token[[:space:]]+=[[:space:]]+\"\#xorb-xxxyyyy\"|# token[[:space:]]+=[[:space:]]+\"\#xorb-xxxyyyy\"| ; \
+s|^(token[[:space:]]+=[[:space:]]+\"xorb-xxxyyyy\")|# \1| ; \
 s|^(bech-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_prefix\"| ; \
 s|^(bech-validator-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_prefix\"| ; \
 s|^(bech-validator-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_validator_pubkey_prefix\"| ; \
 s|^(bech-consensus-node-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_prefix\"| ; \
 s|^(bech-consensus-node-pubkey-prefix[[:space:]]+=[[:space:]]+).*$|\1\"$bech_consensus_node_pubkey_prefix\"| ; \
-s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1\[\"$include_validators\]\"| ; \
-s|^(exclude-validators[[:space:]]+=[[:space:]]+).*$|\# \1$exclude_validators| ; \
+s|^(include-validators[[:space:]]+=[[:space:]]+).*$|\1\[\"$include_validators\"\]| ; \
+s|^(exclude-validators[[:space:]]+=[[:space:]]+).*$|\# \1\[\"$exclude_validators\"\]| ; \
 s|^(grpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$grpc_address\"| ; \
 s|^(rpc-address[[:space:]]+=[[:space:]]+).*$|\1\"$rpc_address\"| ; \
 s|^(level[[:space:]]+=[[:space:]]+).*$|\1\"$level\"| ; \
