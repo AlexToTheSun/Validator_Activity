@@ -6,6 +6,12 @@ This type of alerting does not collect private data, so if the server on which t
 
 🤔 Where is the best place to install this alerting software?  
 - **As usual, the best option is a separate server.**
+
+## Script
+You could use this one-line script instead commands below.
+```
+wget -O Alerting-Telegram.sh https://raw.githubusercontent.com/AlexToTheSun/Validator_Activity/main/Testnet-guides/Haqq/Validator-Security/Alerting-Telegram.sh && chmod +x Alerting-Telegram.sh && ./Alerting-Telegram.sh
+```
 ## Overview
 In this tutorial, we will install and setup [missed-blocks-checker](https://github.com/solarlabsteam/missed-blocks-checker):
 - Prepare the server for missed-blocks-checker
