@@ -2,6 +2,7 @@
 1. [Update to `v1.3.1`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v131)
 2. [Update to `v2.0.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v200) [auto]
 3. [Update to `v2.0.2`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v202)
+4. [Update to `v2.1.0`](https://github.com/AlexToTheSun/Validator_Activity/blob/main/Mainnet-Guides/IRISnet/Upgrade.md#upgrade-v210)
 
 ### Official IrisNet github: https://github.com/irisnet/mainnet/tree/master/upgrade
 
@@ -292,7 +293,68 @@ Logs and status:
 sudo journalctl -u irisd -f -o cat
 iris status 2>&1 | jq .SyncInfo
 ```
+## Upgrade `v2.1.0`
+- official link https://github.com/irisnet/mainnet/blob/master/upgrade/v2.1.0.md
+- Explorer https://www.mintscan.io/iris
+- Snapshot https://imperator.co/services/iris
+- Exapmle snap https://app.nodejumper.io/archway/sync
+### Create `upgrade-info.json`
+As it said in [Discord](https://discord.com/channels/806356514973548614/807902950826835968/1193760689249058846) we should create a file `upgrade-info.json` if it doesn't exist
+```
+IRIS_HOME="/root/.iris"
+echo $IRIS_HOME
+echo '{"name":"v2.0","time":"0001-01-01T00:00:00Z","height":19514010}' > $IRIS_HOME/data/upgrade-info.json
+cd $IRIS_HOME/data && mc
+```
+#### Upgrade Go to 1.19
+```
+wget -O go1.19.4.linux-amd64.tar.gz https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz && rm go1.19.4.linux-amd64.tar.gz
+cat <<'EOF' >> $HOME/.bash_profile
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export GO111MODULE=on
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+EOF
+. $HOME/.bash_profile
+cp /usr/local/go/bin/go /usr/bin
+go version
+# go version go1.19.4 linux/amd64
+```
+Upgrade binary file
+```
+git clone https://github.com/irisnet/irishub
+cd irishub && git checkout v2.1.0
+make install
+# Check
+iris version --long | head
+$HOME/go/bin/iris version --long | head
 
+# Update
+sudo systemctl stop irisd
+cp $HOME/go/bin/iris /usr/local/bin
+```
 
+Use [snapshot](https://imperator.co/services/iris)
+```
+cd
+sudo systemctl stop irisd
 
+iris tendermint unsafe-reset-all --home $HOME/.iris --keep-addr-book
+curl https://s3.imperator.co/mainnets-snapshots/iris/iris_23174317.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.iris
+
+sudo systemctl restart irisd
+sudo journalctl -u irisd -f --no-hostname -o cat
+```
+
+Logs and status:
+```
+sudo journalctl -u irisd -f -o cat
+iris status 2>&1 | jq .SyncInfo
+```
+Unjail
+```
+# to see vars go to /root/.bash_profile
+iris tx slashing unjail --from=TuretskiyW --chain-id=irishub-1 --gas-prices 0.05uiris
+```
 
